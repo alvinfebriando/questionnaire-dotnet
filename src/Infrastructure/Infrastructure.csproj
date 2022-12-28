@@ -8,6 +8,8 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AssemblyName>Questionnaire.Infrastructure</AssemblyName>
+    <RootNamespace>Questionnaire.Infrastructure</RootNamespace>
   </PropertyGroup>
 
 </Project>
