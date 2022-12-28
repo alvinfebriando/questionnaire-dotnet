@@ -1,6 +1,4 @@
-﻿using Questionnaire.Domain.ValueObjects;
-
-namespace Questionnaire.Application.Message;
+﻿namespace Questionnaire.Application.Message;
 
 public abstract class BaseMessage<T> where T : class
 {
@@ -10,5 +8,6 @@ public abstract class BaseMessage<T> where T : class
     {
         Data = data;
     }
+
     public abstract string Lexicalization();
 }
