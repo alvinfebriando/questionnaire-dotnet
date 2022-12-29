@@ -21,7 +21,7 @@ public class OpeningMessageTests
     }
 
     [Fact]
-    public void Lexicalization_NoArgument_ReturnEmbededString()
+    public void Lexicalization_NoArgument_ReturnEmbeddedString()
     {
         // Arrange
         var expected = _sut.Data.Place;
