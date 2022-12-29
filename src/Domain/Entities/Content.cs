@@ -2,13 +2,6 @@
 
 public class Content
 {
-    public string Place { get; set; }
-    public DateOnly Date { get; set; }
-    public string Subject { get; set; }
-    public string Respondent { get; set; }
-    public string Lecturer { get; set; }
-    public double AverageScore { get; set; }
-
     public Content(string place, DateOnly date, string subject, string respondent, string lecturer,
         double score)
     {
@@ -19,4 +12,11 @@ public class Content
         Lecturer = lecturer;
         AverageScore = score;
     }
+
+    public string Place { get; set; }
+    public DateOnly Date { get; set; }
+    public string Subject { get; set; }
+    public string Respondent { get; set; }
+    public string Lecturer { get; set; }
+    public double AverageScore { get; set; }
 }
