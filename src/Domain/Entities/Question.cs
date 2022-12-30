@@ -9,7 +9,6 @@ public class Question
         Advice = advice;
     }
 
-    public Guid Id { get; } = Guid.NewGuid();
     public string Title { get; set; }
     public QuestionSection Section { get; set; }
     public string Advice { get; set; }
