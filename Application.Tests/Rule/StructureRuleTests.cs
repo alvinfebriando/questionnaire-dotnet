@@ -8,7 +8,7 @@ namespace Application.Tests.Rule;
 public class StructureRuleTests
 {
     private readonly ITestOutputHelper _output;
-    private StructureRule _sut;
+    private readonly StructureRule _sut;
 
     public StructureRuleTests(ITestOutputHelper output)
     {
