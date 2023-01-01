@@ -13,11 +13,8 @@ public class ContentRule : IContentRule
                 Math.Round(answer.Select(a => a.Score).Average(),2),
                 answer.Select(a => a))
             ).OrderByDescending(q => q.AverageScore).ToList();
-        var output = new Point()
-        {
-            Max = averagedAnswers.First(),
-            Min = averagedAnswers.Last()
-        };
+        var output = new Point(averagedAnswers.First(), averagedAnswers.Last());
+        
         foreach (var a in averagedAnswers)
         {
             switch (a.AverageScore)
