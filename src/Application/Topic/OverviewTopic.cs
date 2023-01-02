@@ -5,7 +5,7 @@ using Questionnaire.Domain.ValueObjects;
 
 namespace Questionnaire.Application.Topic;
 
-public class OverviewTopic : BaseTopic<OverviewDto>
+public class OverviewTopic : GenericTopic<OverviewDto>
 {
     private readonly ILexicalization _lex;
 

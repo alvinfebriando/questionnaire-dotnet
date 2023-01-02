@@ -4,7 +4,7 @@ using Questionnaire.Domain.Entities;
 
 namespace Questionnaire.Application.Topic;
 
-public class OpeningTopic : BaseTopic<OpeningDto>
+public class OpeningTopic : GenericTopic<OpeningDto>
 {
     private readonly ILexicalization _lex;
 

@@ -1,9 +1,8 @@
-﻿using Questionnaire.Application.Message;
-using Questionnaire.Domain.Entities;
+﻿using Questionnaire.Domain.Entities;
 
 namespace Questionnaire.Application.Topic;
 
-public abstract class BaseTopic<T> where T : class
+public abstract class BaseTopic
 {
     protected BaseTopic(Content content, Structure structure)
     {
@@ -13,6 +12,5 @@ public abstract class BaseTopic<T> where T : class
 
     public Content Content { get; set; }
     public Structure Structure { get; set; }
-    public abstract IList<BaseMessage<T>> Order();
     public abstract IList<string> Aggregate();
 }
