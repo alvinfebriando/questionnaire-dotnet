@@ -16,7 +16,8 @@ public class OverviewTopicTests
     {
         _output = output;
         var date = new DateOnly(2022, 12, 28);
-        var content = new Content("place", date, "subject", "respondent", "lecturer", 3.5);
+        var point = new Point();
+        var content = new Content("place", date, "subject", "respondent", "lecturer", 3.5, point);
         var structure = new Structure();
         var lex = new Mock<ILexicalization>();
         _sut = new OverviewTopic(content, structure, lex.Object);
