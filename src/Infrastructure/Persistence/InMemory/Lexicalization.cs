@@ -5,33 +5,49 @@ namespace Questionnaire.Infrastructure.Persistence.InMemory;
 
 public class Lexicalization : ILexicalization
 {
-    public string RndResponden()
+    private readonly Dictionary<string, string> _synonym = new Dictionary<string, string>();
+
+    public Lexicalization()
     {
-        return "responden";
+        _synonym.Add("mendapat", "mendapat");
+        _synonym.Add("menerima", "mendapat");
+        _synonym.Add("nilai", "nilai");
+        _synonym.Add("skor", "nilai");
+        _synonym.Add("tertinggi", "tertinggi");
+        _synonym.Add("paling tinggi", "tertinggi");
+        _synonym.Add("terendah", "terendah");
+        _synonym.Add("paling rendah", "terendah");
     }
 
-    public string RndMendapat()
+    public string Search(string keyword)
     {
-        return "responden";
+        var output = _synonym.Where(s => s.Value == keyword).Select(s => s.Key).ToList();
+        return Util.GetRandom(output);
     }
 
-    public string RndTertinggi()
+    public string Search(string keyword, string affix)
     {
-        return "responden";
-    }
-
-    public string RndTerendah()
-    {
-        return "responden";
-    }
-
-    public string RndNilai()
-    {
-        return "responden";
+        throw new NotImplementedException();
     }
 
     public string GetStatus(double score)
     {
-        return "responden";
+        const double tolerance = 1e-10;
+        if (Math.Abs(Math.Round(score) - 1) < tolerance)
+        {
+            return "sangat tidak baik";
+        }
+
+        if (Math.Abs(Math.Round(score) - 2) < tolerance)
+        {
+            return "tidak baik";
+        }
+
+        if (Math.Abs(Math.Round(score) - 3) < tolerance)
+        {
+            return "cukup";
+        }
+
+        return Math.Abs(Math.Round(score) - 4) < tolerance ? "baik" : "sangat baik";
     }
 }

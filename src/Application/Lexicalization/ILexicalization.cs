@@ -2,10 +2,6 @@
 
 public interface ILexicalization
 {
-    public string RndResponden();
-    public string RndMendapat();
-    public string RndTertinggi();
-    public string RndTerendah();
-    public string RndNilai();
+    public string Search(string keyword);
     public string GetStatus(double score);
 }
