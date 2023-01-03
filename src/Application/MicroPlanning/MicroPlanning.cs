@@ -1,4 +1,5 @@
-﻿using Questionnaire.Application.Topic;
+﻿using Questionnaire.Application.Lexicalization;
+using Questionnaire.Application.Topic;
 using Questionnaire.Domain.Entities;
 
 namespace Questionnaire.Application.MicroPlanning;

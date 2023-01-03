@@ -1,4 +1,5 @@
 ﻿using Questionnaire.Application.Dto;
+using Questionnaire.Application.Lexicalization;
 
 namespace Questionnaire.Application.Message;
 
