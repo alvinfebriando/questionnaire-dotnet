@@ -29,7 +29,7 @@ public class PerformanceStatusMessage : BaseMessage<OverviewDto>, IComplemented
         // var sentence = $"pencapaian {Complement[0]} dinilai {Status}";
         // var sentence = $"{Complement[0]} {_lex.RndMendapat()} predikat {Status}";
         var sentence =
-            $"performa {Complement[0]} dalam penilaian ini adalah {Status}";
+            $"performa {Complement[0]} dalam penilaian ini adalah {Status}.";
         return sentence;
     }
 }

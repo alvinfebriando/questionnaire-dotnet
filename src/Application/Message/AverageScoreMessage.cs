@@ -33,7 +33,7 @@ public class AverageScoreMessage : BaseMessage<OverviewDto>, IComplemented
     public override string Lexicalization()
     {
         var sentence =
-            $"{Complement[0]} {Complement[1]} {_lex.RndMendapat()} {_lex.RndNilai()} total sebesar {Data.AverageScore}";
+            $"{Complement[0]} {Complement[1]} {_lex.RndMendapat()} {_lex.RndNilai()} total sebesar {Data.AverageScore}.";
         return sentence;
     }
 }
