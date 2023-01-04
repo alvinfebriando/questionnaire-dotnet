@@ -11,12 +11,20 @@ public class Lexicalization : ILexicalization
     {
         _synonym.Add("mendapat", "mendapat");
         _synonym.Add("menerima", "mendapat");
+        _synonym.Add("didapatkan", "didapatkan");
+        _synonym.Add("diterima", "didapatkan");
         _synonym.Add("nilai", "nilai");
         _synonym.Add("skor", "nilai");
         _synonym.Add("tertinggi", "tertinggi");
         _synonym.Add("paling tinggi", "tertinggi");
         _synonym.Add("terendah", "terendah");
         _synonym.Add("paling rendah", "terendah");
+        _synonym.Add("meskipun demikian", "meskipun demikian");
+        _synonym.Add("walaupun demikian", "meskipun demikian");
+        _synonym.Add("serta", "serta");
+        _synonym.Add("dan juga", "serta");
+        _synonym.Add("untuk", "untuk");
+        _synonym.Add("pada", "untuk");
     }
 
     public string Search(string keyword)
