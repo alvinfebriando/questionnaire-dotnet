@@ -28,6 +28,7 @@ public class GoodPointMessageTests
         lex.Setup(l => l.Search("meskipun demikian")).Returns("meskipun demikian");
         lex.Setup(l => l.Search("nilai")).Returns("nilai");
         lex.Setup(l => l.Search("didapatkan")).Returns("didapatkan");
+        lex.Setup(l => l.Search("serta")).Returns("serta");
         _sut = new GoodPointMessage(dto, lex.Object);
     }
 
@@ -98,6 +99,19 @@ public class GoodPointMessageTests
         // Arrange
         var option = new Option("bad");
         const string expected = "meskipun demikian";
+        // Act
+        _sut.EmbedComplement(option);
+        // Assert
+        Assert.Equal(expected, _sut.Complement[0]);
+        _output.WriteLine(_sut.Complement[0]);
+    }
+
+    [Fact]
+    public void EmbedComplement_NoBadOption_ChangeComplementValue()
+    {
+        // Arrange
+        var option = new Option("no bad");
+        const string expected = "serta";
         // Act
         _sut.EmbedComplement(option);
         // Assert
