@@ -1,11 +1,10 @@
 ﻿using Moq;
-using Questionnaire.Application;
 using Questionnaire.Application.Dto;
 using Questionnaire.Application.Lexicalization;
 using Questionnaire.Application.Message;
 using Xunit.Abstractions;
 
-namespace Application.Tests.Message;
+namespace Questionnaire.Application.Tests.Message;
 
 public class OpeningMessageTests
 {

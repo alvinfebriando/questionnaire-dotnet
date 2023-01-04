@@ -6,6 +6,10 @@
         <Nullable>enable</Nullable>
 
         <IsPackable>false</IsPackable>
+
+        <AssemblyName>Questionnaire.Aplication.Tests</AssemblyName>
+
+        <RootNamespace>Questionnaire.Application.Tests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

@@ -7,7 +7,7 @@ using Questionnaire.Domain.Entities;
 using Questionnaire.Domain.ValueObjects;
 using Xunit.Abstractions;
 
-namespace Application.Tests.Message;
+namespace Questionnaire.Application.Tests.Message;
 
 public class GoodPointMessageTests
 {

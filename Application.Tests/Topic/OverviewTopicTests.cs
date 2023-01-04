@@ -1,12 +1,11 @@
 ﻿using Moq;
-using Questionnaire.Application;
 using Questionnaire.Application.Lexicalization;
 using Questionnaire.Application.Message;
 using Questionnaire.Application.Topic;
 using Questionnaire.Domain.Entities;
 using Xunit.Abstractions;
 
-namespace Application.Tests.Topic;
+namespace Questionnaire.Application.Tests.Topic;
 
 public class OverviewTopicTests
 {
