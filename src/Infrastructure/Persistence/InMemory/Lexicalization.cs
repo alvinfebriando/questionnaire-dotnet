@@ -21,6 +21,8 @@ public class Lexicalization : ILexicalization
         _synonym.Add("paling rendah", "terendah");
         _synonym.Add("meskipun demikian", "meskipun demikian");
         _synonym.Add("walaupun demikian", "meskipun demikian");
+        _synonym.Add("namun","namun");
+        _synonym.Add("tetapi","namun");
         _synonym.Add("serta", "serta");
         _synonym.Add("dan juga", "serta");
         _synonym.Add("untuk", "untuk");
