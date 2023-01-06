@@ -118,7 +118,7 @@ public class AdviceTopicTests
     {
         // Arrange
         _sut.Structure.AddRange(new List<string> { "", "", "", "good", "no bad", "no advice" });
-        var averagedAnswer1 = GenerateAveragedAnswer("bad", QuestionSection.PenguasaanMateri);
+        var averagedAnswer1 = GenerateAveragedAnswer("no bad", QuestionSection.PenguasaanMateri);
         _sut.Content.Point.Min = averagedAnswer1;
         // Act
         var s = _sut.Aggregate();
