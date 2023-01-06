@@ -18,7 +18,7 @@ public class GoodPointMessage : BaseMessage<PointDto>, IMultiLexicalizationMessa
     public override string Lexicalization()
     {
         var sentence =
-            $"{Complement[0]}, untuk bagian {Data.Answer.Section}, {Data.Lecturer} sudah menjalankannya dengan baik, dengan {_lex.Search("nilai")} yang {_lex.Search("didapatkan")} adalah {Data.Answer.AverageScore}.";
+            $"{Complement[0]}untuk bagian {Data.Answer.Section}, {Data.Lecturer} sudah menjalankannya dengan baik, dengan {_lex.Search("nilai")} yang {_lex.Search("didapatkan")} adalah {Data.Answer.AverageScore}.";
         return sentence;
     }
 
@@ -30,12 +30,12 @@ public class GoodPointMessage : BaseMessage<PointDto>, IMultiLexicalizationMessa
         {
             case 2:
                 sentence =
-                    $"{Complement[0]}, untuk bagian {Data.Answer.Section} dan {second.Section}, {Data.Lecturer} sudah menjalankannya dengan baik, dengan {_lex.Search("nilai")} yang {_lex.Search("didapatkan")} masing-masing adalah {Data.Answer.AverageScore} dan {second.AverageScore}";
+                    $"{Complement[0]}untuk bagian {Data.Answer.Section} dan {second.Section}, {Data.Lecturer} sudah menjalankannya dengan baik, dengan {_lex.Search("nilai")} yang {_lex.Search("didapatkan")} masing-masing adalah {Data.Answer.AverageScore} dan {second.AverageScore}";
                 break;
             case >= 3:
                 var third = messages[2];
                 sentence =
-                    $"{Complement[0]}, untuk bagian {Data.Answer.Section}, {second.Section}, dan {third.Section}, {Data.Lecturer} sudah menjalankannya dengan baik, dengan {_lex.Search("nilai")} yang {_lex.Search("didapatkan")} masing-masing adalah {Data.Answer.AverageScore}, {second.AverageScore}, {third.AverageScore}";
+                    $"{Complement[0]}untuk bagian {Data.Answer.Section}, {second.Section}, dan {third.Section}, {Data.Lecturer} sudah menjalankannya dengan baik, dengan {_lex.Search("nilai")} yang {_lex.Search("didapatkan")} masing-masing adalah {Data.Answer.AverageScore}, {second.AverageScore}, {third.AverageScore}";
                 break;
         }
 
@@ -48,8 +48,8 @@ public class GoodPointMessage : BaseMessage<PointDto>, IMultiLexicalizationMessa
     {
         Complement[0] = option.Description switch
         {
-            "bad" => _lex.Search("meskipun demikian"),
-            "no bad" => _lex.Search("serta"),
+            "bad" => _lex.Search("meskipun demikian") + ", ",
+            "no bad" => _lex.Search("serta") + ", ",
             _ => Complement[0]
         };
     }

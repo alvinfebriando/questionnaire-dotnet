@@ -17,7 +17,7 @@ public class NoGoodPointMessage : BaseMessage<PointDto>, IComplemented
     public override string Lexicalization()
     {
         var sentence =
-            $"{Complement[0]}, {Data.Lecturer} belum mencapai hasil yang diinginkan, dari pertanyaan yang diajukan, {_lex.Search("nilai")} {_lex.Search("tertinggi")} hanya sebesar {Data.Answer.AverageScore} untuk pertanyaan {Data.Answer.Section}";
+            $"{Complement[0]}{Data.Lecturer} belum mencapai hasil yang diinginkan, dari pertanyaan yang diajukan, {_lex.Search("nilai")} {_lex.Search("tertinggi")} hanya sebesar {Data.Answer.AverageScore} untuk pertanyaan {Data.Answer.Section}";
         return sentence;
     }
 
@@ -27,8 +27,8 @@ public class NoGoodPointMessage : BaseMessage<PointDto>, IComplemented
     {
         Complement[0] = option.Description switch
         {
-            "bad" => _lex.Search("serta"),
-            "no bad" => _lex.Search("namun"),
+            "bad" => _lex.Search("serta") + ", ",
+            "no bad" => _lex.Search("namun") + ", ",
             _ => Complement[0]
         };
     }
