@@ -50,7 +50,7 @@ public class NoBadPointMessageTests
     {
         // Arrange
         var option = new Option("good");
-        const string expected = "serta";
+        const string expected = "serta, ";
         // Act
         _sut.EmbedComplement(option);
         // Assert
@@ -63,7 +63,7 @@ public class NoBadPointMessageTests
     {
         // Arrange
         var option = new Option("no good");
-        const string expected = "meskipun demikian";
+        const string expected = "meskipun demikian, ";
         // Act
         _sut.EmbedComplement(option);
         // Assert

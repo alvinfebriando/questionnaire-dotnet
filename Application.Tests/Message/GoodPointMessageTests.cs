@@ -98,7 +98,7 @@ public class GoodPointMessageTests
     {
         // Arrange
         var option = new Option("bad");
-        const string expected = "meskipun demikian";
+        const string expected = "meskipun demikian, ";
         // Act
         _sut.EmbedComplement(option);
         // Assert
@@ -111,7 +111,7 @@ public class GoodPointMessageTests
     {
         // Arrange
         var option = new Option("no bad");
-        const string expected = "serta";
+        const string expected = "serta, ";
         // Act
         _sut.EmbedComplement(option);
         // Assert
