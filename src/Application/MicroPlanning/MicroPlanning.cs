@@ -21,7 +21,8 @@ public class MicroPlanning : IMicroPlanning
     {
         var overviewTopic = new OverviewTopic(Content, Structure, _lex);
         var openingTopic = new OpeningTopic(Content, Structure, _lex);
-        var list = new List<BaseTopic> { overviewTopic, openingTopic };
+        var pointTopic = new PointTopic(Content, Structure, _lex);
+        var list = new List<BaseTopic> { openingTopic, overviewTopic, pointTopic };
         return list;
     }
 }
