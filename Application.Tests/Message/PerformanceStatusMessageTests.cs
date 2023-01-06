@@ -1,6 +1,4 @@
-﻿using Moq;
-using Questionnaire.Application.Dto;
-using Questionnaire.Application.Lexicalization;
+﻿using Questionnaire.Application.Dto;
 using Questionnaire.Application.Message;
 using Questionnaire.Domain.ValueObjects;
 using Xunit.Abstractions;
@@ -16,8 +14,8 @@ public class PerformanceStatusMessageTests
     {
         _output = output;
         var overviewDto = new OverviewDto("pak alvin",4.2);
-        var lex = new Mock<ILexicalization>();
-        _sut = new PerformanceStatusMessage(overviewDto,lex.Object);
+        var lex = Lexicalization.Create();
+        _sut = new PerformanceStatusMessage(overviewDto,lex);
     }
 
     [Fact]

@@ -1,6 +1,4 @@
-﻿using Moq;
-using Questionnaire.Application.Dto;
-using Questionnaire.Application.Lexicalization;
+﻿using Questionnaire.Application.Dto;
 using Questionnaire.Application.Message;
 using Questionnaire.Domain.Entities;
 using Questionnaire.Domain.ValueObjects;
@@ -23,13 +21,8 @@ public class NoGoodPointMessageTests
         var answers = new List<Answer> { answer1, answer2 };
         var averagedAnswer = new AveragedAnswer(QuestionSection.TransparansiNilai, 3.1, answers);
         var dto = new PointDto("pak alvin", averagedAnswer);
-        var lex = new Mock<ILexicalization>();
-        lex.Setup(l => l.Search("nilai")).Returns("nilai");
-        lex.Setup(l => l.Search("didapatkan")).Returns("didapatkan");
-        lex.Setup(l => l.Search("tertinggi")).Returns("tertinggi");
-        lex.Setup(l => l.Search("serta")).Returns("serta");
-        lex.Setup(l => l.Search("namun")).Returns("namun");
-        _sut = new NoGoodPointMessage(dto, lex.Object);
+        var lex = Lexicalization.Create();
+        _sut = new NoGoodPointMessage(dto, lex);
     }
 
     [Fact]

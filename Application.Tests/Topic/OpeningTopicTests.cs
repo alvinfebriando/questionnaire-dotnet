@@ -1,6 +1,4 @@
-﻿using Moq;
-using Questionnaire.Application.Lexicalization;
-using Questionnaire.Application.Message;
+﻿using Questionnaire.Application.Message;
 using Questionnaire.Application.Topic;
 using Questionnaire.Domain.Entities;
 using Xunit.Abstractions;
@@ -19,8 +17,8 @@ public class OpeningTopicTests
         var point = new Point();
         var content = new Content("place", date, "subject", "respondent", "lecturer", 3.5, point);
         var structure = new Structure();
-        var lex = new Mock<ILexicalization>();
-        _sut = new OpeningTopic(content, structure, lex.Object);
+        var lex = Lexicalization.Create();
+        _sut = new OpeningTopic(content, structure, lex);
     }
 
     [Fact]

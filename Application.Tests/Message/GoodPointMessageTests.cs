@@ -1,7 +1,5 @@
 ﻿using System.Globalization;
-using Moq;
 using Questionnaire.Application.Dto;
-using Questionnaire.Application.Lexicalization;
 using Questionnaire.Application.Message;
 using Questionnaire.Domain.Entities;
 using Questionnaire.Domain.ValueObjects;
@@ -24,12 +22,8 @@ public class GoodPointMessageTests
         var answers = new List<Answer> { answer1, answer2 };
         var averagedAnswer = new AveragedAnswer(QuestionSection.KedisiplinanWaktu, 4.1, answers);
         var dto = new PointDto("pak alvin", averagedAnswer);
-        var lex = new Mock<ILexicalization>();
-        lex.Setup(l => l.Search("meskipun demikian")).Returns("meskipun demikian");
-        lex.Setup(l => l.Search("nilai")).Returns("nilai");
-        lex.Setup(l => l.Search("didapatkan")).Returns("didapatkan");
-        lex.Setup(l => l.Search("serta")).Returns("serta");
-        _sut = new GoodPointMessage(dto, lex.Object);
+        var lex = Lexicalization.Create();
+        _sut = new GoodPointMessage(dto, lex);
     }
 
     [Fact]

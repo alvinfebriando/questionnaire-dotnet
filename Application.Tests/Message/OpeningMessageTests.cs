@@ -1,6 +1,4 @@
-﻿using Moq;
-using Questionnaire.Application.Dto;
-using Questionnaire.Application.Lexicalization;
+﻿using Questionnaire.Application.Dto;
 using Questionnaire.Application.Message;
 using Xunit.Abstractions;
 
@@ -16,8 +14,8 @@ public class OpeningMessageTests
         _output = output;
         var dto = new OpeningDto("usu", new DateOnly(2022, 12, 25), "topik",
             "mahasiswa");
-        var lex = new Mock<ILexicalization>();
-        _sut = new OpeningMessage(dto, lex.Object);
+        var lex = Lexicalization.Create();
+        _sut = new OpeningMessage(dto, lex);
     }
 
     [Fact]
