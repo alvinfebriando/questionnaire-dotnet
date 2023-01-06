@@ -12,12 +12,13 @@ public class DetailPointMessage : BaseMessage<PointDto>, IComplemented
     {
         _lex = lex;
         Complement.Add("");
+        Complement.Add("");
     }
 
     public override string Lexicalization()
     {
         var sentence =
-            $"berikut adalah rincian nilai yang {Complement[0]} ({Data.Answer.Section}):\n";
+            $"{Complement[0]}berikut adalah rincian nilai yang {Complement[1]} ({Data.Answer.Section}):\n";
         var s = Data.Answer.Answer.Select((a, index) =>
             $"{index}. {a.Question.Title}: {a.Score}").ToList();
         return sentence + string.Join("\n", s) + "\n";
@@ -27,11 +28,14 @@ public class DetailPointMessage : BaseMessage<PointDto>, IComplemented
 
     public void EmbedComplement(Option option)
     {
-        Complement[0] = option.Description switch
+        if (option.Description == "max")
         {
-            "max" => _lex.Search("tertinggi"),
-            "min" => _lex.Search("terendah"),
-            _ => Complement[0]
-        };
+            Complement[1] = _lex.Search("tertinggi");
+        }
+        else
+        {
+            Complement[0] = _lex.Search("sedangkan") + ", ";
+            Complement[1] = _lex.Search("terendah");
+        }
     }
 }

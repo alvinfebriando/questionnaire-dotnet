@@ -1,6 +1,4 @@
-﻿using Moq;
-using Questionnaire.Application.Dto;
-using Questionnaire.Application.Lexicalization;
+﻿using Questionnaire.Application.Dto;
 using Questionnaire.Application.Message;
 using Questionnaire.Domain.Entities;
 using Questionnaire.Domain.ValueObjects;
@@ -23,10 +21,8 @@ public class DetailPointMessageTests
         var answers = new List<Answer> { answer1, answer2 };
         var averagedAnswer = new AveragedAnswer(QuestionSection.KedisiplinanWaktu, 4.1, answers);
         var dto = new PointDto("pak alvin", averagedAnswer);
-        var lex = new Mock<ILexicalization>();
-        lex.Setup(l => l.Search("tertinggi")).Returns("tertinggi");
-        lex.Setup(l => l.Search("terendah")).Returns("terendah");
-        _sut = new DetailPointMessage(dto, lex.Object);
+        var lex = Lexicalization.Create();
+        _sut = new DetailPointMessage(dto, lex);
     }
 
     [Fact]
@@ -50,9 +46,10 @@ public class DetailPointMessageTests
         // Act
         _sut.EmbedComplement(option);
         // Assert
-        Assert.Equal(expected, _sut.Complement[0]);
-        _output.WriteLine(_sut.Complement[0]);
+        Assert.Equal(expected, _sut.Complement[1]);
+        _output.WriteLine(_sut.Complement[1]);
     }
+
     [Fact]
     public void EmbedComplement_MinOption_ChangeComplementValue()
     {
@@ -62,7 +59,7 @@ public class DetailPointMessageTests
         // Act
         _sut.EmbedComplement(option);
         // Assert
-        Assert.Equal(expected, _sut.Complement[0]);
-        _output.WriteLine(_sut.Complement[0]);
+        Assert.Equal(expected, _sut.Complement[1]);
+        _output.WriteLine(_sut.Complement[1]);
     }
 }
