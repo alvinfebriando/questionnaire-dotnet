@@ -27,6 +27,7 @@ public class Lexicalization : ILexicalization
         _synonym.Add("dan juga", "serta");
         _synonym.Add("untuk", "untuk");
         _synonym.Add("pada", "untuk");
+        _synonym.Add("sedangkan", "sedangkan");
     }
 
     public string Search(string keyword)
