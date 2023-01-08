@@ -36,11 +36,6 @@ public class Lexicalization : ILexicalization
         return Util.GetRandom(output);
     }
 
-    public string Search(string keyword, string affix)
-    {
-        throw new NotImplementedException();
-    }
-
     public string GetStatus(double score)
     {
         const double tolerance = 1e-10;
