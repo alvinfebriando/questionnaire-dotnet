@@ -13,25 +13,23 @@ public class Realization : IRealization
     public IList<IFormatter> Formatters { get; set; }
     public IEnumerable<BaseTopic> Topics { get; set; }
 
-    public List<string> ConvertToSentence()
+    public IEnumerable<string> ConvertToSentence()
     {
         var output = new List<string>();
         foreach (var topic in Topics)
         {
             var sentences = topic.Aggregate();
             sentences = sentences.Select(s => $"{s} ").ToList();
-            sentences[^1] = sentences[^1].Trim()+"\n";
+            sentences[^1] = sentences[^1].Trim() + "\n";
             output.AddRange(sentences);
         }
-
-        AddFormatter();
 
         return Formatters.Aggregate(output,
             (current, formatter) => current.Select(formatter.Format).ToList());
     }
 
-    private void AddFormatter()
+    public void AddFormatter(IFormatter formatter)
     {
-        Formatters.Add(new TrimFormatter());
+        Formatters.Add(formatter);
     }
 }
