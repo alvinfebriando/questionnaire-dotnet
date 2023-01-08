@@ -27,6 +27,7 @@ public class OverviewTopicTests
     {
         // Arrange
         _sut.Structure = new Structure();
+        _sut.Structure.Add("");
         _sut.Structure.Add("score");
         // Act
         var s = _sut.Order();
@@ -40,6 +41,7 @@ public class OverviewTopicTests
     {
         // Arrange
         _sut.Structure = new Structure();
+        _sut.Structure.Add("");
         _sut.Structure.Add("performance");
         const int expected = 2;
         // Act
