@@ -19,6 +19,8 @@ public class Realization : IRealization
         foreach (var topic in Topics)
         {
             var sentences = topic.Aggregate();
+            sentences = sentences.Select(s => $"{s} ").ToList();
+            sentences[^1] = sentences[^1].Trim()+"\n";
             output.AddRange(sentences);
         }
 
