@@ -3,7 +3,7 @@
 public class Content
 {
     public Content(string place, DateOnly date, string subject, string respondent, string lecturer,
-        double score, Point point)
+        double score, int questionCount, int aspectCount, Point point)
     {
         Place = place;
         Date = date;
@@ -11,6 +11,8 @@ public class Content
         Respondent = respondent;
         Lecturer = lecturer;
         AverageScore = score;
+        QuestionCount = questionCount;
+        AspectCount = aspectCount;
         Point = point;
     }
 
@@ -20,5 +22,7 @@ public class Content
     public string Respondent { get; set; }
     public string Lecturer { get; set; }
     public double AverageScore { get; set; }
+    public int QuestionCount { get; set; }
+    public int AspectCount { get; set; }
     public Point Point { get; set; }
 }

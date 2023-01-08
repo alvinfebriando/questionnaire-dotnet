@@ -15,7 +15,7 @@ public class AdviceTopicTests
     {
         _output = output;
         var point = new Point();
-        var content = new Content("", new DateOnly(2022, 12, 24), "", "", "", 1.4, point);
+        var content = new Content("", new DateOnly(2022, 12, 24), "", "", "", 1.4, 0, 0, point);
         var structure = new Structure();
         var lex = Lexicalization.Create();
         _sut = new AdviceTopic(content, structure, lex);

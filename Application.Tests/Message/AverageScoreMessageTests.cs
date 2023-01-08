@@ -13,9 +13,9 @@ public class AverageScoreMessageTests
     public AverageScoreMessageTests(ITestOutputHelper output)
     {
         _output = output;
-        var overviewDto = new OverviewDto("pak alvin",4.5);
+        var overviewDto = new OverviewDto("pak alvin", 4.5, 13, 6);
         var lex = Lexicalization.Create();
-        _sut = new AverageScoreMessage(overviewDto,lex);
+        _sut = new AverageScoreMessage(overviewDto, lex);
     }
 
     [Fact]
@@ -42,7 +42,7 @@ public class AverageScoreMessageTests
         Assert.Equal(expected, _sut.Complement[0]);
         Assert.Equal(expected2, _sut.Complement[1]);
     }
-    
+
     [Fact]
     public void EmbedComplement_SecondOption_ChangeComplementValue()
     {

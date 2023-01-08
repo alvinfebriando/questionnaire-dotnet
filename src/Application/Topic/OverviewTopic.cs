@@ -13,7 +13,8 @@ public class OverviewTopic : GenericTopic<OverviewDto>
     public OverviewTopic(Content content, Structure structure,
         ILexicalization lex) : base(content, structure)
     {
-        OverviewDto = new OverviewDto(Content.Lecturer, Content.AverageScore);
+        OverviewDto = new OverviewDto(Content.Lecturer, Content.AverageScore, Content.QuestionCount,
+            Content.AspectCount);
         _lex = lex;
     }
 

@@ -11,6 +11,8 @@ var date = new DateOnly(2022, 12, 28);
 const string subject = "kepuasan pengajaran mata kuliah pemrograman web kom a";
 const string respondent = "mahasiswa";
 const string lecturer = "pak alvin";
+const int questionCount = 13;
+const int aspectCount = 6;
 
 // Kesempatan bertanya * 2
 // Penggunaan e-learning * 3
@@ -28,7 +30,8 @@ var contentRule = new ContentRule();
 var structureRule = new StructureRule();
 
 var content =
-    dPlan.DetermineContent(place, date, subject, respondent, lecturer, answers, contentRule);
+    dPlan.DetermineContent(place, date, subject, respondent, lecturer, questionCount, aspectCount,
+        answers, contentRule);
 var structure = dPlan.DetermineStructure(content.Point, structureRule);
 
 var lex = new Lexicalization();
@@ -36,9 +39,12 @@ var mPlan = new MicroPlanning(content, structure, lex);
 var topics = mPlan.Create();
 
 var realization = new Realization(topics);
+realization.AddFormatter(new TrimFormatter());
+realization.AddFormatter(new CapitalSentenceFormatter());
+
 var paragraph = realization.ConvertToSentence();
 
-Console.WriteLine(string.Join("", paragraph));
+Console.WriteLine(string.Join(" ", paragraph));
 
 // TODO
 // performa pak alvin sejauh ini sudah cukup bagus. namun masih bisa ditingkatkan lagi denga saran

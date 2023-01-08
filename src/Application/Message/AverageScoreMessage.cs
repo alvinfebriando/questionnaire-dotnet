@@ -34,7 +34,7 @@ public class AverageScoreMessage : BaseMessage<OverviewDto>, IComplemented
     public override string Lexicalization()
     {
         var sentence =
-            $"{Complement[0]} {Complement[1]} {_lex.Search("mendapat")} {_lex.Search("nilai")} total sebesar {Data.AverageScore}.";
+            $"{Complement[0]} {Complement[1]} {_lex.Search("mendapat")} {_lex.Search("nilai")} total sebesar {Data.AverageScore} dari {Data.QuestionCount} pertanyaan yang dikelompokkan menjadi {Data.AspectCount} aspek.";
         return sentence;
     }
 }

@@ -15,7 +15,8 @@ public class PointTopicTests
     {
         _output = output;
         var point = new Point();
-        var content = new Content("", new DateOnly(2022, 12, 31), "", "", "pak alvin", 4.1, point);
+        var content = new Content("", new DateOnly(2022, 12, 31), "", "", "pak alvin", 4.1, 0,
+            0, point);
         var structure = new Structure();
         var lex = Lexicalization.Create();
         _sut = new PointTopic(content, structure, lex);
