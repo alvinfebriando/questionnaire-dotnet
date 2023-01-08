@@ -20,9 +20,11 @@ public class Realization : IRealization
         {
             var sentences = topic.Aggregate();
             sentences = sentences.Select(s => $"{s} ").ToList();
-            sentences[^1] = sentences[^1].Trim() + "\n";
+            sentences[^1] += "\n";
             output.AddRange(sentences);
         }
+
+        // var o = output.SelectMany(o => o.Split(". ", StringSplitOptions.RemoveEmptyEntries)).ToList();
 
         return Formatters.Aggregate(output,
             (current, formatter) => current.Select(formatter.Format).ToList());

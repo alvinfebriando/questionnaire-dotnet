@@ -17,7 +17,7 @@ public class NoBadPointMessage : BaseMessage<PointDto>, IComplemented
     public override string Lexicalization()
     {
         var sentence =
-            $"{Complement[0]}tidak ada bagian yang dinilai di bawah standar, dengan {_lex.Search("nilai")} {_lex.Search("terendah")} yang {_lex.Search("didapatkan")} sebesar {Data.Answer.AverageScore} untuk pertanyaan {Data.Answer.Section}.";
+            $"{Complement[0]}tidak ada {_lex.Search("aspek")} yang dinilai di bawah standar, dengan {_lex.Search("nilai")} {_lex.Search("terendah")} yang {_lex.Search("didapatkan")} sebesar {Data.Answer.AverageScore} untuk pertanyaan {Data.Answer.Section}.";
         return sentence;
     }
 

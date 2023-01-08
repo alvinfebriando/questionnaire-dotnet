@@ -21,13 +21,15 @@ public class Lexicalization : ILexicalization
         _synonym.Add("paling rendah", "terendah");
         _synonym.Add("meskipun demikian", "meskipun demikian");
         _synonym.Add("walaupun demikian", "meskipun demikian");
-        _synonym.Add("namun","namun");
-        _synonym.Add("tetapi","namun");
+        _synonym.Add("namun", "namun");
+        _synonym.Add("tetapi", "namun");
         _synonym.Add("serta", "serta");
         _synonym.Add("dan juga", "serta");
         _synonym.Add("untuk", "untuk");
         _synonym.Add("pada", "untuk");
         _synonym.Add("sedangkan", "sedangkan");
+        _synonym.Add("aspek", "aspek");
+        _synonym.Add("bagian", "aspek");
     }
 
     public string Search(string keyword)

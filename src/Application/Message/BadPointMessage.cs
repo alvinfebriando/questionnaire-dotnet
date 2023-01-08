@@ -17,7 +17,7 @@ public class BadPointMessage : BaseMessage<PointDto>, IMultiLexicalizationMessag
     public override string Lexicalization()
     {
         var sentence =
-            $"{Complement[0]}{Data.Lecturer} kurang sukses dalam bagian {Data.Answer.Section}, dengan {_lex.Search("nilai")} {_lex.Search("didapatkan")} sebesar {Data.Answer.AverageScore}.";
+            $"{Complement[0]}{Data.Lecturer} kurang sukses dalam {_lex.Search("aspek")} {Data.Answer.Section}, dengan {_lex.Search("nilai")} {_lex.Search("didapatkan")} sebesar {Data.Answer.AverageScore}.";
         return sentence;
     }
 
@@ -29,12 +29,12 @@ public class BadPointMessage : BaseMessage<PointDto>, IMultiLexicalizationMessag
         {
             case 2:
                 sentence =
-                    $"{Complement[0]}{Data.Lecturer} kurang sukses dalam bagian {Data.Answer.Section} dan {second.Section}, dengan {_lex.Search("nilai")} yang {_lex.Search("didapatkan")} masing-masingnya adalah {Data.Answer.AverageScore} dan {second.AverageScore}.";
+                    $"{Complement[0]}{Data.Lecturer} kurang sukses dalam {_lex.Search("aspek")} {Data.Answer.Section} dan {second.Section}, dengan {_lex.Search("nilai")} yang {_lex.Search("didapatkan")} masing-masingnya adalah {Data.Answer.AverageScore} dan {second.AverageScore}.";
                 break;
             case >= 3:
                 var third = messages[2];
                 sentence =
-                    $"{Complement[0]}{Data.Lecturer} kurang sukses dalam menjalankan bagian {Data.Answer.Section}, {second.Section}, dan {third.Section}, dengan {_lex.Search("nilai")} yang {_lex.Search("didapatkan")} masing-masingnya adalah {Data.Answer.AverageScore}, {second.AverageScore}, {third.AverageScore}.";
+                    $"{Complement[0]}{Data.Lecturer} kurang sukses dalam menjalankan {_lex.Search("aspek")} {Data.Answer.Section}, {second.Section}, dan {third.Section}, dengan {_lex.Search("nilai")} yang {_lex.Search("didapatkan")} masing-masingnya adalah {Data.Answer.AverageScore}, {second.AverageScore}, {third.AverageScore}.";
                 break;
         }
 
