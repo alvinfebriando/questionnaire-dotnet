@@ -15,7 +15,7 @@ public class OpeningMessage : BaseMessage<OpeningDto>
     public override string Lexicalization()
     {
         var sentence =
-            $"pada tanggal {Data.Date}, telah dilakukan survey dengan topik {Data.Subject} yang dijawab oleh {Data.Respondent} di lingkungan {Data.Place}. berikut adalah hasil dari survey tersebut.";
+            $"pada tanggal {Data.Date}, telah dilakukan survey dengan topik {Data.Subject} yang dijawab oleh {Data.Respondent} di lingkungan {Data.Place}.";
         return sentence;
     }
 }
