@@ -8,17 +8,19 @@ using Questionnaire.Infrastructure.Persistence.InMemory;
 
 const string place = "usu";
 var date = new DateOnly(2022, 12, 28);
-const string subject = "topik";
+const string subject = "kepuasan pengajaran mata kuliah pemrograman web kom a";
 const string respondent = "mahasiswa";
 const string lecturer = "pak alvin";
 
+// Kesempatan bertanya * 2
+// Penggunaan e-learning * 3
+// Transparansi nilai * 3
+// Kedisiplinan waktu * 2
+// Rencana kontrak kuliah * 2
+// Penguasaan materi * 1
+var scores = new List<double> { 4.1, 4.0, 4.2, 4.1, 4.2, 2.4, 2.9, 3, 1.8, 2.5, 3.8, 3.6, 4.5 };
 
-var answer1 = new Answer(2, Data.Questions[0]);
-var answer2 = new Answer(3, Data.Questions[1]);
-var answer3 = new Answer(4, Data.Questions[2]);
-var answer4 = new Answer(3.5, Data.Questions[3]);
-var answer5 = new Answer(4.2, Data.Questions[4]);
-var answers = new List<Answer> { answer1, answer2, answer3,answer4,answer5 };
+var answers = scores.Select((score, index) => new Answer(score, Data.Questions[index])).ToList();
 
 var dPlan = new DocumentPlanning();
 
