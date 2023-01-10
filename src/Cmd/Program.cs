@@ -45,6 +45,3 @@ realization.AddFormatter(new CapitalSentenceFormatter());
 var paragraph = realization.ConvertToSentence();
 
 Console.WriteLine(string.Join(" ", paragraph));
-
-// TODO
-// performa pak alvin sejauh ini sudah cukup bagus. namun masih bisa ditingkatkan lagi denga saran
