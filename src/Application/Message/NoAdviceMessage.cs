@@ -17,7 +17,7 @@ public class NoAdviceMessage : BaseMessage<AdviceDto>
     {
         var advice = Util.GetRandom(Data.Advice);
         var sentence =
-            $"{Data.Lecturer} dapat melakukan {advice} untuk mempertahankan nilai pada evaluasi mendatang";
+            $"performa {Data.Lecturer} sudah cukup baik, namun beliau dapat melakukan {advice} untuk mempertahankan nilai pada evaluasi mendatang";
         return sentence;
     }
 }
