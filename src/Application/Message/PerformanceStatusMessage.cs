@@ -27,8 +27,6 @@ public class PerformanceStatusMessage : BaseMessage<OverviewDto>, IComplemented
 
     public override string Lexicalization()
     {
-        // var sentence = $"pencapaian {Complement[0]} dinilai {Status}";
-        // var sentence = $"{Complement[0]} {_lex.RndMendapat()} predikat {Status}";
         var sentence =
             $"dalam penilaian ini, {Complement[0]} {_lex.Search("mendapat")} hasil yang {Status}.";
         return sentence;
