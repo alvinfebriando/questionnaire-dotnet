@@ -25,8 +25,8 @@ public class Lexicalization : ILexicalization
         _synonym.Add("tetapi", "namun");
         _synonym.Add("serta", "serta");
         _synonym.Add("dan juga", "serta");
-        _synonym.Add("dan juga", "kemudian");
-        _synonym.Add("dan juga", "lalu");
+        _synonym.Add("kemudian", "serta");
+        _synonym.Add("lalu", "serta");
         _synonym.Add("untuk", "untuk");
         _synonym.Add("pada", "untuk");
         _synonym.Add("sedangkan", "sedangkan");
