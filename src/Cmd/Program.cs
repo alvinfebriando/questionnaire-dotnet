@@ -39,9 +39,8 @@ var mPlan = new MicroPlanning(content, structure, lex);
 var topics = mPlan.Create();
 
 var realization = new Realization(topics);
-realization.AddFormatter(new TrimFormatter());
 realization.AddFormatter(new CapitalSentenceFormatter());
 
 var paragraph = realization.ConvertToSentence();
 
-Console.WriteLine(string.Join(" ", paragraph));
+Console.WriteLine(string.Join("", paragraph));

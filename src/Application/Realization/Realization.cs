@@ -18,16 +18,32 @@ public class Realization : IRealization
         var output = new List<string>();
         foreach (var topic in Topics)
         {
-            var sentences = topic.Aggregate();
-            sentences = sentences.Select(s => $"{s} ").ToList();
-            sentences[^1] += "\n";
+            IList<string> sentences;
+            if (topic.GetType() == typeof(PointTopic))
+            {
+                sentences = topic.Aggregate();
+                sentences = sentences.Select(s => $"{s} ").ToList();
+                sentences[^3] = $"{sentences[^3]}\n";
+                sentences[^2] = $"{sentences[^2].Trim()}\n";
+                sentences[^1] = $"{sentences[^1]}\n";
+            }
+            else
+            {
+                sentences = topic.Aggregate();
+                sentences = sentences.Select(s => $"{s} ").ToList();
+                sentences[^1] += "\n";
+            }
+
+
             output.AddRange(sentences);
         }
 
-        // var o = output.SelectMany(o => o.Split(". ", StringSplitOptions.RemoveEmptyEntries)).ToList();
+        foreach (var formatter in Formatters)
+        {
+            output = output.Select(s => formatter.Format(s)).ToList();
+        }
 
-        return Formatters.Aggregate(output,
-            (current, formatter) => current.Select(formatter.Format).ToList());
+        return output;
     }
 
     public void AddFormatter(IFormatter formatter)

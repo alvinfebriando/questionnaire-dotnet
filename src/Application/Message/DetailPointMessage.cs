@@ -19,9 +19,9 @@ public class DetailPointMessage : BaseMessage<PointDto>, IComplemented
     {
         var sentence =
             $"{Complement[0]}berikut adalah rincian nilai yang {Complement[1]} ({Data.Answer.Section}):\n";
-        var s = Data.Answer.Answer.Select((a, index) =>
-            $"{index}. {a.Question.Title}: {a.Score}").ToList();
-        return sentence + string.Join("\n", s) + "\n";
+        var s = Data.Answer.Answer.Select(a =>
+            $"- {a.Question.Title}: {a.Score}").ToList();
+        return sentence + string.Join("\n", s);
     }
 
     public IList<string> Complement { get; set; } = new List<string>();
