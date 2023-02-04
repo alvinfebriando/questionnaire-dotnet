@@ -4,9 +4,9 @@ using Questionnaire.WebApi;
 
 var builder = WebApplication.CreateBuilder(args);
 {
-    builder.Services.AddControllers().AddJsonOptions(options=>{options.JsonSerializerOptions.Converters.Add(new DateOnlyJsonConverter());});
     builder.Services.AddInfrastructure();
     builder.Services.AddApplication();
+    builder.Services.AddPresentation();
 }
 
 var app = builder.Build();
