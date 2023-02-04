@@ -13,6 +13,13 @@ public static class DependencyInjection
         config.Scan(Assembly.GetExecutingAssembly());
         services.AddSingleton(config);
         services.AddScoped<IMapper, ServiceMapper>();
+        services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(policy =>
+            {
+                policy.AllowAnyOrigin().AllowAnyHeader();
+            });
+        });
         services.AddControllers()
             .AddJsonOptions(options =>
             {
