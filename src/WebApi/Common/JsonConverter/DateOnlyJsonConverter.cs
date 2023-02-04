@@ -2,7 +2,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Questionnaire.WebApi;
+namespace Questionnaire.WebApi.Common.JsonConverter;
 
 public class DateOnlyJsonConverter : JsonConverter<DateOnly>
 {
