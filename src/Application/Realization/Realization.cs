@@ -27,6 +27,11 @@ public class Realization : IRealization
             (current, formatter) => current.Select(formatter.Format).ToList());
     }
 
+    public string StructureRealization(IEnumerable<string> listOfSentence)
+    {
+        return string.Join("", listOfSentence);
+    }
+
     private static void FormatNewLine(IList<string> sentences, Type topic)
     {
         sentences = sentences.Select(s => $"{s} ").ToList();
