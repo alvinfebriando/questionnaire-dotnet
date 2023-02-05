@@ -5,7 +5,7 @@ namespace Questionnaire.Application;
 
 public static class AnswerConverter
 {
-    public static IList<Answer> Convert(IQuestionProvider questionProvider,
+    public static IEnumerable<Answer> Convert(IQuestionProvider questionProvider,
         IEnumerable<double> answers)
     {
         return answers
