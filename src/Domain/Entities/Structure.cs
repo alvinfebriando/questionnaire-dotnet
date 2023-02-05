@@ -24,7 +24,7 @@ public class Structure
         return _structures.IndexOf(s);
     }
 
-    public override string? ToString()
+    public override string ToString()
     {
         return string.Join(", ", _structures);
     }
