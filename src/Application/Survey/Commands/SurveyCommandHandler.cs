@@ -27,6 +27,7 @@ public class SurveyCommandHandler : IRequestHandler<SurveyCommand, IEnumerable<s
     public async Task<IEnumerable<string>> Handle(SurveyCommand request,
         CancellationToken cancellationToken)
     {
+        await Task.CompletedTask;
         var answers = AnswerConverter.Convert(_questionProvider, request.Answers);
         var dPlan = new DocumentPlanning.DocumentPlanning();
 
