@@ -1,6 +1,5 @@
 ﻿using Questionnaire.Application.Dto;
 using Questionnaire.Application.Lexicalization;
-using Questionnaire.Domain.ValueObjects;
 
 namespace Questionnaire.Application.Message;
 

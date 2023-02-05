@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using Questionnaire.Domain.Entities;
+﻿using Questionnaire.Domain.Entities;
 
 namespace Questionnaire.Application.Common.Interfaces;
 

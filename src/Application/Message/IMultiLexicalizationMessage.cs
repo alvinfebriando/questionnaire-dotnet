@@ -1,5 +1,4 @@
-﻿using Questionnaire.Application.Dto;
-using Questionnaire.Domain.ValueObjects;
+﻿using Questionnaire.Domain.ValueObjects;
 
 namespace Questionnaire.Application.Message;
 
