@@ -4,7 +4,7 @@ public abstract class BaseMessage<T> where T : class
 {
     public readonly T Data;
 
-    public BaseMessage(T data)
+    protected BaseMessage(T data)
     {
         Data = data;
     }
