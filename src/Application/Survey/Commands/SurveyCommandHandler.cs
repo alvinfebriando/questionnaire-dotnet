@@ -44,7 +44,7 @@ public class SurveyCommandHandler : IRequestHandler<SurveyCommand, IEnumerable<s
         var realization = new Realization.Realization(topics);
         realization.AddFormatter(new CapitalSentenceFormatter());
 
-        var paragraph = realization.ConvertToSentence();
+        var paragraph = realization.LingusticRealization();
         return paragraph;
     }
 }

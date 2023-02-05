@@ -6,6 +6,6 @@ public interface IRealization
 {
     IList<IFormatter> Formatters { get; set; }
     IEnumerable<BaseTopic> Topics { get; set; }
-    IEnumerable<string> ConvertToSentence();
+    IEnumerable<string> LingusticRealization();
     void AddFormatter(IFormatter formatter);
 }
