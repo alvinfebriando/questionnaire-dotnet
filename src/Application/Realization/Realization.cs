@@ -13,7 +13,7 @@ public class Realization : IRealization
     public IList<IFormatter> Formatters { get; set; }
     public IEnumerable<BaseTopic> Topics { get; set; }
 
-    public IEnumerable<string> LingusticRealization()
+    public IEnumerable<string> LinguisticRealization()
     {
         var output = new List<string>();
         foreach (var topic in Topics)

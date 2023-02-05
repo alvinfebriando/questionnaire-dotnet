@@ -41,6 +41,6 @@ var topics = mPlan.Create();
 var realization = new Realization(topics);
 realization.AddFormatter(new CapitalSentenceFormatter());
 
-var paragraph = realization.LingusticRealization();
+var paragraph = realization.LinguisticRealization();
 
 Console.WriteLine(string.Join("", paragraph));
