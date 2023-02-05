@@ -19,7 +19,6 @@ public class Realization : IRealization
         foreach (var topic in Topics)
         {
             var sentences = topic.Aggregate();
-            sentences = sentences.Select(s => $"{s} ").ToList();
             FormatNewLine(sentences, topic.GetType());
             output.AddRange(sentences);
         }
@@ -30,6 +29,7 @@ public class Realization : IRealization
 
     private static void FormatNewLine(IList<string> sentences, Type topic)
     {
+        sentences = sentences.Select(s => $"{s} ").ToList();
         if (topic == typeof(PointTopic))
         {
             sentences[^3] = $"{sentences[^3]}\n";
