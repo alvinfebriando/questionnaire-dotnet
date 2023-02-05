@@ -24,12 +24,8 @@ public class Realization : IRealization
             output.AddRange(sentences);
         }
 
-        foreach (var formatter in Formatters)
-        {
-            output = output.Select(s => formatter.Format(s)).ToList();
-        }
-
-        return output;
+        return Formatters.Aggregate(output,
+            (current, formatter) => current.Select(formatter.Format).ToList());
     }
 
     private static void FormatNewLine(IList<string> sentences, Type topic)
