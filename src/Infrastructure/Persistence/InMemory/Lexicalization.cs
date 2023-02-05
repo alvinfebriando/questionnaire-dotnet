@@ -5,7 +5,7 @@ namespace Questionnaire.Infrastructure.Persistence.InMemory;
 
 public class Lexicalization : ILexicalization
 {
-    private readonly Dictionary<string, string> _synonym = new Dictionary<string, string>();
+    private readonly Dictionary<string, string> _synonym = new();
 
     public Lexicalization()
     {
