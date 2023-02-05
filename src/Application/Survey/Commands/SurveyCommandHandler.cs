@@ -10,11 +10,18 @@ public class SurveyCommandHandler : IRequestHandler<SurveyCommand, IEnumerable<s
 {
     private readonly ILexicalization _lex;
     private readonly IQuestionProvider _questionProvider;
+    private readonly IContentRule _contentRule;
+    private readonly IStructureRule _structureRule;
 
-    public SurveyCommandHandler(ILexicalization lex, IQuestionProvider questionProvider)
+    public SurveyCommandHandler(ILexicalization lex,
+        IQuestionProvider questionProvider,
+        IContentRule contentRule,
+        IStructureRule structureRule)
     {
         _lex = lex;
         _questionProvider = questionProvider;
+        _contentRule = contentRule;
+        _structureRule = structureRule;
     }
 
     public async Task<IEnumerable<string>> Handle(SurveyCommand request,
@@ -22,9 +29,6 @@ public class SurveyCommandHandler : IRequestHandler<SurveyCommand, IEnumerable<s
     {
         var answers = AnswerConverter.Convert(_questionProvider, request.Answers);
         var dPlan = new DocumentPlanning.DocumentPlanning();
-
-        var contentRule = new ContentRule();
-        var structureRule = new StructureRule();
 
         var content =
             dPlan.DetermineContent(request.Place,
@@ -35,8 +39,8 @@ public class SurveyCommandHandler : IRequestHandler<SurveyCommand, IEnumerable<s
                 request.QuestionCount,
                 request.AspectCount,
                 answers,
-                contentRule);
-        var structure = dPlan.DetermineStructure(content.Point, structureRule);
+                _contentRule);
+        var structure = dPlan.DetermineStructure(content.Point, _structureRule);
 
         var mPlan = new MicroPlanning.MicroPlanning(content, structure, _lex);
         var topics = mPlan.Create();
