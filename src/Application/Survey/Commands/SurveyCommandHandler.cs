@@ -31,16 +31,15 @@ public class SurveyCommandHandler : IRequestHandler<SurveyCommand, IEnumerable<s
         var answers = AnswerConverter.Convert(_questionProvider, request.Answers);
         var dPlan = new DocumentPlanning.DocumentPlanning();
 
-        var content =
-            dPlan.DetermineContent(request.Place,
-                request.Date,
-                request.Subject,
-                request.Respondent,
-                request.Lecturer,
-                request.QuestionCount,
-                request.AspectCount,
-                answers,
-                _contentRule);
+        var content = dPlan.DetermineContent(request.Place,
+            request.Date,
+            request.Subject,
+            request.Respondent,
+            request.Lecturer,
+            request.QuestionCount,
+            request.AspectCount,
+            answers,
+            _contentRule);
         var structure = dPlan.DetermineStructure(content.Point, _structureRule);
 
         var mPlan = new MicroPlanning.MicroPlanning(content, structure, _lex);
