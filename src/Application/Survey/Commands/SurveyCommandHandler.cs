@@ -31,6 +31,7 @@ public class SurveyCommandHandler : IRequestHandler<SurveyCommand, IEnumerable<s
     {
         await Task.CompletedTask;
         var answers = Preprocessing.Convert(_questionProvider, request.Answers);
+        var averageScore = Preprocessing.CalculateAverageScore(answers);
         var dPlan = new DocumentPlanning();
 
         var content = dPlan.DetermineContent(request.Place,
@@ -38,6 +39,7 @@ public class SurveyCommandHandler : IRequestHandler<SurveyCommand, IEnumerable<s
             request.Subject,
             request.Respondent,
             request.Lecturer,
+            averageScore,
             request.QuestionCount,
             request.AspectCount,
             answers,

@@ -1,5 +1,6 @@
 ﻿using Questionnaire.Application.Service.DocumentPlanning;
 using Questionnaire.Application.Service.MicroPlanning;
+using Questionnaire.Application.Service.Preprocessing;
 using Questionnaire.Application.Service.Realization;
 using Questionnaire.Application.Service.Rule;
 using Questionnaire.Domain.Entities;
@@ -23,6 +24,7 @@ const int aspectCount = 6;
 var scores = new List<double> { 4.1, 4.0, 4.2, 4.1, 4.2, 2.4, 2.9, 3, 1.8, 2.5, 3.8, 3.6, 4.5 };
 
 var answers = scores.Select((score, index) => new Answer(score, Data.Questions[index])).ToList();
+var averageScore = Preprocessing.CalculateAverageScore(answers);
 
 var dPlan = new DocumentPlanning();
 
@@ -30,7 +32,7 @@ var contentRule = new ContentRule();
 var structureRule = new StructureRule();
 
 var content =
-    dPlan.DetermineContent(place, date, subject, respondent, lecturer, questionCount, aspectCount,
+    dPlan.DetermineContent(place, date, subject, respondent, lecturer, averageScore, questionCount, aspectCount,
         answers, contentRule);
 var structure = dPlan.DetermineStructure(content.Point, structureRule);
 
