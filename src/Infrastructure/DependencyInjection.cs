@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Questionnaire.Application.Common.Interfaces;
-using Questionnaire.Application.Lexicalization;
 using Questionnaire.Infrastructure.Persistence.InMemory;
 
 namespace Questionnaire.Infrastructure;

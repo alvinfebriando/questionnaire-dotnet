@@ -1,5 +1,5 @@
 ﻿using Moq;
-using Questionnaire.Application.Lexicalization;
+using Questionnaire.Application.Common.Interfaces;
 
 namespace Questionnaire.Application.Tests;
 

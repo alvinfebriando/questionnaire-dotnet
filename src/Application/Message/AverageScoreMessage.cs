@@ -1,5 +1,5 @@
-﻿using Questionnaire.Application.Dto;
-using Questionnaire.Application.Lexicalization;
+﻿using Questionnaire.Application.Common.Interfaces;
+using Questionnaire.Application.Dto;
 using Questionnaire.Domain.ValueObjects;
 
 namespace Questionnaire.Application.Message;

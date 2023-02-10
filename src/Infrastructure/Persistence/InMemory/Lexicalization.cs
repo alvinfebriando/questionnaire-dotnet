@@ -1,5 +1,5 @@
 ﻿using Questionnaire.Application;
-using Questionnaire.Application.Lexicalization;
+using Questionnaire.Application.Common.Interfaces;
 
 namespace Questionnaire.Infrastructure.Persistence.InMemory;
 

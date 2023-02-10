@@ -1,4 +1,4 @@
-﻿using Questionnaire.Application.Lexicalization;
+﻿using Questionnaire.Application.Common.Interfaces;
 using Questionnaire.Application.Topic;
 using Questionnaire.Domain.Entities;
 

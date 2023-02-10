@@ -1,4 +1,4 @@
-﻿namespace Questionnaire.Application.Lexicalization;
+﻿namespace Questionnaire.Application.Common.Interfaces;
 
 public interface ILexicalization
 {

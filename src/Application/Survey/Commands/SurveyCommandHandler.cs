@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Questionnaire.Application.Common.Interfaces;
-using Questionnaire.Application.Lexicalization;
 using Questionnaire.Application.Realization;
 using Questionnaire.Application.Rule;
 
