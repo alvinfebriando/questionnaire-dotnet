@@ -3,7 +3,7 @@ using Questionnaire.Domain.Entities;
 
 namespace Questionnaire.Application.Service.Preprocessing;
 
-public static class AnswerConverter
+public static class Preprocessing
 {
     public static IEnumerable<Answer> Convert(IQuestionProvider questionProvider,
         IEnumerable<double> answers)

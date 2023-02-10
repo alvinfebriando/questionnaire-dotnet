@@ -30,7 +30,7 @@ public class SurveyCommandHandler : IRequestHandler<SurveyCommand, IEnumerable<s
         CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
-        var answers = AnswerConverter.Convert(_questionProvider, request.Answers);
+        var answers = Preprocessing.Convert(_questionProvider, request.Answers);
         var dPlan = new DocumentPlanning();
 
         var content = dPlan.DetermineContent(request.Place,
