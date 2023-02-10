@@ -1,7 +1,7 @@
 ﻿using Questionnaire.Application.Common.Interfaces;
 using Questionnaire.Domain.Entities;
 
-namespace Questionnaire.Application;
+namespace Questionnaire.Application.Service.Preprocessing;
 
 public static class AnswerConverter
 {
