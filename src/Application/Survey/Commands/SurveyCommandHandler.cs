@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Questionnaire.Application.Common.Interfaces;
-using Questionnaire.Application.Realization;
-using Questionnaire.Application.Rule;
+using Questionnaire.Application.Service.DocumentPlanning;
+using Questionnaire.Application.Service.MicroPlanning;
+using Questionnaire.Application.Service.Realization;
+using Questionnaire.Application.Service.Rule;
 
 namespace Questionnaire.Application.Survey.Commands;
 
@@ -28,7 +30,7 @@ public class SurveyCommandHandler : IRequestHandler<SurveyCommand, IEnumerable<s
     {
         await Task.CompletedTask;
         var answers = AnswerConverter.Convert(_questionProvider, request.Answers);
-        var dPlan = new DocumentPlanning.DocumentPlanning();
+        var dPlan = new DocumentPlanning();
 
         var content = dPlan.DetermineContent(request.Place,
             request.Date,
@@ -41,10 +43,10 @@ public class SurveyCommandHandler : IRequestHandler<SurveyCommand, IEnumerable<s
             _contentRule);
         var structure = dPlan.DetermineStructure(content.Point, _structureRule);
 
-        var mPlan = new MicroPlanning.MicroPlanning(content, structure, _lex);
+        var mPlan = new MicroPlanning(content, structure, _lex);
         var topics = mPlan.Create();
 
-        var realization = new Realization.Realization(topics);
+        var realization = new Realization(topics);
         realization.AddFormatter(new CapitalSentenceFormatter());
 
         var paragraph = realization.LinguisticRealization();

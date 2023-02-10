@@ -1,4 +1,4 @@
-﻿using Questionnaire.Application.Rule;
+﻿using Questionnaire.Application.Service.Rule;
 using Questionnaire.Domain.Entities;
 using Xunit.Abstractions;
 

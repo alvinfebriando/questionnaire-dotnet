@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using Questionnaire.Application.Rule;
+using Questionnaire.Application.Service.Rule;
 
 namespace Questionnaire.Application;
 

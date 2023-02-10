@@ -1,7 +1,7 @@
-﻿using Questionnaire.Application.DocumentPlanning;
-using Questionnaire.Application.MicroPlanning;
-using Questionnaire.Application.Realization;
-using Questionnaire.Application.Rule;
+﻿using Questionnaire.Application.Service.DocumentPlanning;
+using Questionnaire.Application.Service.MicroPlanning;
+using Questionnaire.Application.Service.Realization;
+using Questionnaire.Application.Service.Rule;
 using Questionnaire.Domain.Entities;
 using Questionnaire.Infrastructure;
 using Questionnaire.Infrastructure.Persistence.InMemory;

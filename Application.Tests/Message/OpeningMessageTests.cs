@@ -1,5 +1,5 @@
-﻿using Questionnaire.Application.Dto;
-using Questionnaire.Application.Message;
+﻿using Questionnaire.Application.Service.Dto;
+using Questionnaire.Application.Service.Message;
 using Xunit.Abstractions;
 
 namespace Questionnaire.Application.Tests.Message;

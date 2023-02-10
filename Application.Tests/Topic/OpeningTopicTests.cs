@@ -1,5 +1,5 @@
-﻿using Questionnaire.Application.Message;
-using Questionnaire.Application.Topic;
+﻿using Questionnaire.Application.Service.Message;
+using Questionnaire.Application.Service.Topic;
 using Questionnaire.Domain.Entities;
 using Xunit.Abstractions;
 
