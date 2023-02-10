@@ -7,7 +7,6 @@ public record SurveyCommand(string Place,
     string Subject,
     string Respondent,
     string Lecturer,
-    double Score,
     int QuestionCount,
     int AspectCount,
     IList<double> Answers) : IRequest<IEnumerable<string>>;
