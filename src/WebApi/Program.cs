@@ -1,6 +1,11 @@
+using Numpy;
+using Python.Runtime;
 using Questionnaire.Application;
 using Questionnaire.Infrastructure;
 using Questionnaire.WebApi;
+
+np.arange(1);
+PythonEngine.BeginAllowThreads();
 
 var builder = WebApplication.CreateBuilder(args);
 {
