@@ -10,6 +10,7 @@ public static class DependencyInjection
     {
         services.AddScoped<ILexicalization, Lexicalization>();
         services.AddScoped<IQuestionProvider, QuestionProvider>();
+        services.AddScoped<IWeightProvider, WeightProvider>();
         return services;
     }
 }
