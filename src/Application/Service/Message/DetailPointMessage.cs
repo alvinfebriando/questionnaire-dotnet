@@ -15,15 +15,6 @@ public class DetailPointMessage : BaseMessage<PointDto>, IComplemented
         Complement.Add("");
     }
 
-    public override string Lexicalization()
-    {
-        var sentence =
-            $"{Complement[0]}berikut adalah rincian nilai yang {Complement[1]} ({Data.Answer.Section}):\n";
-        var s = Data.Answer.Answer.Select(a =>
-            $"- {a.Question.Title}: {a.Score}").ToList();
-        return sentence + string.Join("\n", s);
-    }
-
     public IList<string> Complement { get; set; } = new List<string>();
 
     public void EmbedComplement(Option option)
@@ -37,5 +28,16 @@ public class DetailPointMessage : BaseMessage<PointDto>, IComplemented
             Complement[0] = _lex.Search("sedangkan") + ", ";
             Complement[1] = _lex.Search("terendah");
         }
+    }
+
+    public override string Lexicalization()
+    {
+        var sentence =
+            $"{Complement[0]}berikut adalah rincian nilai yang {Complement[1]} ({Data.Answer.Section}):\n";
+        var s = Data.Answer.Answer.Select(
+                a =>
+                    $"- {a.Question.Title}: {a.Score}")
+            .ToList();
+        return sentence + string.Join("\n", s);
     }
 }

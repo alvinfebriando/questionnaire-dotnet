@@ -10,8 +10,8 @@ namespace Questionnaire.WebApi.Controllers;
 [ApiController]
 public class SurveyController : ControllerBase
 {
-    private readonly IMediator _mediator;
     private readonly IMapper _mapper;
+    private readonly IMediator _mediator;
 
     public SurveyController(IMediator mediator, IMapper mapper)
     {
@@ -24,6 +24,6 @@ public class SurveyController : ControllerBase
     {
         var command = _mapper.Map<SurveyCommand>(request);
         var r = await _mediator.Send(command);
-        return Ok(string.Join("",r));
+        return Ok(string.Join("", r));
     }
 }

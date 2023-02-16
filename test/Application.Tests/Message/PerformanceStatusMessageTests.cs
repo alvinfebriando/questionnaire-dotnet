@@ -13,9 +13,13 @@ public class PerformanceStatusMessageTests
     public PerformanceStatusMessageTests(ITestOutputHelper output)
     {
         _output = output;
-        var overviewDto = new OverviewDto("pak alvin",4.2,13,6);
+        var overviewDto = new OverviewDto(
+            "pak alvin",
+            4.2,
+            13,
+            6);
         var lex = Lexicalization.Create();
-        _sut = new PerformanceStatusMessage(overviewDto,lex);
+        _sut = new PerformanceStatusMessage(overviewDto, lex);
     }
 
     [Fact]

@@ -2,7 +2,8 @@
 
 namespace Questionnaire.Application.Survey.Commands;
 
-public record SurveyCommand(string Place,
+public record SurveyCommand(
+    string Place,
     DateOnly Date,
     string Subject,
     string Respondent,

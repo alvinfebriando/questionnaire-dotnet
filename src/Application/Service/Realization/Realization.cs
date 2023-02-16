@@ -23,13 +23,19 @@ public class Realization : IRealization
             output.AddRange(sentences);
         }
 
-        return Formatters.Aggregate(output,
+        return Formatters.Aggregate(
+            output,
             (current, formatter) => current.Select(formatter.Format).ToList());
     }
 
     public string StructureRealization(IEnumerable<string> listOfSentence)
     {
         return string.Join("", listOfSentence);
+    }
+
+    public void AddFormatter(IFormatter formatter)
+    {
+        Formatters.Add(formatter);
     }
 
     private static void FormatNewLine(IList<string> sentences, Type topic)
@@ -45,10 +51,5 @@ public class Realization : IRealization
         {
             sentences[^1] += "\n";
         }
-    }
-
-    public void AddFormatter(IFormatter formatter)
-    {
-        Formatters.Add(formatter);
     }
 }

@@ -14,13 +14,6 @@ public class NoGoodPointMessage : BaseMessage<PointDto>, IComplemented
         Complement.Add("");
     }
 
-    public override string Lexicalization()
-    {
-        var sentence =
-            $"{Complement[0]}{Data.Lecturer} belum mencapai hasil yang diinginkan, dari pertanyaan yang diajukan, {_lex.Search("nilai")} {_lex.Search("tertinggi")} hanya sebesar {Data.Answer.AverageScore} untuk pertanyaan {Data.Answer.Section}.";
-        return sentence;
-    }
-
     public IList<string> Complement { get; set; } = new List<string>();
 
     public void EmbedComplement(Option option)
@@ -31,5 +24,12 @@ public class NoGoodPointMessage : BaseMessage<PointDto>, IComplemented
             "no bad" => _lex.Search("namun") + ", ",
             _ => Complement[0]
         };
+    }
+
+    public override string Lexicalization()
+    {
+        var sentence =
+            $"{Complement[0]}{Data.Lecturer} belum mencapai hasil yang diinginkan, dari pertanyaan yang diajukan, {_lex.Search("nilai")} {_lex.Search("tertinggi")} hanya sebesar {Data.Answer.AverageScore} untuk pertanyaan {Data.Answer.Section}.";
+        return sentence;
     }
 }

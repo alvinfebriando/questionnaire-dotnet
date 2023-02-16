@@ -14,11 +14,16 @@ public class GoodPointMessage : BaseMessage<PointDto>, IMultiLexicalizationMessa
         Complement.Add("");
     }
 
-    public override string Lexicalization()
+    public IList<string> Complement { get; set; } = new List<string>();
+
+    public void EmbedComplement(Option option)
     {
-        var sentence =
-            $"{Complement[0]}untuk {_lex.Search("aspek")} {Data.Answer.Section}, {Data.Lecturer} sudah menjalankannya dengan baik, dengan {_lex.Search("nilai")} yang {_lex.Search("didapatkan")} adalah {Data.Answer.AverageScore}.";
-        return sentence;
+        Complement[0] = option.Description switch
+        {
+            "bad" => _lex.Search("meskipun demikian") + ", ",
+            "no bad" => _lex.Search("serta") + ", ",
+            _ => Complement[0]
+        };
     }
 
     public string Lexicalization(IList<AveragedAnswer> messages)
@@ -41,15 +46,10 @@ public class GoodPointMessage : BaseMessage<PointDto>, IMultiLexicalizationMessa
         return sentence;
     }
 
-    public IList<string> Complement { get; set; } = new List<string>();
-
-    public void EmbedComplement(Option option)
+    public override string Lexicalization()
     {
-        Complement[0] = option.Description switch
-        {
-            "bad" => _lex.Search("meskipun demikian") + ", ",
-            "no bad" => _lex.Search("serta") + ", ",
-            _ => Complement[0]
-        };
+        var sentence =
+            $"{Complement[0]}untuk {_lex.Search("aspek")} {Data.Answer.Section}, {Data.Lecturer} sudah menjalankannya dengan baik, dengan {_lex.Search("nilai")} yang {_lex.Search("didapatkan")} adalah {Data.Answer.AverageScore}.";
+        return sentence;
     }
 }

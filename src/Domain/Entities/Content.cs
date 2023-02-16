@@ -2,8 +2,16 @@
 
 public class Content
 {
-    public Content(string place, DateOnly date, string subject, string respondent, string lecturer,
-        double score, int questionCount, int aspectCount, Point point)
+    public Content(
+        string place,
+        DateOnly date,
+        string subject,
+        string respondent,
+        string lecturer,
+        double score,
+        int questionCount,
+        int aspectCount,
+        Point point)
     {
         Place = place;
         Date = date;

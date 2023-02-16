@@ -14,11 +14,16 @@ public class BadPointMessage : BaseMessage<PointDto>, IMultiLexicalizationMessag
         Complement.Add("");
     }
 
-    public override string Lexicalization()
+    public IList<string> Complement { get; set; } = new List<string>();
+
+    public void EmbedComplement(Option option)
     {
-        var sentence =
-            $"{Complement[0]}{Data.Lecturer} kurang sukses dalam {_lex.Search("aspek")} {Data.Answer.Section}, dengan {_lex.Search("nilai")} {_lex.Search("didapatkan")} sebesar {Data.Answer.AverageScore}.";
-        return sentence;
+        Complement[0] = option.Description switch
+        {
+            "good" => _lex.Search("namun") + ", ",
+            "no good" => _lex.Search("serta") + ", ",
+            _ => Complement[0]
+        };
     }
 
     public string Lexicalization(IList<AveragedAnswer> messages)
@@ -41,15 +46,10 @@ public class BadPointMessage : BaseMessage<PointDto>, IMultiLexicalizationMessag
         return sentence;
     }
 
-    public IList<string> Complement { get; set; } = new List<string>();
-
-    public void EmbedComplement(Option option)
+    public override string Lexicalization()
     {
-        Complement[0] = option.Description switch
-        {
-            "good" => _lex.Search("namun") + ", ",
-            "no good" => _lex.Search("serta") + ", ",
-            _ => Complement[0]
-        };
+        var sentence =
+            $"{Complement[0]}{Data.Lecturer} kurang sukses dalam {_lex.Search("aspek")} {Data.Answer.Section}, dengan {_lex.Search("nilai")} {_lex.Search("didapatkan")} sebesar {Data.Answer.AverageScore}.";
+        return sentence;
     }
 }

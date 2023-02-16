@@ -15,7 +15,15 @@ public class OpeningTopicTests
         _output = output;
         var date = new DateOnly(2022, 12, 26);
         var point = new Point();
-        var content = new Content("place", date, "subject", "respondent", "lecturer", 3.5, 0, 0,
+        var content = new Content(
+            "place",
+            date,
+            "subject",
+            "respondent",
+            "lecturer",
+            3.5,
+            0,
+            0,
             point);
         var structure = new Structure();
         var lex = Lexicalization.Create();

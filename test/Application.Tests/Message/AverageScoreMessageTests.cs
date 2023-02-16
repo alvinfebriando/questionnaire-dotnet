@@ -13,7 +13,11 @@ public class AverageScoreMessageTests
     public AverageScoreMessageTests(ITestOutputHelper output)
     {
         _output = output;
-        var overviewDto = new OverviewDto("pak alvin", 4.5, 13, 6);
+        var overviewDto = new OverviewDto(
+            "pak alvin",
+            4.5,
+            13,
+            6);
         var lex = Lexicalization.Create();
         _sut = new AverageScoreMessage(overviewDto, lex);
     }

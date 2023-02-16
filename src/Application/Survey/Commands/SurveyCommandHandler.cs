@@ -10,12 +10,13 @@ namespace Questionnaire.Application.Survey.Commands;
 
 public class SurveyCommandHandler : IRequestHandler<SurveyCommand, IEnumerable<string>>
 {
+    private readonly IContentRule _contentRule;
     private readonly ILexicalization _lex;
     private readonly IQuestionProvider _questionProvider;
-    private readonly IContentRule _contentRule;
     private readonly IStructureRule _structureRule;
 
-    public SurveyCommandHandler(ILexicalization lex,
+    public SurveyCommandHandler(
+        ILexicalization lex,
         IQuestionProvider questionProvider,
         IContentRule contentRule,
         IStructureRule structureRule)
@@ -26,15 +27,17 @@ public class SurveyCommandHandler : IRequestHandler<SurveyCommand, IEnumerable<s
         _structureRule = structureRule;
     }
 
-    public async Task<IEnumerable<string>> Handle(SurveyCommand request,
+    public async Task<IEnumerable<string>> Handle(
+        SurveyCommand request,
         CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
-        var answers = Preprocessing.Convert(_questionProvider, request.Answers);
+        var answers = Preprocessing.Convert(_questionProvider, request.Answers).ToList();
         var averageScore = Preprocessing.CalculateAverageScore(answers);
         var dPlan = new DocumentPlanning();
 
-        var content = dPlan.DetermineContent(request.Place,
+        var content = dPlan.DetermineContent(
+            request.Place,
             request.Date,
             request.Subject,
             request.Respondent,

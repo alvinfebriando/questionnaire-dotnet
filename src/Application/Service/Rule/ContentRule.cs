@@ -8,15 +8,17 @@ public class ContentRule : IContentRule
     public Point Rule(IEnumerable<Answer> answers)
     {
         var averagedAnswers = answers.GroupBy(a => a.Question.Section)
-            .Select(answer => new AveragedAnswer(
-                answer.Key,
-                Math.Round(answer.Select(a => a.Score).Average(),2),
-                answer.Select(a => a))
-            ).OrderByDescending(q => q.AverageScore).ToList();
+            .Select(
+                answer => new AveragedAnswer(
+                    answer.Key,
+                    Math.Round(answer.Select(a => a.Score).Average(), 2),
+                    answer.Select(a => a))
+            )
+            .OrderByDescending(q => q.AverageScore)
+            .ToList();
         var output = new Point(averagedAnswers.First(), averagedAnswers.Last());
-        
+
         foreach (var a in averagedAnswers)
-        {
             switch (a.AverageScore)
             {
                 case <= 2:
@@ -26,7 +28,7 @@ public class ContentRule : IContentRule
                     output.Good.Add(a);
                     break;
             }
-        }
+
         return output;
     }
 }

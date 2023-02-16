@@ -15,8 +15,16 @@ public class PointTopicTests
     {
         _output = output;
         var point = new Point();
-        var content = new Content("", new DateOnly(2022, 12, 31), "", "", "pak alvin", 4.1, 0,
-            0, point);
+        var content = new Content(
+            "",
+            new DateOnly(2022, 12, 31),
+            "",
+            "",
+            "pak alvin",
+            4.1,
+            0,
+            0,
+            point);
         var structure = new Structure();
         var lex = Lexicalization.Create();
         _sut = new PointTopic(content, structure, lex);
@@ -26,7 +34,14 @@ public class PointTopicTests
     public void Order_1Good1BadPoint_ReturnMessages()
     {
         // Arrange
-        _sut.Structure.AddRange(new List<string> { "", "", "", "good" });
+        _sut.Structure.AddRange(
+            new List<string>
+            {
+                "",
+                "",
+                "",
+                "good"
+            });
 
         var averagedAnswer1 = GenerateAveragedAnswer("good", QuestionSection.KedisiplinanWaktu);
         var averagedAnswer2 = GenerateAveragedAnswer("bad", QuestionSection.KesempatanBertanya);
@@ -46,7 +61,14 @@ public class PointTopicTests
     public void Order_1Bad1Good_ReturnMessages()
     {
         // Arrange
-        _sut.Structure.AddRange(new List<string> { "", "", "", "bad" });
+        _sut.Structure.AddRange(
+            new List<string>
+            {
+                "",
+                "",
+                "",
+                "bad"
+            });
         var averagedAnswer1 = GenerateAveragedAnswer("good", QuestionSection.KedisiplinanWaktu);
         var averagedAnswer2 = GenerateAveragedAnswer("bad", QuestionSection.KesempatanBertanya);
         _sut.Content.Point.Bad.Add(averagedAnswer2);
@@ -66,7 +88,15 @@ public class PointTopicTests
     public void Order_0Good1Bad_ReturnMessages()
     {
         // Arrange
-        _sut.Structure.AddRange(new List<string> { "", "", "", "no good", "bad" });
+        _sut.Structure.AddRange(
+            new List<string>
+            {
+                "",
+                "",
+                "",
+                "no good",
+                "bad"
+            });
         var averagedAnswer1 = GenerateAveragedAnswer("ordinary", QuestionSection.KedisiplinanWaktu);
         var averagedAnswer2 = GenerateAveragedAnswer("bad", QuestionSection.KesempatanBertanya);
         _sut.Content.Point.Bad.Add(averagedAnswer2);
@@ -86,7 +116,15 @@ public class PointTopicTests
     public void Order_1Good0Bad_ReturnMessages()
     {
         // Arrange
-        _sut.Structure.AddRange(new List<string> { "", "", "", "good", "no bad" });
+        _sut.Structure.AddRange(
+            new List<string>
+            {
+                "",
+                "",
+                "",
+                "good",
+                "no bad"
+            });
         var averagedAnswer1 = GenerateAveragedAnswer("ordinary", QuestionSection.KedisiplinanWaktu);
         var averagedAnswer2 = GenerateAveragedAnswer("good", QuestionSection.KesempatanBertanya);
         _sut.Content.Point.Bad.Add(averagedAnswer1);
@@ -106,7 +144,15 @@ public class PointTopicTests
     public void Order_0Bad0Good_ReturnMessages()
     {
         // Arrange
-        _sut.Structure.AddRange(new List<string> { "", "", "", "no bad", "no good" });
+        _sut.Structure.AddRange(
+            new List<string>
+            {
+                "",
+                "",
+                "",
+                "no bad",
+                "no good"
+            });
         var averagedAnswer1 = GenerateAveragedAnswer("no bad", QuestionSection.TransparansiNilai);
         var averagedAnswer2 = GenerateAveragedAnswer("no good", QuestionSection.PenguasaanMateri);
         _sut.Content.Point.Good.Add(averagedAnswer1);
@@ -124,7 +170,15 @@ public class PointTopicTests
     public void Aggregate_1Good1Bad_ReturnLexicalizationString()
     {
         // Arrange
-        _sut.Structure.AddRange(new List<string> { "", "", "", "good", "bad" });
+        _sut.Structure.AddRange(
+            new List<string>
+            {
+                "",
+                "",
+                "",
+                "good",
+                "bad"
+            });
         var option1 = new MessageOption("good", 1);
         var option2 = new MessageOption("bad", 1);
         GenerateOrderOfMessages(option1, option2);
@@ -145,7 +199,15 @@ public class PointTopicTests
     public void Aggregate_2Good1Bad_ReturnLexicalizationString()
     {
         // Arrange
-        _sut.Structure.AddRange(new List<string> { "", "", "", "good", "bad" });
+        _sut.Structure.AddRange(
+            new List<string>
+            {
+                "",
+                "",
+                "",
+                "good",
+                "bad"
+            });
         var option1 = new MessageOption("good", 2);
         var option2 = new MessageOption("bad", 1);
         GenerateOrderOfMessages(option1, option2);
@@ -166,7 +228,15 @@ public class PointTopicTests
     public void Aggregate_1Good2Bad_ReturnLexicalizationString()
     {
         // Arrange
-        _sut.Structure.AddRange(new List<string> { "", "", "", "good", "bad" });
+        _sut.Structure.AddRange(
+            new List<string>
+            {
+                "",
+                "",
+                "",
+                "good",
+                "bad"
+            });
         var option1 = new MessageOption("good", 1);
         var option2 = new MessageOption("bad", 2);
         GenerateOrderOfMessages(option1, option2);
@@ -187,7 +257,15 @@ public class PointTopicTests
     public void Aggregate_2Good2Bad_ReturnLexicalizationString()
     {
         // Arrange
-        _sut.Structure.AddRange(new List<string> { "", "", "", "good", "bad" });
+        _sut.Structure.AddRange(
+            new List<string>
+            {
+                "",
+                "",
+                "",
+                "good",
+                "bad"
+            });
         var option1 = new MessageOption("good", 2);
         var option2 = new MessageOption("bad", 2);
         GenerateOrderOfMessages(option1, option2);
@@ -208,7 +286,15 @@ public class PointTopicTests
     public void Aggregate_3Good3Bad_ReturnLexicalizationString()
     {
         // Arrange
-        _sut.Structure.AddRange(new List<string> { "", "", "", "good", "bad" });
+        _sut.Structure.AddRange(
+            new List<string>
+            {
+                "",
+                "",
+                "",
+                "good",
+                "bad"
+            });
         var option1 = new MessageOption("good", 3);
         var option2 = new MessageOption("bad", 3);
         GenerateOrderOfMessages(option1, option2);
@@ -229,7 +315,15 @@ public class PointTopicTests
     public void Aggregate_0Good0Bad_ReturnLexicalizationString()
     {
         // Arrange
-        _sut.Structure.AddRange(new List<string> { "", "", "", "no good", "no bad" });
+        _sut.Structure.AddRange(
+            new List<string>
+            {
+                "",
+                "",
+                "",
+                "no good",
+                "no bad"
+            });
         var option1 = new MessageOption("no good", 1);
         var option2 = new MessageOption("no bad", 1);
         GenerateOrderOfMessages(option1, option2);
@@ -281,7 +375,8 @@ public class PointTopicTests
         return averagedAnswer;
     }
 
-    private void GenerateOrderOfMessages(MessageOption first,
+    private void GenerateOrderOfMessages(
+        MessageOption first,
         MessageOption second)
     {
         var averagedAnswer1 = GenerateAveragedAnswer(first.Type, QuestionSection.TransparansiNilai);
@@ -290,17 +385,11 @@ public class PointTopicTests
         {
             case "good" when second.Type == "bad":
             {
-                for (var i = 0; i < first.Count; i++)
-                {
-                    _sut.Content.Point.Good.Add(averagedAnswer1);
-                }
+                for (var i = 0; i < first.Count; i++) _sut.Content.Point.Good.Add(averagedAnswer1);
 
                 _sut.Content.Point.Max = averagedAnswer1;
 
-                for (var i = 0; i < second.Count; i++)
-                {
-                    _sut.Content.Point.Bad.Add(averagedAnswer2);
-                }
+                for (var i = 0; i < second.Count; i++) _sut.Content.Point.Bad.Add(averagedAnswer2);
 
                 _sut.Content.Point.Min = averagedAnswer2;
 
@@ -308,10 +397,7 @@ public class PointTopicTests
             }
             case "good" when second.Type == "no bad":
             {
-                for (var i = 0; i < first.Count; i++)
-                {
-                    _sut.Content.Point.Good.Add(averagedAnswer1);
-                }
+                for (var i = 0; i < first.Count; i++) _sut.Content.Point.Good.Add(averagedAnswer1);
 
                 _sut.Content.Point.Max = averagedAnswer1;
 
@@ -320,17 +406,11 @@ public class PointTopicTests
             }
             case "bad" when second.Type == "good":
             {
-                for (var i = 0; i < first.Count; i++)
-                {
-                    _sut.Content.Point.Bad.Add(averagedAnswer1);
-                }
+                for (var i = 0; i < first.Count; i++) _sut.Content.Point.Bad.Add(averagedAnswer1);
 
                 _sut.Content.Point.Min = averagedAnswer1;
 
-                for (var i = 0; i < second.Count; i++)
-                {
-                    _sut.Content.Point.Good.Add(averagedAnswer2);
-                }
+                for (var i = 0; i < second.Count; i++) _sut.Content.Point.Good.Add(averagedAnswer2);
 
                 _sut.Content.Point.Max = averagedAnswer2;
 
@@ -338,10 +418,7 @@ public class PointTopicTests
             }
             case "bad" when second.Type == "no good":
             {
-                for (var i = 0; i < first.Count; i++)
-                {
-                    _sut.Content.Point.Bad.Add(averagedAnswer1);
-                }
+                for (var i = 0; i < first.Count; i++) _sut.Content.Point.Bad.Add(averagedAnswer1);
 
                 _sut.Content.Point.Min = averagedAnswer1;
 
@@ -351,10 +428,7 @@ public class PointTopicTests
             case "no good" when second.Type == "bad":
             {
                 _sut.Content.Point.Max = averagedAnswer1;
-                for (var i = 0; i < second.Count; i++)
-                {
-                    _sut.Content.Point.Bad.Add(averagedAnswer2);
-                }
+                for (var i = 0; i < second.Count; i++) _sut.Content.Point.Bad.Add(averagedAnswer2);
 
                 _sut.Content.Point.Min = averagedAnswer2;
 
@@ -367,10 +441,7 @@ public class PointTopicTests
             case "no bad" when second.Type == "good":
             {
                 _sut.Content.Point.Min = averagedAnswer1;
-                for (var i = 0; i < second.Count; i++)
-                {
-                    _sut.Content.Point.Good.Add(averagedAnswer2);
-                }
+                for (var i = 0; i < second.Count; i++) _sut.Content.Point.Good.Add(averagedAnswer2);
 
                 _sut.Content.Point.Max = averagedAnswer2;
 

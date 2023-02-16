@@ -14,7 +14,8 @@ public class SimulatorQueryHandler : IRequestHandler<SimulatorQuery, SimulatorRe
         _weightProvider = weightProvider;
     }
 
-    public async Task<SimulatorResult> Handle(SimulatorQuery request,
+    public async Task<SimulatorResult> Handle(
+        SimulatorQuery request,
         CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
@@ -25,7 +26,8 @@ public class SimulatorQueryHandler : IRequestHandler<SimulatorQuery, SimulatorRe
         return new SimulatorResult(answers);
     }
 
-    private static async Task<int[][]> RandomScore(int questionCount,
+    private static async Task<int[][]> RandomScore(
+        int questionCount,
         int respondentCount,
         double[][] weight)
     {
@@ -37,8 +39,8 @@ public class SimulatorQueryHandler : IRequestHandler<SimulatorQuery, SimulatorRe
             for (var i = 0; i < questionCount; i++)
             {
                 var result = np.random.choice(
-                    new int[] { 1, 2, 3, 4, 5 },
-                    new int[] { respondentCount },
+                    new[] { 1, 2, 3, 4, 5 },
+                    new[] { respondentCount },
                     p: weight[i]);
                 answers[i] = result.GetData<int>();
             }

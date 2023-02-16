@@ -9,11 +9,16 @@ public class OpeningTopic : GenericTopic<OpeningDto>
 {
     private readonly ILexicalization _lex;
 
-    public OpeningTopic(Content content, Structure structure, ILexicalization lex) : base(content,
+    public OpeningTopic(Content content, Structure structure, ILexicalization lex) : base(
+        content,
         structure)
     {
         OpeningDto =
-            new OpeningDto(Content.Place, Content.Date, Content.Subject, Content.Respondent);
+            new OpeningDto(
+                Content.Place,
+                Content.Date,
+                Content.Subject,
+                Content.Respondent);
         _lex = lex;
     }
 

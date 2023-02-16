@@ -15,9 +15,11 @@ public class NoBadPointMessageTests
     public NoBadPointMessageTests(ITestOutputHelper output)
     {
         _output = output;
-        var answer1 = new Answer(3.1,
+        var answer1 = new Answer(
+            3.1,
             new Question("title1", QuestionSection.TransparansiNilai, "advice1"));
-        var answer2 = new Answer(3.1,
+        var answer2 = new Answer(
+            3.1,
             new Question("title2", QuestionSection.TransparansiNilai, "advice2"));
         var answers = new List<Answer> { answer1, answer2 };
         var averagedAnswer = new AveragedAnswer(QuestionSection.TransparansiNilai, 3.1, answers);

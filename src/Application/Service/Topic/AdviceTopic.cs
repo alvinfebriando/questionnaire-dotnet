@@ -9,7 +9,8 @@ public class AdviceTopic : GenericTopic<AdviceDto>
 {
     private readonly ILexicalization _lex;
 
-    public AdviceTopic(Content content, Structure structure, ILexicalization lex) : base(content,
+    public AdviceTopic(Content content, Structure structure, ILexicalization lex) : base(
+        content,
         structure)
     {
         _lex = lex;
@@ -50,7 +51,8 @@ public class AdviceTopic : GenericTopic<AdviceDto>
         }
         else
         {
-            var advices = order.Select(m => m.Data.Advice).Skip(1)
+            var advices = order.Select(m => m.Data.Advice)
+                .Skip(1)
                 .ToList();
             var s = ((AdviceMessage)order[0]).Lexicalization(advices);
             output.Add(s);

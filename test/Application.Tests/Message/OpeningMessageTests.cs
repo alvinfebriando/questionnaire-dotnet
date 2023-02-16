@@ -12,7 +12,10 @@ public class OpeningMessageTests
     public OpeningMessageTests(ITestOutputHelper output)
     {
         _output = output;
-        var dto = new OpeningDto("usu", new DateOnly(2022, 12, 25), "topik",
+        var dto = new OpeningDto(
+            "usu",
+            new DateOnly(2022, 12, 25),
+            "topik",
             "mahasiswa");
         var lex = Lexicalization.Create();
         _sut = new OpeningMessage(dto, lex);

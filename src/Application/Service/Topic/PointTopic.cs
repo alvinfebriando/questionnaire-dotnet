@@ -9,8 +9,14 @@ namespace Questionnaire.Application.Service.Topic;
 public class PointTopic : GenericTopic<PointDto>
 {
     private readonly ILexicalization _lex;
+    public IList<BaseMessage<PointDto>> BadPoints = new List<BaseMessage<PointDto>>();
+    public IList<BaseMessage<PointDto>> Details = new List<BaseMessage<PointDto>>();
 
-    public PointTopic(Content content, Structure structure, ILexicalization lex) : base(content,
+
+    public IList<BaseMessage<PointDto>> GoodPoints = new List<BaseMessage<PointDto>>();
+
+    public PointTopic(Content content, Structure structure, ILexicalization lex) : base(
+        content,
         structure)
     {
         _lex = lex;
@@ -111,11 +117,6 @@ public class PointTopic : GenericTopic<PointDto>
         output.Add(detail2);
         return output;
     }
-
-
-    public IList<BaseMessage<PointDto>> GoodPoints = new List<BaseMessage<PointDto>>();
-    public IList<BaseMessage<PointDto>> BadPoints = new List<BaseMessage<PointDto>>();
-    public IList<BaseMessage<PointDto>> Details = new List<BaseMessage<PointDto>>();
 
     private void Transform()
     {

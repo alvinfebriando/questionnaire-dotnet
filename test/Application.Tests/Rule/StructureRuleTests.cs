@@ -21,7 +21,7 @@ public class StructureRuleTests
     {
         // Arrange
         var p = new Point();
-        
+
         const string expected = "opening";
         var expected2 = new List<string> { "score", "performance" };
         var expected3 = new List<string> { "no good", "no bad" };
@@ -42,9 +42,11 @@ public class StructureRuleTests
     {
         // Arrange
         var p = new Point();
-        var answer1 = new Answer(1.7,
+        var answer1 = new Answer(
+            1.7,
             new Question("title1", QuestionSection.KedisiplinanWaktu, "advice1"));
-        var answer2 = new Answer(1.7,
+        var answer2 = new Answer(
+            1.7,
             new Question("title2", QuestionSection.KedisiplinanWaktu, "2"));
         var answers = new List<Answer> { answer1, answer2 };
         var averagedAnswer = new AveragedAnswer(QuestionSection.KedisiplinanWaktu, 1.7, answers);
@@ -64,15 +66,17 @@ public class StructureRuleTests
 
         _output.WriteLine(s.ToString());
     }
-    
+
     [Fact]
     public void Rule_GoodNotEmptyBadEmpty_ReturnStructure()
     {
         // Arrange
         var p = new Point();
-        var answer1 = new Answer(4.1,
+        var answer1 = new Answer(
+            4.1,
             new Question("title1", QuestionSection.KedisiplinanWaktu, "advice1"));
-        var answer2 = new Answer(4.1,
+        var answer2 = new Answer(
+            4.1,
             new Question("title2", QuestionSection.KedisiplinanWaktu, "advice2"));
         var answers = new List<Answer> { answer1, answer2 };
         var averagedAnswer = new AveragedAnswer(QuestionSection.KedisiplinanWaktu, 4.1, answers);
@@ -92,19 +96,23 @@ public class StructureRuleTests
 
         _output.WriteLine(s.ToString());
     }
-    
+
     [Fact]
     public void Rule_GoodNotEmptyBadNotEmpty_ReturnStructure()
     {
         // Arrange
         var p = new Point();
-        var answer1 = new Answer(4.1,
+        var answer1 = new Answer(
+            4.1,
             new Question("title1", QuestionSection.KedisiplinanWaktu, "advice1"));
-        var answer2 = new Answer(4.1,
+        var answer2 = new Answer(
+            4.1,
             new Question("title2", QuestionSection.KedisiplinanWaktu, "advice2"));
-        var answer3 = new Answer(1.1,
+        var answer3 = new Answer(
+            1.1,
             new Question("title3", QuestionSection.KedisiplinanWaktu, "advice3"));
-        var answer4 = new Answer(1.1,
+        var answer4 = new Answer(
+            1.1,
             new Question("title4", QuestionSection.KedisiplinanWaktu, "advice4"));
         var answers1 = new List<Answer> { answer1, answer2 };
         var answers2 = new List<Answer> { answer3, answer4 };

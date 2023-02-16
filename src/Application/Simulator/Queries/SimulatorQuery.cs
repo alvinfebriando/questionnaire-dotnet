@@ -2,4 +2,5 @@
 
 namespace Questionnaire.Application.Simulator.Queries;
 
-public record SimulatorQuery(int RespondentCount, List<int> DominantScores): IRequest<SimulatorResult>;
+public record SimulatorQuery
+    (int RespondentCount, List<int> DominantScores) : IRequest<SimulatorResult>;

@@ -10,7 +10,9 @@ public static class Preprocessing
         var enumerable = answers.ToList();
         return Math.Round(enumerable.Select(x => x.Score).Average(), 2);
     }
-    public static IEnumerable<Answer> Convert(IQuestionProvider questionProvider,
+
+    public static IEnumerable<Answer> Convert(
+        IQuestionProvider questionProvider,
         IEnumerable<double> answers)
     {
         return answers

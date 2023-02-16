@@ -10,10 +10,15 @@ public class OverviewTopic : GenericTopic<OverviewDto>
 {
     private readonly ILexicalization _lex;
 
-    public OverviewTopic(Content content, Structure structure,
+    public OverviewTopic(
+        Content content,
+        Structure structure,
         ILexicalization lex) : base(content, structure)
     {
-        OverviewDto = new OverviewDto(Content.Lecturer, Content.AverageScore, Content.QuestionCount,
+        OverviewDto = new OverviewDto(
+            Content.Lecturer,
+            Content.AverageScore,
+            Content.QuestionCount,
             Content.AspectCount);
         _lex = lex;
     }
@@ -25,10 +30,8 @@ public class OverviewTopic : GenericTopic<OverviewDto>
         var averageScoreMsg = new AverageScoreMessage(OverviewDto, _lex);
         var performanceMsg = new PerformanceStatusMessage(OverviewDto, _lex);
         return Structure.Get(1) == "score"
-            ? new List<BaseMessage<OverviewDto>>
-                { averageScoreMsg, performanceMsg }
-            : new List<BaseMessage<OverviewDto>>
-                { performanceMsg, averageScoreMsg };
+            ? new List<BaseMessage<OverviewDto>> { averageScoreMsg, performanceMsg }
+            : new List<BaseMessage<OverviewDto>> { performanceMsg, averageScoreMsg };
     }
 
     public override IList<string> Aggregate()

@@ -1,5 +1,4 @@
-﻿using Questionnaire.Application;
-using Questionnaire.Application.Common.Interfaces;
+﻿using Questionnaire.Application.Common.Interfaces;
 using Questionnaire.Application.Service.Preprocessing;
 
 namespace Questionnaire.Infrastructure.Persistence.InMemory;
@@ -44,20 +43,11 @@ public class Lexicalization : ILexicalization
     public string GetStatus(double score)
     {
         const double tolerance = 1e-10;
-        if (Math.Abs(Math.Round(score) - 1) < tolerance)
-        {
-            return "sangat tidak baik";
-        }
+        if (Math.Abs(Math.Round(score) - 1) < tolerance) return "sangat tidak baik";
 
-        if (Math.Abs(Math.Round(score) - 2) < tolerance)
-        {
-            return "tidak baik";
-        }
+        if (Math.Abs(Math.Round(score) - 2) < tolerance) return "tidak baik";
 
-        if (Math.Abs(Math.Round(score) - 3) < tolerance)
-        {
-            return "cukup";
-        }
+        if (Math.Abs(Math.Round(score) - 3) < tolerance) return "cukup";
 
         return Math.Abs(Math.Round(score) - 4) < tolerance ? "baik" : "sangat baik";
     }

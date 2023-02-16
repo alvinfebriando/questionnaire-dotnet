@@ -14,9 +14,11 @@ public class DetailPointMessageTests
     public DetailPointMessageTests(ITestOutputHelper output)
     {
         _output = output;
-        var answer1 = new Answer(4.1,
+        var answer1 = new Answer(
+            4.1,
             new Question("title1", QuestionSection.KedisiplinanWaktu, "advice1"));
-        var answer2 = new Answer(4.1,
+        var answer2 = new Answer(
+            4.1,
             new Question("title2", QuestionSection.KedisiplinanWaktu, "advice2"));
         var answers = new List<Answer> { answer1, answer2 };
         var averagedAnswer = new AveragedAnswer(QuestionSection.KedisiplinanWaktu, 4.1, answers);

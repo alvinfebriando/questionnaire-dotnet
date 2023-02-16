@@ -15,7 +15,16 @@ public class AdviceTopicTests
     {
         _output = output;
         var point = new Point();
-        var content = new Content("", new DateOnly(2022, 12, 24), "", "", "", 1.4, 0, 0, point);
+        var content = new Content(
+            "",
+            new DateOnly(2022, 12, 24),
+            "",
+            "",
+            "",
+            1.4,
+            0,
+            0,
+            point);
         var structure = new Structure();
         var lex = Lexicalization.Create();
         _sut = new AdviceTopic(content, structure, lex);
@@ -25,7 +34,16 @@ public class AdviceTopicTests
     private void Order_1Advice_ReturnMessage()
     {
         // Arrange
-        _sut.Structure.AddRange(new List<string> { "", "", "", "good", "bad", "advice" });
+        _sut.Structure.AddRange(
+            new List<string>
+            {
+                "",
+                "",
+                "",
+                "good",
+                "bad",
+                "advice"
+            });
         var averagedAnswer1 = GenerateAveragedAnswer("bad", QuestionSection.TransparansiNilai);
         _sut.Content.Point.Bad = new List<AveragedAnswer> { averagedAnswer1 };
         // Act
@@ -39,7 +57,16 @@ public class AdviceTopicTests
     private void Order_2Advice_ReturnMessage()
     {
         // Arrange
-        _sut.Structure.AddRange(new List<string> { "", "", "", "good", "bad", "advice" });
+        _sut.Structure.AddRange(
+            new List<string>
+            {
+                "",
+                "",
+                "",
+                "good",
+                "bad",
+                "advice"
+            });
         var averagedAnswer1 = GenerateAveragedAnswer("bad", QuestionSection.TransparansiNilai);
         var averagedAnswer2 = GenerateAveragedAnswer("bad", QuestionSection.KedisiplinanWaktu);
         _sut.Content.Point.Bad = new List<AveragedAnswer> { averagedAnswer1, averagedAnswer2 };
@@ -56,7 +83,16 @@ public class AdviceTopicTests
     private void Order_NoAdvice_ReturnMessage()
     {
         // Arrange
-        _sut.Structure.AddRange(new List<string> { "", "", "", "good", "no bad", "no advice" });
+        _sut.Structure.AddRange(
+            new List<string>
+            {
+                "",
+                "",
+                "",
+                "good",
+                "no bad",
+                "no advice"
+            });
         var averagedAnswer1 = GenerateAveragedAnswer("good", QuestionSection.TransparansiNilai);
         _sut.Content.Point.Min = averagedAnswer1;
 
@@ -72,7 +108,16 @@ public class AdviceTopicTests
     public void Aggregate_1Advice_ReturnString()
     {
         // Arrange
-        _sut.Structure.AddRange(new List<string> { "", "", "", "good", "bad", "advice" });
+        _sut.Structure.AddRange(
+            new List<string>
+            {
+                "",
+                "",
+                "",
+                "good",
+                "bad",
+                "advice"
+            });
         var averagedAnswer1 = GenerateAveragedAnswer("bad", QuestionSection.PenguasaanMateri);
         _sut.Content.Point.Bad.Add(averagedAnswer1);
         // Act
@@ -85,7 +130,16 @@ public class AdviceTopicTests
     public void Aggregate_2Advice_ReturnString()
     {
         // Arrange
-        _sut.Structure.AddRange(new List<string> { "", "", "", "good", "bad", "advice" });
+        _sut.Structure.AddRange(
+            new List<string>
+            {
+                "",
+                "",
+                "",
+                "good",
+                "bad",
+                "advice"
+            });
         var averagedAnswer1 = GenerateAveragedAnswer("bad", QuestionSection.PenguasaanMateri);
         var averagedAnswer2 = GenerateAveragedAnswer("bad", QuestionSection.TransparansiNilai);
         _sut.Content.Point.Bad.Add(averagedAnswer1);
@@ -100,7 +154,16 @@ public class AdviceTopicTests
     public void Aggregate_3Advice_ReturnString()
     {
         // Arrange
-        _sut.Structure.AddRange(new List<string> { "", "", "", "good", "bad", "advice" });
+        _sut.Structure.AddRange(
+            new List<string>
+            {
+                "",
+                "",
+                "",
+                "good",
+                "bad",
+                "advice"
+            });
         var averagedAnswer1 = GenerateAveragedAnswer("bad", QuestionSection.PenguasaanMateri);
         var averagedAnswer2 = GenerateAveragedAnswer("bad", QuestionSection.TransparansiNilai);
         var averagedAnswer3 = GenerateAveragedAnswer("bad", QuestionSection.PenggunaanElearning);
@@ -117,7 +180,16 @@ public class AdviceTopicTests
     public void Aggregate_NoAdvice_ReturnString()
     {
         // Arrange
-        _sut.Structure.AddRange(new List<string> { "", "", "", "good", "no bad", "no advice" });
+        _sut.Structure.AddRange(
+            new List<string>
+            {
+                "",
+                "",
+                "",
+                "good",
+                "no bad",
+                "no advice"
+            });
         var averagedAnswer1 = GenerateAveragedAnswer("no bad", QuestionSection.PenguasaanMateri);
         _sut.Content.Point.Min = averagedAnswer1;
         // Act

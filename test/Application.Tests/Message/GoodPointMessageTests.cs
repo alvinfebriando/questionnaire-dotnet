@@ -15,9 +15,11 @@ public class GoodPointMessageTests
     public GoodPointMessageTests(ITestOutputHelper output)
     {
         _output = output;
-        var answer1 = new Answer(4.1,
+        var answer1 = new Answer(
+            4.1,
             new Question("title1", QuestionSection.KedisiplinanWaktu, "advice1"));
-        var answer2 = new Answer(4.1,
+        var answer2 = new Answer(
+            4.1,
             new Question("title2", QuestionSection.KedisiplinanWaktu, "advice2"));
         var answers = new List<Answer> { answer1, answer2 };
         var averagedAnswer = new AveragedAnswer(QuestionSection.KedisiplinanWaktu, 4.1, answers);
@@ -42,16 +44,20 @@ public class GoodPointMessageTests
     public void Lexicalization_2Answer_ReturnEmbeddedString()
     {
         // Arrange
-        var answer1 = new Answer(4.1,
+        var answer1 = new Answer(
+            4.1,
             new Question("title1", QuestionSection.KedisiplinanWaktu, "advice1"));
-        var answer2 = new Answer(4.1,
+        var answer2 = new Answer(
+            4.1,
             new Question("title2", QuestionSection.KedisiplinanWaktu, "advice2"));
         var answers = new List<Answer> { answer1, answer2 };
         var averagedAnswer1 = new AveragedAnswer(QuestionSection.TransparansiNilai, 4.1, answers);
 
-        var answer3 = new Answer(4.1,
+        var answer3 = new Answer(
+            4.1,
             new Question("title1", QuestionSection.TransparansiNilai, "advice3"));
-        var answer4 = new Answer(4.1,
+        var answer4 = new Answer(
+            4.1,
             new Question("title2", QuestionSection.TransparansiNilai, "advice4"));
         var answers2 = new List<Answer> { answer3, answer4 };
         var averagedAnswer2 = new AveragedAnswer(QuestionSection.TransparansiNilai, 4.1, answers2);
@@ -70,17 +76,19 @@ public class GoodPointMessageTests
     public void Lexicalization_MoreThan3Answer_ReturnEmbeddedString()
     {
         // Arrange
-        var answer1 = new Answer(4.1,
+        var answer1 = new Answer(
+            4.1,
             new Question("title1", QuestionSection.PenggunaanElearning, "advice1"));
-        var answer2 = new Answer(4.1,
+        var answer2 = new Answer(
+            4.1,
             new Question("title2", QuestionSection.PenggunaanElearning, "advice2"));
         var answers = new List<Answer> { answer1, answer2 };
         var averagedAnswer1 = new AveragedAnswer(QuestionSection.PenggunaanElearning, 4.1, answers);
         var expected = averagedAnswer1.AverageScore;
 
         // Act
-        var s = _sut.Lexicalization(new List<AveragedAnswer>
-            { averagedAnswer1, averagedAnswer1, averagedAnswer1 });
+        var s = _sut.Lexicalization(
+            new List<AveragedAnswer> { averagedAnswer1, averagedAnswer1, averagedAnswer1 });
 
         // Assert
         Assert.Contains(expected.ToString(CultureInfo.CurrentCulture), s);
