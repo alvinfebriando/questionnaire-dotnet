@@ -4,10 +4,14 @@ namespace Questionnaire.Application.Service.Realization;
 
 public class Realization : IRealization
 {
-    public Realization(IEnumerable<BaseTopic> topics)
+    public Realization()
+    {
+        Formatters = new List<IFormatter>();
+    }
+
+    public void Init(IEnumerable<BaseTopic> topics)
     {
         Topics = topics;
-        Formatters = new List<IFormatter>();
     }
 
     public IList<IFormatter> Formatters { get; set; }

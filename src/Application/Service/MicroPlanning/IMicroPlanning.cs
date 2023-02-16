@@ -8,4 +8,5 @@ public interface IMicroPlanning
     public Content Content { get; set; }
     public Structure Structure { get; set; }
     public IEnumerable<BaseTopic> Create();
+    public void Init(Content content, Structure structure);
 }

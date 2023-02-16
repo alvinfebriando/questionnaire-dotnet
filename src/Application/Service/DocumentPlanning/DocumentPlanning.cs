@@ -5,6 +5,15 @@ namespace Questionnaire.Application.Service.DocumentPlanning;
 
 public class DocumentPlanning : IDocumentPlanning
 {
+    private readonly IContentRule _contentRule;
+    private readonly IStructureRule _structureRule;
+
+    public DocumentPlanning(IContentRule contentRule, IStructureRule structureRule)
+    {
+        _contentRule = contentRule;
+        _structureRule = structureRule;
+    }
+
     public Content DetermineContent(
         string place,
         DateOnly date,
@@ -14,11 +23,10 @@ public class DocumentPlanning : IDocumentPlanning
         double averageScore,
         int questionCount,
         int aspectCount,
-        IEnumerable<Answer> answers,
-        IContentRule rule)
+        IEnumerable<Answer> answers)
     {
         var enumerable = answers.ToList();
-        var point = rule.Rule(enumerable);
+        var point = _contentRule.Rule(enumerable);
         return new Content(
             place,
             date,
@@ -31,8 +39,8 @@ public class DocumentPlanning : IDocumentPlanning
             point);
     }
 
-    public Structure DetermineStructure(Point point, IStructureRule rule)
+    public Structure DetermineStructure(Point point)
     {
-        return rule.Rule(point);
+        return _structureRule.Rule(point);
     }
 }

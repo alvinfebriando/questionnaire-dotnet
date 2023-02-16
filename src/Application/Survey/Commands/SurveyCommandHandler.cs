@@ -10,21 +10,21 @@ namespace Questionnaire.Application.Survey.Commands;
 
 public class SurveyCommandHandler : IRequestHandler<SurveyCommand, IEnumerable<string>>
 {
-    private readonly IContentRule _contentRule;
-    private readonly ILexicalization _lex;
     private readonly IQuestionProvider _questionProvider;
-    private readonly IStructureRule _structureRule;
+    private readonly IDocumentPlanning _documentPlanning;
+    private readonly IMicroPlanning _microPlanning;
+    private readonly IRealization _realization;
 
     public SurveyCommandHandler(
-        ILexicalization lex,
         IQuestionProvider questionProvider,
-        IContentRule contentRule,
-        IStructureRule structureRule)
+        IDocumentPlanning documentPlanning,
+        IMicroPlanning microPlanning,
+        IRealization realization)
     {
-        _lex = lex;
         _questionProvider = questionProvider;
-        _contentRule = contentRule;
-        _structureRule = structureRule;
+        _documentPlanning = documentPlanning;
+        _microPlanning = microPlanning;
+        _realization = realization;
     }
 
     public async Task<IEnumerable<string>> Handle(
@@ -34,9 +34,8 @@ public class SurveyCommandHandler : IRequestHandler<SurveyCommand, IEnumerable<s
         await Task.CompletedTask;
         var answers = Preprocessing.Convert(_questionProvider, request.Answers).ToList();
         var averageScore = Preprocessing.CalculateAverageScore(answers);
-        var dPlan = new DocumentPlanning();
 
-        var content = dPlan.DetermineContent(
+        var content = _documentPlanning.DetermineContent(
             request.Place,
             request.Date,
             request.Subject,
@@ -45,17 +44,16 @@ public class SurveyCommandHandler : IRequestHandler<SurveyCommand, IEnumerable<s
             averageScore,
             request.QuestionCount,
             request.AspectCount,
-            answers,
-            _contentRule);
-        var structure = dPlan.DetermineStructure(content.Point, _structureRule);
+            answers);
+        var structure = _documentPlanning.DetermineStructure(content.Point);
+        
+        _microPlanning.Init(content, structure);
+        var topics = _microPlanning.Create();
 
-        var mPlan = new MicroPlanning(content, structure, _lex);
-        var topics = mPlan.Create();
+        _realization.Init(topics);
+        _realization.AddFormatter(new CapitalSentenceFormatter());
 
-        var realization = new Realization(topics);
-        realization.AddFormatter(new CapitalSentenceFormatter());
-
-        var paragraph = realization.LinguisticRealization();
+        var paragraph = _realization.LinguisticRealization();
         return paragraph;
     }
 }

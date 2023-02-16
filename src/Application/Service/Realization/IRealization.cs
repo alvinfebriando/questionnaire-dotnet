@@ -9,4 +9,5 @@ public interface IRealization
     IEnumerable<string> LinguisticRealization();
     string StructureRealization(IEnumerable<string> listOfSentence);
     void AddFormatter(IFormatter formatter);
+    void Init(IEnumerable<BaseTopic> topics);
 }

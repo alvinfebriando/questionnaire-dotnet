@@ -14,8 +14,7 @@ public interface IDocumentPlanning
         double averageScore,
         int questionCount,
         int aspectCount,
-        IEnumerable<Answer> answers,
-        IContentRule rule);
+        IEnumerable<Answer> answers);
 
-    public Structure DetermineStructure(Point point, IStructureRule rule);
+    public Structure DetermineStructure(Point point);
 }

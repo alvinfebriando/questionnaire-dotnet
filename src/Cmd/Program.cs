@@ -41,10 +41,10 @@ var scores = new List<double>
 var answers = scores.Select((score, index) => new Answer(score, Data.Questions[index])).ToList();
 var averageScore = Preprocessing.CalculateAverageScore(answers);
 
-var dPlan = new DocumentPlanning();
 
 var contentRule = new ContentRule();
 var structureRule = new StructureRule();
+var dPlan = new DocumentPlanning(contentRule, structureRule);
 
 var content =
     dPlan.DetermineContent(
@@ -56,15 +56,16 @@ var content =
         averageScore,
         questionCount,
         aspectCount,
-        answers,
-        contentRule);
-var structure = dPlan.DetermineStructure(content.Point, structureRule);
+        answers);
+var structure = dPlan.DetermineStructure(content.Point);
 
 var lex = new Lexicalization();
-var mPlan = new MicroPlanning(content, structure, lex);
+var mPlan = new MicroPlanning(lex);
+mPlan.Init(content, structure);
 var topics = mPlan.Create();
 
-var realization = new Realization(topics);
+var realization = new Realization();
+realization.Init(topics);
 realization.AddFormatter(new CapitalSentenceFormatter());
 
 var paragraph = realization.LinguisticRealization();

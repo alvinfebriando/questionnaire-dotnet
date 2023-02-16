@@ -8,11 +8,15 @@ public class MicroPlanning : IMicroPlanning
 {
     private readonly ILexicalization _lex;
 
-    public MicroPlanning(Content content, Structure structure, ILexicalization lex)
+    public MicroPlanning(ILexicalization lex)
+    {
+        _lex = lex;
+    }
+
+    public void Init(Content content, Structure structure)
     {
         Content = content;
         Structure = structure;
-        _lex = lex;
     }
 
     public Content Content { get; set; }
