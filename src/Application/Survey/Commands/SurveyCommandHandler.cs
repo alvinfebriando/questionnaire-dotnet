@@ -4,15 +4,14 @@ using Questionnaire.Application.Service.DocumentPlanning;
 using Questionnaire.Application.Service.MicroPlanning;
 using Questionnaire.Application.Service.Preprocessing;
 using Questionnaire.Application.Service.Realization;
-using Questionnaire.Application.Service.Rule;
 
 namespace Questionnaire.Application.Survey.Commands;
 
 public class SurveyCommandHandler : IRequestHandler<SurveyCommand, IEnumerable<string>>
 {
-    private readonly IQuestionProvider _questionProvider;
     private readonly IDocumentPlanning _documentPlanning;
     private readonly IMicroPlanning _microPlanning;
+    private readonly IQuestionProvider _questionProvider;
     private readonly IRealization _realization;
 
     public SurveyCommandHandler(
@@ -46,7 +45,7 @@ public class SurveyCommandHandler : IRequestHandler<SurveyCommand, IEnumerable<s
             request.AspectCount,
             answers);
         var structure = _documentPlanning.DetermineStructure(content.Point);
-        
+
         _microPlanning.Init(content, structure);
         var topics = _microPlanning.Create();
 

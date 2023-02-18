@@ -10,7 +10,11 @@ public class OpeningTopic : GenericTopic<OpeningDto>
     private readonly ILexicalization _lex;
     private readonly ITemplateProvider _templateProvider;
 
-    public OpeningTopic(Content content, Structure structure, ILexicalization lex, ITemplateProvider templateProvider) : base(
+    public OpeningTopic(
+        Content content,
+        Structure structure,
+        ILexicalization lex,
+        ITemplateProvider templateProvider) : base(
         content,
         structure)
     {

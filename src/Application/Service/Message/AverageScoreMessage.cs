@@ -9,7 +9,10 @@ public class AverageScoreMessage : BaseMessage<OverviewDto>, IComplemented
     private readonly ILexicalization _lex;
     private readonly ITemplateProvider _templateProvider;
 
-    public AverageScoreMessage(OverviewDto data, ILexicalization lex, ITemplateProvider templateProvider) :
+    public AverageScoreMessage(
+        OverviewDto data,
+        ILexicalization lex,
+        ITemplateProvider templateProvider) :
         base(data)
     {
         _lex = lex;
@@ -32,11 +35,12 @@ public class AverageScoreMessage : BaseMessage<OverviewDto>, IComplemented
                 break;
         }
     }
-    
+
 
     public override string Lexicalization()
     {
-        var sentence = _templateProvider.Template["average"].Replace("{Complement[0]}", Complement[0])
+        var sentence = _templateProvider.Template["average"]
+            .Replace("{Complement[0]}", Complement[0])
             .Replace("{Complement[1]}", Complement[1])
             .Replace("{Search(mendapat)}", _lex.Search("mendapat"))
             .Replace("{Search(nilai)}", _lex.Search("nilai"))

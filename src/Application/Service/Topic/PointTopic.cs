@@ -16,7 +16,11 @@ public class PointTopic : GenericTopic<PointDto>
 
     public IList<BaseMessage<PointDto>> GoodPoints = new List<BaseMessage<PointDto>>();
 
-    public PointTopic(Content content, Structure structure, ILexicalization lex, ITemplateProvider templateProvider) : base(
+    public PointTopic(
+        Content content,
+        Structure structure,
+        ILexicalization lex,
+        ITemplateProvider templateProvider) : base(
         content,
         structure)
     {

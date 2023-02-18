@@ -9,7 +9,10 @@ public class BadPointMessage : BaseMessage<PointDto>, IMultiLexicalizationMessag
     private readonly ILexicalization _lex;
     private readonly ITemplateProvider _templateProvider;
 
-    public BadPointMessage(PointDto data, ILexicalization lex, ITemplateProvider templateProvider) : base(data)
+    public BadPointMessage(
+        PointDto data,
+        ILexicalization lex,
+        ITemplateProvider templateProvider) : base(data)
     {
         _lex = lex;
         _templateProvider = templateProvider;
@@ -35,7 +38,8 @@ public class BadPointMessage : BaseMessage<PointDto>, IMultiLexicalizationMessag
         switch (messages.Count)
         {
             case 2:
-                sentence = _templateProvider.Template["bad2"].Replace("{Complement[0]}", Complement[0])
+                sentence = _templateProvider.Template["bad2"]
+                    .Replace("{Complement[0]}", Complement[0])
                     .Replace("{Lecturer}", Data.Lecturer)
                     .Replace("{Search(aspek)}", _lex.Search("aspek"))
                     .Replace("{Answer.Section}", Data.Answer.Section.ToString())
@@ -47,7 +51,8 @@ public class BadPointMessage : BaseMessage<PointDto>, IMultiLexicalizationMessag
                 break;
             case >= 3:
                 var third = messages[2];
-                sentence = _templateProvider.Template["bad3"].Replace("{Complement[0]}", Complement[0])
+                sentence = _templateProvider.Template["bad3"]
+                    .Replace("{Complement[0]}", Complement[0])
                     .Replace("{Lecturer}", Data.Lecturer)
                     .Replace("{Search(aspek)}", _lex.Search("aspek"))
                     .Replace("{Answer.Section}", Data.Answer.Section.ToString())
@@ -66,7 +71,8 @@ public class BadPointMessage : BaseMessage<PointDto>, IMultiLexicalizationMessag
 
     public override string Lexicalization()
     {
-        var sentence = _templateProvider.Template["bad1"].Replace("{Complement[0]}", Complement[0])
+        var sentence = _templateProvider.Template["bad1"]
+            .Replace("{Complement[0]}", Complement[0])
             .Replace("{Lecturer}", Data.Lecturer)
             .Replace("{Search(aspek)}", _lex.Search("aspek"))
             .Replace("{Answer.Section}", Data.Answer.Section.ToString())

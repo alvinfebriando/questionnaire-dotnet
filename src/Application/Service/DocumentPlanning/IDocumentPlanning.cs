@@ -1,5 +1,4 @@
-﻿using Questionnaire.Application.Service.Rule;
-using Questionnaire.Domain.Entities;
+﻿using Questionnaire.Domain.Entities;
 
 namespace Questionnaire.Application.Service.DocumentPlanning;
 

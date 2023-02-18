@@ -26,10 +26,26 @@ public class MicroPlanning : IMicroPlanning
 
     public IEnumerable<BaseTopic> Create()
     {
-        var overviewTopic = new OverviewTopic(Content, Structure, _lex, _templateProvider);
-        var openingTopic = new OpeningTopic(Content, Structure, _lex, _templateProvider);
-        var pointTopic = new PointTopic(Content, Structure, _lex, _templateProvider);
-        var adviceTopic = new AdviceTopic(Content, Structure, _lex, _templateProvider);
+        var overviewTopic = new OverviewTopic(
+            Content,
+            Structure,
+            _lex,
+            _templateProvider);
+        var openingTopic = new OpeningTopic(
+            Content,
+            Structure,
+            _lex,
+            _templateProvider);
+        var pointTopic = new PointTopic(
+            Content,
+            Structure,
+            _lex,
+            _templateProvider);
+        var adviceTopic = new AdviceTopic(
+            Content,
+            Structure,
+            _lex,
+            _templateProvider);
         var list = new List<BaseTopic>
         {
             openingTopic,

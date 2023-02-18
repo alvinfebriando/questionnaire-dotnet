@@ -10,7 +10,11 @@ public class AdviceTopic : GenericTopic<AdviceDto>
     private readonly ILexicalization _lex;
     private readonly ITemplateProvider _templateProvider;
 
-    public AdviceTopic(Content content, Structure structure, ILexicalization lex, ITemplateProvider templateProvider) : base(
+    public AdviceTopic(
+        Content content,
+        Structure structure,
+        ILexicalization lex,
+        ITemplateProvider templateProvider) : base(
         content,
         structure)
     {

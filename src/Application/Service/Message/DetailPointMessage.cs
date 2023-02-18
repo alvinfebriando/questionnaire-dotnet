@@ -8,6 +8,9 @@ public class DetailPointMessage : BaseMessage<PointDto>, IComplemented
 {
     private readonly ILexicalization _lex;
 
+    private readonly string _template =
+        "{Complement[0]}berikut adalah rincian nilai yang {Complement[1]} ({Data.Answer.Section}):\n";
+
     public DetailPointMessage(PointDto data, ILexicalization lex) : base(data)
     {
         _lex = lex;
@@ -30,16 +33,13 @@ public class DetailPointMessage : BaseMessage<PointDto>, IComplemented
         }
     }
 
-    private string _template = 
-        "{Complement[0]}berikut adalah rincian nilai yang {Complement[1]} ({Data.Answer.Section}):\n";
 
-    
     public override string Lexicalization()
     {
         var sentence = _template.Replace("{Complement[0]}", Complement[0])
             .Replace("{Complement[1]}", Complement[1])
             .Replace("{Data.Answer.Section}", Data.Answer.Section.ToString());
-        
+
         var s = Data.Answer.Answer.Select(
                 a =>
                     $"- {a.Question.Title}: {a.Score}")

@@ -9,7 +9,10 @@ public class PerformanceStatusMessage : BaseMessage<OverviewDto>, IComplemented
     private readonly ILexicalization _lex;
     private readonly ITemplateProvider _templateProvider;
 
-    public PerformanceStatusMessage(OverviewDto data, ILexicalization lex, ITemplateProvider templateProvider) :
+    public PerformanceStatusMessage(
+        OverviewDto data,
+        ILexicalization lex,
+        ITemplateProvider templateProvider) :
         base(data)
     {
         _lex = lex;
@@ -29,7 +32,8 @@ public class PerformanceStatusMessage : BaseMessage<OverviewDto>, IComplemented
 
     public override string Lexicalization()
     {
-        var sentence = _templateProvider.Template["performance"].Replace("{Complement[0]}", Complement[0])
+        var sentence = _templateProvider.Template["performance"]
+            .Replace("{Complement[0]}", Complement[0])
             .Replace("{Search(mendapat)}", _lex.Search("mendapat"))
             .Replace("{Status}", Status);
         return sentence;

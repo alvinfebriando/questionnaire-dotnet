@@ -38,7 +38,6 @@ public class TemplateProvider : ITemplateProvider
             {
                 "bad2",
                 "{Complement[0]}{Lecturer} kurang sukses dalam {Search(aspek)} {Answer.Section} dan {second.Section}, dengan {Search(nilai)} yang {Search(didapatkan)} masing-masingnya adalah {Answer.AverageScore} dan {second.AverageScore}."
-
             },
             {
                 "bad3",

@@ -22,7 +22,8 @@ public class NoAdviceMessage : BaseMessage<AdviceDto>
     public override string Lexicalization()
     {
         var advice = Util.GetRandom(Data.Advice);
-        var sentence = _templateProvider.Template["no advice"].Replace("{Lecturer}", Data.Lecturer)
+        var sentence = _templateProvider.Template["no advice"]
+            .Replace("{Lecturer}", Data.Lecturer)
             .Replace("{advice}", advice);
         return sentence;
     }

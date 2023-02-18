@@ -9,7 +9,10 @@ public class AdviceMessage : BaseMessage<AdviceDto>
     private readonly ILexicalization _lex;
     private readonly ITemplateProvider _templateProvider;
 
-    public AdviceMessage(AdviceDto data, ILexicalization lex, ITemplateProvider templateProvider) : base(data)
+    public AdviceMessage(
+        AdviceDto data,
+        ILexicalization lex,
+        ITemplateProvider templateProvider) : base(data)
     {
         _lex = lex;
         _templateProvider = templateProvider;
@@ -18,7 +21,8 @@ public class AdviceMessage : BaseMessage<AdviceDto>
     public override string Lexicalization()
     {
         var advice = Util.GetRandom(Data.Advice);
-        var sentence = _templateProvider.Template["advice1"].Replace("{Lecturer}", Data.Lecturer)
+        var sentence = _templateProvider.Template["advice1"]
+            .Replace("{Lecturer}", Data.Lecturer)
             .Replace("{Search(nilai)}", _lex.Search("nilai"))
             .Replace("{advice}", advice);
         return sentence;
@@ -31,7 +35,8 @@ public class AdviceMessage : BaseMessage<AdviceDto>
         var advice2 = Util.GetRandom(advices[0]);
         if (advices.Count == 1)
         {
-            sentence = _templateProvider.Template["advice2"].Replace("{Lecturer}", Data.Lecturer)
+            sentence = _templateProvider.Template["advice2"]
+                .Replace("{Lecturer}", Data.Lecturer)
                 .Replace("{Search(nilai)}", _lex.Search("nilai"))
                 .Replace("{advice1}", advice1)
                 .Replace("{advice2}", advice2);
@@ -39,7 +44,8 @@ public class AdviceMessage : BaseMessage<AdviceDto>
         else
         {
             var advice3 = Util.GetRandom(advices[1]);
-            sentence = _templateProvider.Template["advice3"].Replace("{Lecturer}", Data.Lecturer)
+            sentence = _templateProvider.Template["advice3"]
+                .Replace("{Lecturer}", Data.Lecturer)
                 .Replace("{Search(nilai)}", _lex.Search("nilai"))
                 .Replace("{advice1}", advice1)
                 .Replace("{advice2}", advice2)

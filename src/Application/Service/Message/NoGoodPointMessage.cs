@@ -9,7 +9,10 @@ public class NoGoodPointMessage : BaseMessage<PointDto>, IComplemented
     private readonly ILexicalization _lex;
     private readonly ITemplateProvider _templateProvider;
 
-    public NoGoodPointMessage(PointDto data, ILexicalization lex, ITemplateProvider templateProvider) : base(data)
+    public NoGoodPointMessage(
+        PointDto data,
+        ILexicalization lex,
+        ITemplateProvider templateProvider) : base(data)
     {
         _lex = lex;
         _templateProvider = templateProvider;
@@ -27,11 +30,12 @@ public class NoGoodPointMessage : BaseMessage<PointDto>, IComplemented
             _ => Complement[0]
         };
     }
-    
+
 
     public override string Lexicalization()
     {
-        var sentence = _templateProvider.Template["no good"].Replace("{Complement[0]}", Complement[0])
+        var sentence = _templateProvider.Template["no good"]
+            .Replace("{Complement[0]}", Complement[0])
             .Replace("{Lecturer}", Data.Lecturer)
             .Replace("{Search(nilai)}", _lex.Search("nilai"))
             .Replace("{Search(tertinggi)}", _lex.Search("tertinggi"))
