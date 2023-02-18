@@ -60,7 +60,8 @@ var content =
 var structure = dPlan.DetermineStructure(content.Point);
 
 var lex = new Lexicalization();
-var mPlan = new MicroPlanning(lex);
+var templateProvider = new TemplateProvider();
+var mPlan = new MicroPlanning(lex, templateProvider);
 mPlan.Init(content, structure);
 var topics = mPlan.Create();
 

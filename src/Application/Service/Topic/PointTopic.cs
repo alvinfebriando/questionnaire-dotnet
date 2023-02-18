@@ -9,17 +9,19 @@ namespace Questionnaire.Application.Service.Topic;
 public class PointTopic : GenericTopic<PointDto>
 {
     private readonly ILexicalization _lex;
+    private readonly ITemplateProvider _templateProvider;
     public IList<BaseMessage<PointDto>> BadPoints = new List<BaseMessage<PointDto>>();
     public IList<BaseMessage<PointDto>> Details = new List<BaseMessage<PointDto>>();
 
 
     public IList<BaseMessage<PointDto>> GoodPoints = new List<BaseMessage<PointDto>>();
 
-    public PointTopic(Content content, Structure structure, ILexicalization lex) : base(
+    public PointTopic(Content content, Structure structure, ILexicalization lex, ITemplateProvider templateProvider) : base(
         content,
         structure)
     {
         _lex = lex;
+        _templateProvider = templateProvider;
     }
 
     public override IList<BaseMessage<PointDto>> Order()
@@ -123,28 +125,28 @@ public class PointTopic : GenericTopic<PointDto>
         if (Structure.Get("no good") > 0)
         {
             var dto = new PointDto(Content.Lecturer, Content.Point.Max);
-            var message = new NoGoodPointMessage(dto, _lex);
+            var message = new NoGoodPointMessage(dto, _lex, _templateProvider);
             GoodPoints.Add(message);
         }
 
         if (Structure.Get("no bad") > 0)
         {
             var dto = new PointDto(Content.Lecturer, Content.Point.Min);
-            var message = new NoBadPointMessage(dto, _lex);
+            var message = new NoBadPointMessage(dto, _lex, _templateProvider);
             BadPoints.Add(message);
         }
 
         foreach (var item in Content.Point.Good)
         {
             var dto = new PointDto(Content.Lecturer, item);
-            var message = new GoodPointMessage(dto, _lex);
+            var message = new GoodPointMessage(dto, _lex, _templateProvider);
             GoodPoints.Add(message);
         }
 
         foreach (var item in Content.Point.Bad)
         {
             var dto = new PointDto(Content.Lecturer, item);
-            var message = new BadPointMessage(dto, _lex);
+            var message = new BadPointMessage(dto, _lex, _templateProvider);
             BadPoints.Add(message);
         }
 

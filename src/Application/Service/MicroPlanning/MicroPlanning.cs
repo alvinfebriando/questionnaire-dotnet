@@ -7,10 +7,12 @@ namespace Questionnaire.Application.Service.MicroPlanning;
 public class MicroPlanning : IMicroPlanning
 {
     private readonly ILexicalization _lex;
+    private readonly ITemplateProvider _templateProvider;
 
-    public MicroPlanning(ILexicalization lex)
+    public MicroPlanning(ILexicalization lex, ITemplateProvider templateProvider)
     {
         _lex = lex;
+        _templateProvider = templateProvider;
     }
 
     public void Init(Content content, Structure structure)
@@ -24,10 +26,10 @@ public class MicroPlanning : IMicroPlanning
 
     public IEnumerable<BaseTopic> Create()
     {
-        var overviewTopic = new OverviewTopic(Content, Structure, _lex);
-        var openingTopic = new OpeningTopic(Content, Structure, _lex);
-        var pointTopic = new PointTopic(Content, Structure, _lex);
-        var adviceTopic = new AdviceTopic(Content, Structure, _lex);
+        var overviewTopic = new OverviewTopic(Content, Structure, _lex, _templateProvider);
+        var openingTopic = new OpeningTopic(Content, Structure, _lex, _templateProvider);
+        var pointTopic = new PointTopic(Content, Structure, _lex, _templateProvider);
+        var adviceTopic = new AdviceTopic(Content, Structure, _lex, _templateProvider);
         var list = new List<BaseTopic>
         {
             openingTopic,

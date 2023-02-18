@@ -7,19 +7,17 @@ namespace Questionnaire.Application.Service.Message;
 public class OpeningMessage : BaseMessage<OpeningDto>
 {
     private readonly ILexicalization _lex;
+    private readonly ITemplateProvider _templateProvider;
 
-    public OpeningMessage(OpeningDto data, ILexicalization lex) : base(data)
+    public OpeningMessage(OpeningDto data, ILexicalization lex, ITemplateProvider templateProvider) : base(data)
     {
         _lex = lex;
+        _templateProvider = templateProvider;
     }
-
-    private string _template =
-        "pada tanggal {Date}, telah dilakukan survey dengan topik {Subject} yang dijawab oleh {Respondent} di lingkungan {Place}.";
 
     public override string Lexicalization()
     {
-        var sentence = _template;
-        sentence = sentence.Replace("{Date}", Data.Date.ToString())
+        var sentence = _templateProvider.Template["opening"].Replace("{Date}", Data.Date.ToString())
             .Replace("{Subject}", Data.Subject)
             .Replace("{Respondent}", Data.Respondent)
             .Replace("{Place}", Data.Place);

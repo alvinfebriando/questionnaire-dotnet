@@ -7,11 +7,13 @@ namespace Questionnaire.Application.Service.Message;
 public class AverageScoreMessage : BaseMessage<OverviewDto>, IComplemented
 {
     private readonly ILexicalization _lex;
+    private readonly ITemplateProvider _templateProvider;
 
-    public AverageScoreMessage(OverviewDto data, ILexicalization lex) :
+    public AverageScoreMessage(OverviewDto data, ILexicalization lex, ITemplateProvider templateProvider) :
         base(data)
     {
         _lex = lex;
+        _templateProvider = templateProvider;
         Complement.Add("");
         Complement.Add(Data.Lecturer);
     }
@@ -31,17 +33,16 @@ public class AverageScoreMessage : BaseMessage<OverviewDto>, IComplemented
         }
     }
     
-    private string _template = "{Complement[0]}{Complement[1]} {_lex.Search(mendapat)} {_lex.Search(nilai)} total sebesar {Data.AverageScore} dari {Data.QuestionCount} pertanyaan yang dikelompokkan menjadi {Data.AspectCount} aspek.";
 
     public override string Lexicalization()
     {
-        var sentence = _template.Replace("{Complement[0]}", Complement[0])
+        var sentence = _templateProvider.Template["average"].Replace("{Complement[0]}", Complement[0])
             .Replace("{Complement[1]}", Complement[1])
-            .Replace("{_lex.Search(mendapat)}", _lex.Search("mendapat"))
-            .Replace("{_lex.Search(nilai)}", _lex.Search("nilai"))
-            .Replace("{Data.AverageScore}", Data.AverageScore.ToString())
-            .Replace("{Data.QuestionCount}", Data.QuestionCount.ToString())
-            .Replace("{Data.AspectCount}", Data.AspectCount.ToString());
+            .Replace("{Search(mendapat)}", _lex.Search("mendapat"))
+            .Replace("{Search(nilai)}", _lex.Search("nilai"))
+            .Replace("{AverageScore}", Data.AverageScore.ToString())
+            .Replace("{QuestionCount}", Data.QuestionCount.ToString())
+            .Replace("{AspectCount}", Data.AspectCount.ToString());
         return sentence;
     }
 }

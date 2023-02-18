@@ -7,10 +7,12 @@ namespace Questionnaire.Application.Service.Message;
 public class NoGoodPointMessage : BaseMessage<PointDto>, IComplemented
 {
     private readonly ILexicalization _lex;
+    private readonly ITemplateProvider _templateProvider;
 
-    public NoGoodPointMessage(PointDto data, ILexicalization lex) : base(data)
+    public NoGoodPointMessage(PointDto data, ILexicalization lex, ITemplateProvider templateProvider) : base(data)
     {
         _lex = lex;
+        _templateProvider = templateProvider;
         Complement.Add("");
     }
 
@@ -26,17 +28,15 @@ public class NoGoodPointMessage : BaseMessage<PointDto>, IComplemented
         };
     }
     
-    private string _template = 
-        "{Complement[0]}{Data.Lecturer} belum mencapai hasil yang diinginkan, dari pertanyaan yang diajukan, {_lex.Search(nilai)} {_lex.Search(tertinggi)} hanya sebesar {Data.Answer.AverageScore} untuk pertanyaan {Data.Answer.Section}.";
 
     public override string Lexicalization()
     {
-        var sentence = _template.Replace("{Complement[0]}", Complement[0])
-            .Replace("{Data.Lecturer}", Data.Lecturer)
-            .Replace("{_lex.Search(nilai)}", _lex.Search("nilai"))
-            .Replace("{_lex.Search(tertinggi)}", _lex.Search("tertinggi"))
-            .Replace("{Data.Answer.AverageScore}", Data.Answer.AverageScore.ToString())
-            .Replace("{Data.Answer.Section}", Data.Answer.Section.ToString());
+        var sentence = _templateProvider.Template["no good"].Replace("{Complement[0]}", Complement[0])
+            .Replace("{Lecturer}", Data.Lecturer)
+            .Replace("{Search(nilai)}", _lex.Search("nilai"))
+            .Replace("{Search(tertinggi)}", _lex.Search("tertinggi"))
+            .Replace("{Answer.AverageScore}", Data.Answer.AverageScore.ToString())
+            .Replace("{Answer.Section}", Data.Answer.Section.ToString());
         return sentence;
     }
 }

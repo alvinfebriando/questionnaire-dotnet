@@ -8,12 +8,14 @@ namespace Questionnaire.Application.Service.Topic;
 public class AdviceTopic : GenericTopic<AdviceDto>
 {
     private readonly ILexicalization _lex;
+    private readonly ITemplateProvider _templateProvider;
 
-    public AdviceTopic(Content content, Structure structure, ILexicalization lex) : base(
+    public AdviceTopic(Content content, Structure structure, ILexicalization lex, ITemplateProvider templateProvider) : base(
         content,
         structure)
     {
         _lex = lex;
+        _templateProvider = templateProvider;
     }
 
     public override IList<BaseMessage<AdviceDto>> Order()
@@ -23,7 +25,7 @@ public class AdviceTopic : GenericTopic<AdviceDto>
         {
             var advices = Content.Point.Min.Answer.Select(a => a.Question.Advice).ToList();
             var dto = new AdviceDto(Content.Lecturer, advices);
-            var noAdviceMessage = new NoAdviceMessage(dto, _lex);
+            var noAdviceMessage = new NoAdviceMessage(dto, _lex, _templateProvider);
             messages.Add(noAdviceMessage);
         }
         else
@@ -32,7 +34,7 @@ public class AdviceTopic : GenericTopic<AdviceDto>
             {
                 var advices = answers.Answer.Select(a => a.Question.Advice).ToList();
                 var dto = new AdviceDto(Content.Lecturer, advices);
-                var adviceMessage = new AdviceMessage(dto, _lex);
+                var adviceMessage = new AdviceMessage(dto, _lex, _templateProvider);
                 messages.Add(adviceMessage);
             }
         }

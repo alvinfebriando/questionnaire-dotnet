@@ -9,11 +9,13 @@ namespace Questionnaire.Application.Service.Topic;
 public class OverviewTopic : GenericTopic<OverviewDto>
 {
     private readonly ILexicalization _lex;
+    private readonly ITemplateProvider _templateProvider;
 
     public OverviewTopic(
         Content content,
         Structure structure,
-        ILexicalization lex) : base(content, structure)
+        ILexicalization lex,
+        ITemplateProvider templateProvider) : base(content, structure)
     {
         OverviewDto = new OverviewDto(
             Content.Lecturer,
@@ -21,14 +23,15 @@ public class OverviewTopic : GenericTopic<OverviewDto>
             Content.QuestionCount,
             Content.AspectCount);
         _lex = lex;
+        _templateProvider = templateProvider;
     }
 
     public OverviewDto OverviewDto { get; init; }
 
     public override IList<BaseMessage<OverviewDto>> Order()
     {
-        var averageScoreMsg = new AverageScoreMessage(OverviewDto, _lex);
-        var performanceMsg = new PerformanceStatusMessage(OverviewDto, _lex);
+        var averageScoreMsg = new AverageScoreMessage(OverviewDto, _lex, _templateProvider);
+        var performanceMsg = new PerformanceStatusMessage(OverviewDto, _lex, _templateProvider);
         return Structure.Get(1) == "score"
             ? new List<BaseMessage<OverviewDto>> { averageScoreMsg, performanceMsg }
             : new List<BaseMessage<OverviewDto>> { performanceMsg, averageScoreMsg };

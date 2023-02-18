@@ -7,20 +7,22 @@ namespace Questionnaire.Application.Service.Message;
 public class NoAdviceMessage : BaseMessage<AdviceDto>
 {
     private readonly ILexicalization _lex;
+    private readonly ITemplateProvider _templateProvider;
 
-    public NoAdviceMessage(AdviceDto data, ILexicalization lex) : base(data)
+    public NoAdviceMessage(
+        AdviceDto data,
+        ILexicalization lex,
+        ITemplateProvider templateProvider) : base(data)
     {
         _lex = lex;
+        _templateProvider = templateProvider;
     }
-
-    private string _template =
-        "performa {Data.Lecturer} sudah cukup baik, namun beliau dapat melakukan {advice} untuk mempertahankan nilai pada evaluasi mendatang";
 
 
     public override string Lexicalization()
     {
         var advice = Util.GetRandom(Data.Advice);
-        var sentence = _template.Replace("{Data.Lecturer}", Data.Lecturer)
+        var sentence = _templateProvider.Template["no advice"].Replace("{Lecturer}", Data.Lecturer)
             .Replace("{advice}", advice);
         return sentence;
     }

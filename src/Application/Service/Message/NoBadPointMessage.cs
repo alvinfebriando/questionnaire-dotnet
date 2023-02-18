@@ -7,10 +7,12 @@ namespace Questionnaire.Application.Service.Message;
 public class NoBadPointMessage : BaseMessage<PointDto>, IComplemented
 {
     private readonly ILexicalization _lex;
+    private readonly ITemplateProvider _templateProvider;
 
-    public NoBadPointMessage(PointDto data, ILexicalization lex) : base(data)
+    public NoBadPointMessage(PointDto data, ILexicalization lex, ITemplateProvider templateProvider) : base(data)
     {
         _lex = lex;
+        _templateProvider = templateProvider;
         Complement.Add("");
     }
 
@@ -26,19 +28,17 @@ public class NoBadPointMessage : BaseMessage<PointDto>, IComplemented
         };
     }
 
-    private string _template =
-        "{Complement[0]}tidak ada {_lex.Search(aspek)} yang dinilai di bawah standar, dengan {_lex.Search(nilai)} {_lex.Search(terendah)} yang {_lex.Search(didapatkan)} sebesar {Data.Answer.AverageScore} untuk pertanyaan {Data.Answer.Section}.";
 
 
     public override string Lexicalization()
     {
-        var sentence = _template.Replace("{Complement[0]}", Complement[0])
-            .Replace("{_lex.Search(aspek)}", _lex.Search("aspek"))
-            .Replace("{_lex.Search(nilai)}", _lex.Search("nilai"))
-            .Replace("{_lex.Search(terendah)}", _lex.Search("terendah"))
-            .Replace("{_lex.Search(didapatkan)}", _lex.Search("didapatkan"))
-            .Replace("{Data.Answer.AverageScore}", Data.Answer.AverageScore.ToString())
-            .Replace("{Data.Answer.Section}", Data.Answer.Section.ToString());
+        var sentence = _templateProvider.Template["no bad"].Replace("{Complement[0]}", Complement[0])
+            .Replace("{Search(aspek)}", _lex.Search("aspek"))
+            .Replace("{Search(nilai)}", _lex.Search("nilai"))
+            .Replace("{Search(terendah)}", _lex.Search("terendah"))
+            .Replace("{Search(didapatkan)}", _lex.Search("didapatkan"))
+            .Replace("{Answer.AverageScore}", Data.Answer.AverageScore.ToString())
+            .Replace("{Answer.Section}", Data.Answer.Section.ToString());
         return sentence;
     }
 }
