@@ -25,6 +25,13 @@ public class BadPointMessage : BaseMessage<PointDto>, IMultiLexicalizationMessag
             _ => Complement[0]
         };
     }
+    private string _template1 = 
+        "{Complement[0]}{Data.Lecturer} kurang sukses dalam {_lex.Search(aspek)} {Data.Answer.Section}, dengan {_lex.Search(nilai)} {_lex.Search(didapatkan)} sebesar {Data.Answer.AverageScore}.";
+
+    private string _template2 = 
+        "{Complement[0]}{Data.Lecturer} kurang sukses dalam {_lex.Search(aspek)} {Data.Answer.Section} dan {second.Section}, dengan {_lex.Search(nilai)} yang {_lex.Search(didapatkan)} masing-masingnya adalah {Data.Answer.AverageScore} dan {second.AverageScore}.";
+    private string _template3 =
+        "{Complement[0]}{Data.Lecturer} kurang sukses dalam menjalankan {_lex.Search(aspek)} {Data.Answer.Section}, {second.Section}, dan {third.Section}, dengan {_lex.Search(nilai)} yang {_lex.Search(didapatkan)} masing-masingnya adalah {Data.Answer.AverageScore}, {second.AverageScore}, {third.AverageScore}.";
 
     public string Lexicalization(IList<AveragedAnswer> messages)
     {
@@ -33,13 +40,31 @@ public class BadPointMessage : BaseMessage<PointDto>, IMultiLexicalizationMessag
         switch (messages.Count)
         {
             case 2:
-                sentence =
-                    $"{Complement[0]}{Data.Lecturer} kurang sukses dalam {_lex.Search("aspek")} {Data.Answer.Section} dan {second.Section}, dengan {_lex.Search("nilai")} yang {_lex.Search("didapatkan")} masing-masingnya adalah {Data.Answer.AverageScore} dan {second.AverageScore}.";
+                sentence = _template2;
+                sentence = sentence.Replace("{Complement[0]}", Complement[0])
+                    .Replace("{Data.Lecturer}", Data.Lecturer)
+                    .Replace("{_lex.Search(aspek)}", _lex.Search("aspek"))
+                    .Replace("{Data.Answer.Section}", Data.Answer.Section.ToString())
+                    .Replace("{second.Section}", second.Section.ToString())
+                    .Replace("_lex.Search(nilai)", _lex.Search("nilai"))
+                    .Replace("_lex.Search(didapatkan)", _lex.Search("didapatkan"))
+                    .Replace("{Data.Answer.AverageScore}", Data.Answer.AverageScore.ToString())
+                    .Replace("{second.AverageScore}", second.AverageScore.ToString());
                 break;
             case >= 3:
                 var third = messages[2];
-                sentence =
-                    $"{Complement[0]}{Data.Lecturer} kurang sukses dalam menjalankan {_lex.Search("aspek")} {Data.Answer.Section}, {second.Section}, dan {third.Section}, dengan {_lex.Search("nilai")} yang {_lex.Search("didapatkan")} masing-masingnya adalah {Data.Answer.AverageScore}, {second.AverageScore}, {third.AverageScore}.";
+                sentence = _template3;
+                sentence = sentence.Replace("{Complement[0]}", Complement[0])
+                    .Replace("{Data.Lecturer}", Data.Lecturer)
+                    .Replace("{_lex.Search(aspek)}", _lex.Search("aspek"))
+                    .Replace("{Data.Answer.Section}", Data.Answer.Section.ToString())
+                    .Replace("{second.Section}", second.Section.ToString())
+                    .Replace("{third.Section}", third.Section.ToString())
+                    .Replace("_lex.Search(nilai)", _lex.Search("nilai"))
+                    .Replace("_lex.Search(didapatkan)", _lex.Search("didapatkan"))
+                    .Replace("{Data.Answer.AverageScore}", Data.Answer.AverageScore.ToString())
+                    .Replace("{second.AverageScore}", second.AverageScore.ToString())
+                    .Replace("{third.AverageScore}", third.AverageScore.ToString());
                 break;
         }
 
@@ -48,8 +73,13 @@ public class BadPointMessage : BaseMessage<PointDto>, IMultiLexicalizationMessag
 
     public override string Lexicalization()
     {
-        var sentence =
-            $"{Complement[0]}{Data.Lecturer} kurang sukses dalam {_lex.Search("aspek")} {Data.Answer.Section}, dengan {_lex.Search("nilai")} {_lex.Search("didapatkan")} sebesar {Data.Answer.AverageScore}.";
+        var sentence = _template1.Replace("{Complement[0]}", Complement[0])
+            .Replace("{Data.Lecturer}", Data.Lecturer)
+            .Replace("{_lex.Search(aspek)}", _lex.Search("aspek"))
+            .Replace("{Data.Answer.Section}", Data.Answer.Section.ToString())
+            .Replace("_lex.Search(nilai)", _lex.Search("nilai"))
+            .Replace("_lex.Search(didapatkan)", _lex.Search("didapatkan"))
+            .Replace("{Data.Answer.AverageScore}", Data.Answer.AverageScore.ToString());
         return sentence;
     }
 }

@@ -25,11 +25,18 @@ public class NoGoodPointMessage : BaseMessage<PointDto>, IComplemented
             _ => Complement[0]
         };
     }
+    
+    private string _template = 
+        "{Complement[0]}{Data.Lecturer} belum mencapai hasil yang diinginkan, dari pertanyaan yang diajukan, {_lex.Search(nilai)} {_lex.Search(tertinggi)} hanya sebesar {Data.Answer.AverageScore} untuk pertanyaan {Data.Answer.Section}.";
 
     public override string Lexicalization()
     {
-        var sentence =
-            $"{Complement[0]}{Data.Lecturer} belum mencapai hasil yang diinginkan, dari pertanyaan yang diajukan, {_lex.Search("nilai")} {_lex.Search("tertinggi")} hanya sebesar {Data.Answer.AverageScore} untuk pertanyaan {Data.Answer.Section}.";
+        var sentence = _template.Replace("{Complement[0]}", Complement[0])
+            .Replace("{Data.Lecturer}", Data.Lecturer)
+            .Replace("{_lex.Search(nilai)}", _lex.Search("nilai"))
+            .Replace("{_lex.Search(tertinggi)}", _lex.Search("tertinggi"))
+            .Replace("{Data.Answer.AverageScore}", Data.Answer.AverageScore.ToString())
+            .Replace("{Data.Answer.Section}", Data.Answer.Section.ToString());
         return sentence;
     }
 }

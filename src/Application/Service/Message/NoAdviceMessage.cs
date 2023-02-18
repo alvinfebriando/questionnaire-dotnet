@@ -13,11 +13,15 @@ public class NoAdviceMessage : BaseMessage<AdviceDto>
         _lex = lex;
     }
 
+    private string _template =
+        "performa {Data.Lecturer} sudah cukup baik, namun beliau dapat melakukan {advice} untuk mempertahankan nilai pada evaluasi mendatang";
+
+
     public override string Lexicalization()
     {
         var advice = Util.GetRandom(Data.Advice);
-        var sentence =
-            $"performa {Data.Lecturer} sudah cukup baik, namun beliau dapat melakukan {advice} untuk mempertahankan nilai pada evaluasi mendatang";
+        var sentence = _template.Replace("{Data.Lecturer}", Data.Lecturer)
+            .Replace("{advice}", advice);
         return sentence;
     }
 }

@@ -25,10 +25,14 @@ public class PerformanceStatusMessage : BaseMessage<OverviewDto>, IComplemented
         if (option.Description == "second") Complement[0] = "beliau";
     }
 
+    private string _template =
+        "dalam penilaian ini, {Complement[0]} {Search(mendapat)} hasil yang {Status}.";
+
     public override string Lexicalization()
     {
-        var sentence =
-            $"dalam penilaian ini, {Complement[0]} {_lex.Search("mendapat")} hasil yang {Status}.";
+        var sentence = _template.Replace("{Complement[0]}", Complement[0])
+            .Replace("{Search(mendapat)}", _lex.Search("mendapat"))
+            .Replace("{Status}", Status);
         return sentence;
     }
 }
