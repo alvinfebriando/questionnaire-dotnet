@@ -30,7 +30,7 @@ public class AdviceMessage : BaseMessage<AdviceDto>
 
     public string EntitySlotting(IList<IList<string>> advices)
     {
-        var sentence = "";
+        string sentence;
         var advice1 = Util.GetRandom(Data.Advice);
         var advice2 = Util.GetRandom(advices[0]);
         if (advices.Count == 1)
