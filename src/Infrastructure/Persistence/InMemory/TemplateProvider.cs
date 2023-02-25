@@ -9,7 +9,7 @@ public class TemplateProvider : ITemplateProvider
         {
             {
                 "opening",
-                "pada tanggal {Date}, telah dilakukan survey dengan topik {Subject} yang dijawab oleh {Respondent} di lingkungan {Place}."
+                "pada tanggal {Date}, telah dilakukan survey dengan topik {Subject} yang dijawab oleh {Respondent} responden di lingkungan {Place}."
             },
             {
                 "performance",
