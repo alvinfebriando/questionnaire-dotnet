@@ -9,5 +9,5 @@ public abstract class BaseMessage<T> where T : class
         Data = data;
     }
 
-    public abstract string Lexicalization();
+    public abstract string EntitySlotting();
 }

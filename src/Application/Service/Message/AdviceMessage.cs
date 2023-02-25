@@ -18,7 +18,7 @@ public class AdviceMessage : BaseMessage<AdviceDto>
         _templateProvider = templateProvider;
     }
 
-    public override string Lexicalization()
+    public override string EntitySlotting()
     {
         var advice = Util.GetRandom(Data.Advice);
         var sentence = _templateProvider.Template["advice1"]
@@ -28,7 +28,7 @@ public class AdviceMessage : BaseMessage<AdviceDto>
         return sentence;
     }
 
-    public string Lexicalization(IList<IList<string>> advices)
+    public string EntitySlotting(IList<IList<string>> advices)
     {
         var sentence = "";
         var advice1 = Util.GetRandom(Data.Advice);

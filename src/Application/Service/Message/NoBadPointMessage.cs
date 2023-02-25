@@ -32,7 +32,7 @@ public class NoBadPointMessage : BaseMessage<PointDto>, IComplemented
     }
 
 
-    public override string Lexicalization()
+    public override string EntitySlotting()
     {
         var sentence = _templateProvider.Template["no bad"]
             .Replace("{Complement[0]}", Complement[0])

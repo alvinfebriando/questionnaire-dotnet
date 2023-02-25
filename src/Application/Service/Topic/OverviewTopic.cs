@@ -50,6 +50,6 @@ public class OverviewTopic : GenericTopic<OverviewDto>
             ((IComplemented)order[1]).EmbedComplement(new Option("second"));
         }
 
-        return order.Select(message => message.Lexicalization()).ToList();
+        return order.Select(message => message.EntitySlotting()).ToList();
     }
 }

@@ -34,7 +34,7 @@ public class GoodPointMessageTests
         // Arrange
         var expected = _sut.Data.Lecturer;
         // Act
-        var s = _sut.Lexicalization();
+        var s = _sut.EntitySlotting();
         // Assert
         Assert.Contains(expected, s);
         _output.WriteLine(s);
@@ -65,7 +65,7 @@ public class GoodPointMessageTests
         var expected = averagedAnswer2.AverageScore;
 
         // Act
-        var s = _sut.Lexicalization(new List<AveragedAnswer> { averagedAnswer1, averagedAnswer2 });
+        var s = _sut.EntitySlotting(new List<AveragedAnswer> { averagedAnswer1, averagedAnswer2 });
 
         // Assert
         Assert.Contains(expected.ToString(CultureInfo.CurrentCulture), s);
@@ -87,7 +87,7 @@ public class GoodPointMessageTests
         var expected = averagedAnswer1.AverageScore;
 
         // Act
-        var s = _sut.Lexicalization(
+        var s = _sut.EntitySlotting(
             new List<AveragedAnswer> { averagedAnswer1, averagedAnswer1, averagedAnswer1 });
 
         // Assert

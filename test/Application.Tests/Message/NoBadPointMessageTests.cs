@@ -34,7 +34,7 @@ public class NoBadPointMessageTests
         // Arrange
         var expected = _sut.Data.Answer.AverageScore;
         // Act
-        var s = _sut.Lexicalization();
+        var s = _sut.EntitySlotting();
         // Assert
         Assert.Contains(expected.ToString(CultureInfo.CurrentCulture), s);
         _output.WriteLine(s);

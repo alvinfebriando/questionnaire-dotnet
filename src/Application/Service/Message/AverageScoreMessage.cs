@@ -37,7 +37,7 @@ public class AverageScoreMessage : BaseMessage<OverviewDto>, IComplemented
     }
 
 
-    public override string Lexicalization()
+    public override string EntitySlotting()
     {
         var sentence = _templateProvider.Template["average"]
             .Replace("{Complement[0]}", Complement[0])

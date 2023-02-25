@@ -17,7 +17,7 @@ public class OpeningMessage : BaseMessage<OpeningDto>
         _templateProvider = templateProvider;
     }
 
-    public override string Lexicalization()
+    public override string EntitySlotting()
     {
         var sentence = _templateProvider.Template["opening"]
             .Replace("{Date}", Data.Date.ToString())

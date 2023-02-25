@@ -33,7 +33,7 @@ public class NoGoodPointMessageTests
         // Arrange
         var expected = _sut.Data.Lecturer;
         // Act
-        var s = _sut.Lexicalization();
+        var s = _sut.EntitySlotting();
         // Assert
         Assert.Contains(expected, s);
         _output.WriteLine(s);

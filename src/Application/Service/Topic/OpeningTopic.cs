@@ -39,6 +39,6 @@ public class OpeningTopic : GenericTopic<OpeningDto>
     public override IList<string> Aggregate()
     {
         var order = Order();
-        return order.Select(message => message.Lexicalization()).ToList();
+        return order.Select(message => message.EntitySlotting()).ToList();
     }
 }

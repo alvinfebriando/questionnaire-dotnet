@@ -4,7 +4,7 @@ using Questionnaire.Domain.ValueObjects;
 
 namespace Questionnaire.Application.Service.Message;
 
-public class GoodPointMessage : BaseMessage<PointDto>, IMultiLexicalizationMessage, IComplemented
+public class GoodPointMessage : BaseMessage<PointDto>, IMultiEntitySlottingMessage, IComplemented
 {
     private readonly ILexicalization _lex;
     private readonly ITemplateProvider _templateProvider;
@@ -31,7 +31,7 @@ public class GoodPointMessage : BaseMessage<PointDto>, IMultiLexicalizationMessa
         };
     }
 
-    public string Lexicalization(IList<AveragedAnswer> messages)
+    public string EntitySlotting(IList<AveragedAnswer> messages)
     {
         var sentence = "";
         var second = messages[1];
@@ -69,7 +69,7 @@ public class GoodPointMessage : BaseMessage<PointDto>, IMultiLexicalizationMessa
         return sentence;
     }
 
-    public override string Lexicalization()
+    public override string EntitySlotting()
     {
         var sentence = _templateProvider.Template["good1"]
             .Replace("{Complement[0]}", Complement[0])

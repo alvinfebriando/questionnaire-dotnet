@@ -30,7 +30,7 @@ public class PerformanceStatusMessage : BaseMessage<OverviewDto>, IComplemented
         if (option.Description == "second") Complement[0] = "beliau";
     }
 
-    public override string Lexicalization()
+    public override string EntitySlotting()
     {
         var sentence = _templateProvider.Template["performance"]
             .Replace("{Complement[0]}", Complement[0])

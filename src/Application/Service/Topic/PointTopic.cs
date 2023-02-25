@@ -58,14 +58,14 @@ public class PointTopic : GenericTopic<PointDto>
         {
             if (GoodPoints.Count > 1)
             {
-                var message = (IMultiLexicalizationMessage)order[0];
+                var message = (IMultiEntitySlottingMessage)order[0];
                 var averagedAnswers = GoodPoints.Select(p => p.Data.Answer).ToList();
-                var s = message.Lexicalization(averagedAnswers);
+                var s = message.EntitySlotting(averagedAnswers);
                 output.Add(s);
             }
             else
             {
-                var s = order[0].Lexicalization();
+                var s = order[0].EntitySlotting();
                 output.Add(s);
             }
 
@@ -73,14 +73,14 @@ public class PointTopic : GenericTopic<PointDto>
 
             if (BadPoints.Count > 1)
             {
-                var message = (IMultiLexicalizationMessage)order[1];
+                var message = (IMultiEntitySlottingMessage)order[1];
                 var averagedAnswers = BadPoints.Select(p => p.Data.Answer).ToList();
-                var s = message.Lexicalization(averagedAnswers);
+                var s = message.EntitySlotting(averagedAnswers);
                 output.Add(s);
             }
             else
             {
-                var s = order[1].Lexicalization();
+                var s = order[1].EntitySlotting();
                 output.Add(s);
             }
         }
@@ -88,14 +88,14 @@ public class PointTopic : GenericTopic<PointDto>
         {
             if (BadPoints.Count > 1)
             {
-                var message = (IMultiLexicalizationMessage)order[0];
+                var message = (IMultiEntitySlottingMessage)order[0];
                 var averagedAnswers = BadPoints.Select(p => p.Data.Answer).ToList();
-                var s = message.Lexicalization(averagedAnswers);
+                var s = message.EntitySlotting(averagedAnswers);
                 output.Add(s);
             }
             else
             {
-                var s = order[0].Lexicalization();
+                var s = order[0].EntitySlotting();
                 output.Add(s);
             }
 
@@ -103,22 +103,22 @@ public class PointTopic : GenericTopic<PointDto>
 
             if (GoodPoints.Count > 1)
             {
-                var message = (IMultiLexicalizationMessage)order[1];
+                var message = (IMultiEntitySlottingMessage)order[1];
                 var averagedAnswers = GoodPoints.Select(p => p.Data.Answer).ToList();
-                var s = message.Lexicalization(averagedAnswers);
+                var s = message.EntitySlotting(averagedAnswers);
                 output.Add(s);
             }
             else
             {
-                var s = order[1].Lexicalization();
+                var s = order[1].EntitySlotting();
                 output.Add(s);
             }
         }
 
         ((IComplemented)order[2]).EmbedComplement(new Option("max"));
         ((IComplemented)order[3]).EmbedComplement(new Option("min"));
-        var detail1 = order[2].Lexicalization();
-        var detail2 = order[3].Lexicalization();
+        var detail1 = order[2].EntitySlotting();
+        var detail2 = order[3].EntitySlotting();
         output.Add(detail1);
         output.Add(detail2);
         return output;

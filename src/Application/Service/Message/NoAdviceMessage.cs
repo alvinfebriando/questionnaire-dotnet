@@ -19,7 +19,7 @@ public class NoAdviceMessage : BaseMessage<AdviceDto>
     }
 
 
-    public override string Lexicalization()
+    public override string EntitySlotting()
     {
         var advice = Util.GetRandom(Data.Advice);
         var sentence = _templateProvider.Template["no advice"]

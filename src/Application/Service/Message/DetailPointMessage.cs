@@ -34,7 +34,7 @@ public class DetailPointMessage : BaseMessage<PointDto>, IComplemented
     }
 
 
-    public override string Lexicalization()
+    public override string EntitySlotting()
     {
         var sentence = _template.Replace("{Complement[0]}", Complement[0])
             .Replace("{Complement[1]}", Complement[1])

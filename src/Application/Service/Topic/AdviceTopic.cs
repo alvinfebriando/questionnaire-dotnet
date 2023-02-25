@@ -52,7 +52,7 @@ public class AdviceTopic : GenericTopic<AdviceDto>
         var output = new List<string>();
         if (order.Count <= 1)
         {
-            var s = order[0].Lexicalization();
+            var s = order[0].EntitySlotting();
             output.Add(s);
         }
         else
@@ -60,7 +60,7 @@ public class AdviceTopic : GenericTopic<AdviceDto>
             var advices = order.Select(m => m.Data.Advice)
                 .Skip(1)
                 .ToList();
-            var s = ((AdviceMessage)order[0]).Lexicalization(advices);
+            var s = ((AdviceMessage)order[0]).EntitySlotting(advices);
             output.Add(s);
         }
 
