@@ -22,7 +22,7 @@ public class AdviceTopic : GenericTopic<AdviceDto>
         _templateProvider = templateProvider;
     }
 
-    public override IList<BaseMessage<AdviceDto>> Order()
+    public override IList<BaseMessage<AdviceDto>> Sort()
     {
         var messages = new List<BaseMessage<AdviceDto>>();
         if (Structure.Get("no advice") > 0)
@@ -48,7 +48,7 @@ public class AdviceTopic : GenericTopic<AdviceDto>
 
     public override IList<string> Aggregate()
     {
-        var order = Order();
+        var order = Sort();
         var output = new List<string>();
         if (order.Count <= 1)
         {

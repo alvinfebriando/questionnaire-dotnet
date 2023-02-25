@@ -28,7 +28,7 @@ public class OverviewTopic : GenericTopic<OverviewDto>
 
     public OverviewDto OverviewDto { get; init; }
 
-    public override IList<BaseMessage<OverviewDto>> Order()
+    public override IList<BaseMessage<OverviewDto>> Sort()
     {
         var averageScoreMsg = new AverageScoreMessage(OverviewDto, _lex, _templateProvider);
         var performanceMsg = new PerformanceStatusMessage(OverviewDto, _lex, _templateProvider);
@@ -39,7 +39,7 @@ public class OverviewTopic : GenericTopic<OverviewDto>
 
     public override IList<string> Aggregate()
     {
-        var order = Order();
+        var order = Sort();
         if (Structure.Get(1) == "score")
         {
             ((IComplemented)order[0]).EmbedComplement(new Option("first"));

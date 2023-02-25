@@ -47,7 +47,7 @@ public class AdviceTopicTests
         var averagedAnswer1 = GenerateAveragedAnswer("bad", QuestionSection.TransparansiNilai);
         _sut.Content.Point.Bad = new List<AveragedAnswer> { averagedAnswer1 };
         // Act
-        var messages = _sut.Order();
+        var messages = _sut.Sort();
         // Assert
         Assert.IsType<AdviceMessage>(messages[0]);
         Assert.NotEmpty(messages[0].Data.Advice);
@@ -71,7 +71,7 @@ public class AdviceTopicTests
         var averagedAnswer2 = GenerateAveragedAnswer("bad", QuestionSection.KedisiplinanWaktu);
         _sut.Content.Point.Bad = new List<AveragedAnswer> { averagedAnswer1, averagedAnswer2 };
         // Act
-        var messages = _sut.Order();
+        var messages = _sut.Sort();
         // Assert
         Assert.IsType<AdviceMessage>(messages[0]);
         Assert.IsType<AdviceMessage>(messages[1]);
@@ -97,7 +97,7 @@ public class AdviceTopicTests
         _sut.Content.Point.Min = averagedAnswer1;
 
         // Act
-        var messages = _sut.Order();
+        var messages = _sut.Sort();
 
         // Assert
         Assert.IsType<NoAdviceMessage>(messages[0]);

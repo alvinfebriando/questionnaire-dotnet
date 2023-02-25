@@ -30,7 +30,7 @@ public class OpeningTopic : GenericTopic<OpeningDto>
 
     public OpeningDto OpeningDto { get; set; }
 
-    public override IList<BaseMessage<OpeningDto>> Order()
+    public override IList<BaseMessage<OpeningDto>> Sort()
     {
         var openingMsg = new OpeningMessage(OpeningDto, _lex, _templateProvider);
         return new List<BaseMessage<OpeningDto>> { openingMsg };
@@ -38,7 +38,7 @@ public class OpeningTopic : GenericTopic<OpeningDto>
 
     public override IList<string> Aggregate()
     {
-        var order = Order();
+        var order = Sort();
         return order.Select(message => message.EntitySlotting()).ToList();
     }
 }

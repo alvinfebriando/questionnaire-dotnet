@@ -28,7 +28,7 @@ public class PointTopic : GenericTopic<PointDto>
         _templateProvider = templateProvider;
     }
 
-    public override IList<BaseMessage<PointDto>> Order()
+    public override IList<BaseMessage<PointDto>> Sort()
     {
         Transform();
         var order = new List<BaseMessage<PointDto>>();
@@ -52,7 +52,7 @@ public class PointTopic : GenericTopic<PointDto>
 
     public override IList<string> Aggregate()
     {
-        var order = Order();
+        var order = Sort();
         var output = new List<string>();
         if (IsGnG())
         {

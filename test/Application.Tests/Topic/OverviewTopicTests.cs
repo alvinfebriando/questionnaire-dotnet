@@ -38,7 +38,7 @@ public class OverviewTopicTests
         _sut.Structure.Add("");
         _sut.Structure.Add("score");
         // Act
-        var s = _sut.Order();
+        var s = _sut.Sort();
         // Assert
         Assert.IsType<AverageScoreMessage>(s[0]);
         Assert.IsType<PerformanceStatusMessage>(s[1]);
@@ -53,7 +53,7 @@ public class OverviewTopicTests
         _sut.Structure.Add("performance");
         const int expected = 2;
         // Act
-        var s = _sut.Order();
+        var s = _sut.Sort();
         // Assert
         Assert.Equal(expected, s.Count);
         Assert.IsType<AverageScoreMessage>(s[1]);

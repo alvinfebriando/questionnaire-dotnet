@@ -36,7 +36,7 @@ public class OpeningTopicTests
         // Arrange 
         const int expected = 1;
         // Act
-        var s = _sut.Order();
+        var s = _sut.Sort();
         // Assert
         Assert.Equal(expected, s.Count);
         Assert.IsType<OpeningMessage>(s[0]);

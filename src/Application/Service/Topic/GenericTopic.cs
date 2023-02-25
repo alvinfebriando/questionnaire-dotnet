@@ -9,5 +9,5 @@ public abstract class GenericTopic<T> : BaseTopic where T : class
     {
     }
 
-    public abstract IList<BaseMessage<T>> Order();
+    public abstract IList<BaseMessage<T>> Sort();
 }

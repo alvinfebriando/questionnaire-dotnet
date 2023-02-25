@@ -49,7 +49,7 @@ public class PointTopicTests
         _sut.Content.Point.Good.Add(averagedAnswer1);
         _sut.Content.Point.Bad.Add(averagedAnswer2);
         // Act
-        var messages = _sut.Order();
+        var messages = _sut.Sort();
         // Assert
         Assert.IsType<GoodPointMessage>(messages[0]);
         Assert.IsType<BadPointMessage>(messages[1]);
@@ -75,7 +75,7 @@ public class PointTopicTests
         _sut.Content.Point.Good.Add(averagedAnswer1);
 
         // Act
-        var messages = _sut.Order();
+        var messages = _sut.Sort();
 
         // Assert
         Assert.IsType<BadPointMessage>(messages[0]);
@@ -103,7 +103,7 @@ public class PointTopicTests
         _sut.Content.Point.Good.Add(averagedAnswer1);
 
         // Act
-        var messages = _sut.Order();
+        var messages = _sut.Sort();
 
         // Assert
         Assert.IsType<NoGoodPointMessage>(messages[0]);
@@ -131,7 +131,7 @@ public class PointTopicTests
         _sut.Content.Point.Good.Add(averagedAnswer2);
 
         // Act
-        var messages = _sut.Order();
+        var messages = _sut.Sort();
 
         // Assert
         Assert.IsType<GoodPointMessage>(messages[0]);
@@ -158,7 +158,7 @@ public class PointTopicTests
         _sut.Content.Point.Good.Add(averagedAnswer1);
         _sut.Content.Point.Bad.Add(averagedAnswer2);
         // Act
-        var messages = _sut.Order();
+        var messages = _sut.Sort();
         // Assert
         Assert.IsType<NoBadPointMessage>(messages[0]);
         Assert.IsType<NoGoodPointMessage>(messages[1]);
