@@ -20,7 +20,7 @@ public class SimulatorController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> A([FromBody] SimulatorRequest request)
+    public async Task<IActionResult> Submit([FromBody] SimulatorRequest request)
     {
         var query = _mapper.Map<SimulatorQuery>(request);
         var simResult = await _mediator.Send(query);
