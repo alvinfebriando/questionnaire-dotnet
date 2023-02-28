@@ -23,7 +23,7 @@ public class Realization : IRealization
         foreach (var topic in Topics)
         {
             var sentences = topic.Aggregate();
-            FormatNewLine(sentences, topic.GetType());
+            sentences = FormatNewLine(sentences, topic.GetType());
             output.AddRange(sentences);
         }
 
@@ -42,18 +42,20 @@ public class Realization : IRealization
         Formatters.Add(formatter);
     }
 
-    private static void FormatNewLine(IList<string> sentences, Type topic)
+    private static IList<string> FormatNewLine(IList<string> sentences, Type topic)
     {
         sentences = sentences.Select(s => $"{s} ").ToList();
+        var output = sentences;
         if (topic == typeof(PointTopic))
         {
-            sentences[^3] = $"{sentences[^3]}\n";
-            sentences[^2] = $"{sentences[^2].Trim()}\n";
-            sentences[^1] = $"{sentences[^1]}\n";
-        }
-        else
+            output[^3] = $"{sentences[^3]}\n";
+            output[^2] = $"{sentences[^2].Trim()}\n";
+            output[^1] = $"{sentences[^1]}\n\n";
+        }else if (topic != typeof(OpeningTopic))
         {
-            sentences[^1] += "\n";
+            output[^1] += "\n\n";
         }
+
+        return output;
     }
 }

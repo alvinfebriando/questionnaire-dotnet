@@ -7,7 +7,7 @@ using Questionnaire.Application.Service.Realization;
 
 namespace Questionnaire.Application.Survey.Commands;
 
-public class SurveyCommandHandler : IRequestHandler<SurveyCommand, IEnumerable<string>>
+public class SurveyCommandHandler : IRequestHandler<SurveyCommand, string>
 {
     private readonly IDocumentPlanning _documentPlanning;
     private readonly IMicroPlanning _microPlanning;
@@ -26,7 +26,7 @@ public class SurveyCommandHandler : IRequestHandler<SurveyCommand, IEnumerable<s
         _realization = realization;
     }
 
-    public async Task<IEnumerable<string>> Handle(
+    public async Task<string> Handle(
         SurveyCommand request,
         CancellationToken cancellationToken)
     {
@@ -53,6 +53,6 @@ public class SurveyCommandHandler : IRequestHandler<SurveyCommand, IEnumerable<s
         _realization.AddFormatter(new CapitalSentenceFormatter());
 
         var paragraph = _realization.LinguisticRealization();
-        return paragraph;
+        return _realization.StructureRealization(paragraph);
     }
 }

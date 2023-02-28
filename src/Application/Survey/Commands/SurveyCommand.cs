@@ -10,4 +10,4 @@ public record SurveyCommand(
     string Lecturer,
     int QuestionCount,
     int AspectCount,
-    IList<double> Answers) : IRequest<IEnumerable<string>>;
+    IList<double> Answers) : IRequest<string>;
