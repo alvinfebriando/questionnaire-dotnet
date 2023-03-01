@@ -7,6 +7,7 @@ public class OpeningMessage : BaseMessage<OpeningDto>
 {
     private readonly ILexicalization _lex;
     private readonly ITemplateProvider _templateProvider;
+    private readonly Dictionary<string, string> _replacement;
 
     public OpeningMessage(
         OpeningDto data,
@@ -19,11 +20,18 @@ public class OpeningMessage : BaseMessage<OpeningDto>
 
     public override string EntitySlotting()
     {
-        var sentence = _templateProvider.Template["opening"]
-            .Replace("{Date}", Data.Date.ToString())
-            .Replace("{Subject}", Data.Subject)
-            .Replace("{Respondent}", Data.Respondent)
-            .Replace("{Place}", Data.Place);
+        var sentence = Replace(_templateProvider.Template["opening"], LoadReplacement());
         return sentence;
+    }
+
+    private Dictionary<string, string> LoadReplacement()
+    {
+        return new Dictionary<string, string>
+        {
+            { "{Date}", Data.Date.ToString() },
+            { "{Subject}", Data.Subject },
+            { "{Respondent}", Data.Respondent },
+            { "{Place}", Data.Place },
+        };
     }
 }

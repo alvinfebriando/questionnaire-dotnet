@@ -17,14 +17,22 @@ public class AdviceMessage : BaseMessage<AdviceDto>
         _lex = lex;
         _templateProvider = templateProvider;
     }
+    
+    private Dictionary<string, string> LoadReplacement()
+    {
+        return new Dictionary<string, string>
+        {
+            {"{Lecturer}", Data.Lecturer},
+            { "{Search-nilai}", _lex.Search("nilai") },
+        };
+    }
 
     public override string EntitySlotting()
     {
         var advice = Util.GetRandom(Data.Advice);
-        var sentence = _templateProvider.Template["advice1"]
-            .Replace("{Lecturer}", Data.Lecturer)
-            .Replace("{Search(nilai)}", _lex.Search("nilai"))
-            .Replace("{advice}", advice);
+        var replacement = LoadReplacement();
+        replacement.Add("{advice}", advice);
+        var sentence = Replace(_templateProvider.Template["advice1"], replacement);
         return sentence;
     }
 
@@ -33,23 +41,18 @@ public class AdviceMessage : BaseMessage<AdviceDto>
         string sentence;
         var advice1 = Util.GetRandom(Data.Advice);
         var advice2 = Util.GetRandom(advices[0]);
+        var replacement = LoadReplacement();
+        replacement.Add("{advice1}", advice1);
+        replacement.Add("{advice2}", advice2);
         if (advices.Count == 1)
         {
-            sentence = _templateProvider.Template["advice2"]
-                .Replace("{Lecturer}", Data.Lecturer)
-                .Replace("{Search(nilai)}", _lex.Search("nilai"))
-                .Replace("{advice1}", advice1)
-                .Replace("{advice2}", advice2);
+            sentence = Replace(_templateProvider.Template["advice2"], replacement);
         }
         else
         {
             var advice3 = Util.GetRandom(advices[1]);
-            sentence = _templateProvider.Template["advice3"]
-                .Replace("{Lecturer}", Data.Lecturer)
-                .Replace("{Search(nilai)}", _lex.Search("nilai"))
-                .Replace("{advice1}", advice1)
-                .Replace("{advice2}", advice2)
-                .Replace("{advice3}", advice3);
+            replacement.Add("{advice3}", advice3);
+            sentence = Replace(_templateProvider.Template["advice3"], replacement);
         }
 
         return sentence;

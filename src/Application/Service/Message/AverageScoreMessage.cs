@@ -36,17 +36,23 @@ public class AverageScoreMessage : BaseMessage<OverviewDto>, IComplemented
         }
     }
 
+    private Dictionary<string, string> LoadReplacement()
+    {
+        return new Dictionary<string, string>
+        {
+            { "{Complement-0}", Complement[0] },
+            { "{Complement-1}", Complement[1] },
+            { "{Search-mendapat}", _lex.Search("mendapat") },
+            { "{Search-nilai}", _lex.Search("nilai") },
+            { "{AverageScore}", Data.AverageScore.ToString() },
+            { "{QuestionCount}", Data.QuestionCount.ToString() },
+            { "{AspectCount}", Data.AspectCount.ToString() },
+        };
+    }
 
     public override string EntitySlotting()
     {
-        var sentence = _templateProvider.Template["average"]
-            .Replace("{Complement[0]}", Complement[0])
-            .Replace("{Complement[1]}", Complement[1])
-            .Replace("{Search(mendapat)}", _lex.Search("mendapat"))
-            .Replace("{Search(nilai)}", _lex.Search("nilai"))
-            .Replace("{AverageScore}", Data.AverageScore.ToString())
-            .Replace("{QuestionCount}", Data.QuestionCount.ToString())
-            .Replace("{AspectCount}", Data.AspectCount.ToString());
+        var sentence = Replace(_templateProvider.Template["average"], LoadReplacement());
         return sentence;
     }
 }

@@ -31,38 +31,37 @@ public class BadPointMessage : BaseMessage<PointDto>, IMultiEntitySlottingMessag
         };
     }
 
+    private Dictionary<string, string> LoadReplacement()
+    {
+        return new Dictionary<string, string>
+        {
+            { "{Complement-0}", Complement[0] },
+            { "{Lecturer}", Data.Lecturer },
+            { "{Search-aspek}", _lex.Search("aspek") },
+            { "{Answer.Section}", Data.Answer.Section.ToString() },
+            { "{Search-nilai}", _lex.Search("nilai") },
+            { "{Search-didapatkan}", _lex.Search("didapatkan") },
+            { "{Answer.AverageScore}", Data.Answer.AverageScore.ToString() }
+        };
+    }
+
     public string EntitySlotting(IList<AveragedAnswer> messages)
     {
         var sentence = "";
         var second = messages[1];
+        var replacement = LoadReplacement();
+        replacement.Add("{second.Section}", second.Section.ToString());
+        replacement.Add("{second.AverageScore}", second.AverageScore.ToString());
         switch (messages.Count)
         {
             case 2:
-                sentence = _templateProvider.Template["bad2"]
-                    .Replace("{Complement[0]}", Complement[0])
-                    .Replace("{Lecturer}", Data.Lecturer)
-                    .Replace("{Search(aspek)}", _lex.Search("aspek"))
-                    .Replace("{Answer.Section}", Data.Answer.Section.ToString())
-                    .Replace("{second.Section}", second.Section.ToString())
-                    .Replace("{Search(nilai)}", _lex.Search("nilai"))
-                    .Replace("{Search(didapatkan)}", _lex.Search("didapatkan"))
-                    .Replace("{Answer.AverageScore}", Data.Answer.AverageScore.ToString())
-                    .Replace("{second.AverageScore}", second.AverageScore.ToString());
+                sentence = Replace(_templateProvider.Template["bad2"], replacement);
                 break;
             case >= 3:
                 var third = messages[2];
-                sentence = _templateProvider.Template["bad3"]
-                    .Replace("{Complement[0]}", Complement[0])
-                    .Replace("{Lecturer}", Data.Lecturer)
-                    .Replace("{Search(aspek)}", _lex.Search("aspek"))
-                    .Replace("{Answer.Section}", Data.Answer.Section.ToString())
-                    .Replace("{second.Section}", second.Section.ToString())
-                    .Replace("{third.Section}", third.Section.ToString())
-                    .Replace("{Search(nilai)}", _lex.Search("nilai"))
-                    .Replace("{Search(didapatkan)}", _lex.Search("didapatkan"))
-                    .Replace("{Answer.AverageScore}", Data.Answer.AverageScore.ToString())
-                    .Replace("{second.AverageScore}", second.AverageScore.ToString())
-                    .Replace("{third.AverageScore}", third.AverageScore.ToString());
+                replacement.Add("{third.Section}", third.Section.ToString());
+                replacement.Add("{third.AverageScore}", third.AverageScore.ToString());
+                sentence = Replace(_templateProvider.Template["bad3"], replacement);
                 break;
         }
 

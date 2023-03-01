@@ -30,18 +30,25 @@ public class NoBadPointMessage : BaseMessage<PointDto>, IComplemented
             _ => Complement[0]
         };
     }
-
+    
+    private Dictionary<string, string> LoadReplacement()
+    {
+        return new Dictionary<string, string>
+        {
+            { "{Complement-0}", Complement[0] },
+            { "{Search-aspek}", _lex.Search("aspek") },
+            { "{Search-nilai}", _lex.Search("nilai") },
+            { "{Search-terendah}", _lex.Search("terendah") },
+            { "{Search-didapatkan}", _lex.Search("didapatkan") },
+            { "{Answer.AverageScore}", Data.Answer.AverageScore.ToString() },
+            { "{Answer.Section}", Data.Answer.Section.ToString() }
+        };
+    }
 
     public override string EntitySlotting()
     {
-        var sentence = _templateProvider.Template["no bad"]
-            .Replace("{Complement[0]}", Complement[0])
-            .Replace("{Search(aspek)}", _lex.Search("aspek"))
-            .Replace("{Search(nilai)}", _lex.Search("nilai"))
-            .Replace("{Search(terendah)}", _lex.Search("terendah"))
-            .Replace("{Search(didapatkan)}", _lex.Search("didapatkan"))
-            .Replace("{Answer.AverageScore}", Data.Answer.AverageScore.ToString())
-            .Replace("{Answer.Section}", Data.Answer.Section.ToString());
+        var replacement = LoadReplacement();
+        var sentence = Replace(_templateProvider.Template["no bad"], replacement);
         return sentence;
     }
 }

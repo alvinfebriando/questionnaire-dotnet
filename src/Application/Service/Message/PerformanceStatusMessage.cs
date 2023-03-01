@@ -30,12 +30,19 @@ public class PerformanceStatusMessage : BaseMessage<OverviewDto>, IComplemented
         if (option.Description == "second") Complement[0] = "beliau";
     }
 
+    private Dictionary<string, string> LoadReplacement()
+    {
+        return new Dictionary<string, string>
+        {
+            { "{Complement-0}", Complement[0] },
+            { "{Search-mendapat}", _lex.Search("mendapat") },
+            { "{Status}", Status },
+        };
+    }
+
     public override string EntitySlotting()
     {
-        var sentence = _templateProvider.Template["performance"]
-            .Replace("{Complement[0]}", Complement[0])
-            .Replace("{Search(mendapat)}", _lex.Search("mendapat"))
-            .Replace("{Status}", Status);
+        var sentence = Replace(_templateProvider.Template["performance"], LoadReplacement());
         return sentence;
     }
 }

@@ -18,13 +18,17 @@ public class NoAdviceMessage : BaseMessage<AdviceDto>
         _templateProvider = templateProvider;
     }
 
+    private Dictionary<string, string> LoadReplacement()
+    {
+        return new Dictionary<string, string> { { "{Lecturer}", Data.Lecturer } };
+    }
 
     public override string EntitySlotting()
     {
         var advice = Util.GetRandom(Data.Advice);
-        var sentence = _templateProvider.Template["no advice"]
-            .Replace("{Lecturer}", Data.Lecturer)
-            .Replace("{advice}", advice);
+        var replacement = LoadReplacement();
+        replacement.Add("{advice}", advice);
+        var sentence = Replace(_templateProvider.Template["no advice"], replacement);
         return sentence;
     }
 }
