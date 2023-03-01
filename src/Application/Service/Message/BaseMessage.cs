@@ -18,8 +18,8 @@ public abstract class BaseMessage<T> where T : class
         var replaced = template;
         foreach (var key in map.Keys)
         {
-            var pattern2 = $"{{{key}}}";
-            replaced = Regex.Replace(replaced, pattern2, map[key]);
+            var pattern = $"{key}";
+            replaced = Regex.Replace(replaced, pattern, map[key]);
         }
 
         return replaced;
