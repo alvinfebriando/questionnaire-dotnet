@@ -17,6 +17,7 @@ public class GoodPointMessage : BaseMessage<PointDto>, IMultiEntitySlottingMessa
         _lex = lex;
         _templateProvider = templateProvider;
         Complement.Add("");
+        Complement.Add("");
     }
 
     public IList<string> Complement { get; set; } = new List<string>();
@@ -29,6 +30,11 @@ public class GoodPointMessage : BaseMessage<PointDto>, IMultiEntitySlottingMessa
             "no bad" => _lex.Search("serta") + ", ",
             _ => Complement[0]
         };
+        Complement[1] = option.Description switch
+        {
+            "no bad" => "juga ",
+            _ => Complement[0]
+        };
     }
 
     private Dictionary<string, string> LoadReplacement()
@@ -36,6 +42,7 @@ public class GoodPointMessage : BaseMessage<PointDto>, IMultiEntitySlottingMessa
         return new Dictionary<string, string>
         {
             { "{Complement-0}", Complement[0] },
+            { "{Complement-1}", Complement[1] },
             { "{Search-aspek}", _lex.Search("aspek") },
             { "{Answer.Section}", Data.Answer.Section.ToString() },
             { "{Lecturer}", Data.Lecturer },
@@ -70,14 +77,8 @@ public class GoodPointMessage : BaseMessage<PointDto>, IMultiEntitySlottingMessa
 
     public override string EntitySlotting()
     {
-        var sentence = _templateProvider.Template["good1"]
-            .Replace("{Complement[0]}", Complement[0])
-            .Replace("{Search(aspek)}", _lex.Search("aspek"))
-            .Replace("{Answer.Section}", Data.Answer.Section.ToString())
-            .Replace("{Lecturer}", Data.Lecturer)
-            .Replace("{Search(nilai)}", _lex.Search("nilai"))
-            .Replace("{Search(didapatkan)}", _lex.Search("didapatkan"))
-            .Replace("{Answer.AverageScore}", Data.Answer.AverageScore.ToString());
+        var replacement = LoadReplacement();
+        var sentence = Replace(_templateProvider.Template["good1"], replacement);
         return sentence;
     }
 }

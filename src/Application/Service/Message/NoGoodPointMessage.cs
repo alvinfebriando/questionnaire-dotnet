@@ -17,6 +17,7 @@ public class NoGoodPointMessage : BaseMessage<PointDto>, IComplemented
         _lex = lex;
         _templateProvider = templateProvider;
         Complement.Add("");
+        Complement.Add("");
     }
 
     public IList<string> Complement { get; set; } = new List<string>();
@@ -29,6 +30,11 @@ public class NoGoodPointMessage : BaseMessage<PointDto>, IComplemented
             "no bad" => _lex.Search("namun") + ", ",
             _ => Complement[0]
         };
+        Complement[1] = option.Description switch
+        {
+            "bad" => "juga ",
+            _ => Complement[1]
+        };
     }
     
     private Dictionary<string, string> LoadReplacement()
@@ -36,6 +42,7 @@ public class NoGoodPointMessage : BaseMessage<PointDto>, IComplemented
         return new Dictionary<string, string>
         {
             { "{Complement-0}", Complement[0] },
+            { "{Complement-1}", Complement[1] },
             { "{Lecturer}", Data.Lecturer },
             { "{Search-nilai}", _lex.Search("nilai") },
             { "{Search-tertinggi}", _lex.Search("tertinggi") },
