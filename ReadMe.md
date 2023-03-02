@@ -26,7 +26,7 @@ Terdapat 2 endpoint yang bisa digunakan yaitu
       "place": "USU",
       "date": "2020-01-01",
       "subject": "Kepuasan pengajaran mata kuliah Kecerdasan Buatan",
-      "respondent": "mahasiswa",
+      "respondent": "50",
       "lecturer": "pak Alvin",
       "questionCount": 13,
       "aspectCount": 6,
