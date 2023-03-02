@@ -156,8 +156,8 @@ public class PointTopic : GenericTopic<PointDto>
 
         var dto1 = new PointDto(Content.Lecturer, Content.Point.Max);
         var dto2 = new PointDto(Content.Lecturer, Content.Point.Min);
-        var message1 = new DetailPointMessage(dto1, _lex);
-        var message2 = new DetailPointMessage(dto2, _lex);
+        var message1 = new DetailPointMessage(dto1, _lex, _templateProvider);
+        var message2 = new DetailPointMessage(dto2, _lex, _templateProvider);
         Details.Add(message1);
         Details.Add(message2);
     }

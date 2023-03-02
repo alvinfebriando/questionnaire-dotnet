@@ -7,13 +7,15 @@ namespace Questionnaire.Application.Service.Message;
 public class DetailPointMessage : BaseMessage<PointDto>, IComplemented
 {
     private readonly ILexicalization _lex;
+    private readonly ITemplateProvider _templateProvider;
 
-    private readonly string _template =
-        "{Complement[0]}berikut adalah rincian nilai yang {Complement[1]} ({Data.Answer.Section}):\n";
-
-    public DetailPointMessage(PointDto data, ILexicalization lex) : base(data)
+    public DetailPointMessage(
+        PointDto data,
+        ILexicalization lex,
+        ITemplateProvider templateProvider) : base(data)
     {
         _lex = lex;
+        _templateProvider = templateProvider;
         Complement.Add("");
         Complement.Add("");
     }
@@ -36,14 +38,21 @@ public class DetailPointMessage : BaseMessage<PointDto>, IComplemented
 
     public override string EntitySlotting()
     {
-        var sentence = _template.Replace("{Complement[0]}", Complement[0])
-            .Replace("{Complement[1]}", Complement[1])
-            .Replace("{Data.Answer.Section}", Data.Answer.Section.ToString());
-
+        var replacement = LoadReplacement();
+        var sentence = Replace(_templateProvider.Template["detail"], replacement);
         var s = Data.Answer.Answer.Select(
-                a =>
-                    $"- {a.Question.Title}: {a.Score}")
+                a => $"- {a.Question.Title}: {a.Score}")
             .ToList();
         return sentence + string.Join("\n", s);
+    }
+
+    private Dictionary<string, string> LoadReplacement()
+    {
+        return new Dictionary<string, string>
+        {
+            { "{Complement-0}", Complement[0] },
+            { "{Complement-1}", Complement[1] },
+            { "{Data.Answer.Section}", Data.Answer.Section.ToString() }
+        };
     }
 }
