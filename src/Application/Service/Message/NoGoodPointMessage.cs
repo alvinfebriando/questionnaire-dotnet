@@ -37,7 +37,7 @@ public class NoGoodPointMessage : BaseMessage<PointDto>, IComplemented
             _ => Complement[1]
         };
     }
-    
+
     private Dictionary<string, string> LoadReplacement()
     {
         return new Dictionary<string, string>
@@ -48,7 +48,10 @@ public class NoGoodPointMessage : BaseMessage<PointDto>, IComplemented
             { "{Search-nilai}", _lex.Search("nilai") },
             { "{Search-tertinggi}", _lex.Search("tertinggi") },
             { "{Answer.AverageScore}", Data.Answer.AverageScore.ToString() },
-            { "{Answer.Section}", Data.Answer.Section.ToString().Humanize(LetterCasing.LowerCase) }
+            {
+                "{Answer.Section}",
+                Data.Answer.Section.ToString().Humanize(LetterCasing.LowerCase)
+            }
         };
     }
 

@@ -51,7 +51,8 @@ public class Realization : IRealization
             output[^3] = $"{sentences[^3]}\n";
             output[^2] = $"{sentences[^2].Trim()}\n";
             output[^1] = $"{sentences[^1]}\n\n";
-        }else if (topic != typeof(OpeningTopic))
+        }
+        else if (topic != typeof(OpeningTopic))
         {
             output[^1] += "\n\n";
         }

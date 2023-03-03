@@ -17,13 +17,12 @@ public class AdviceMessage : BaseMessage<AdviceDto>
         _lex = lex;
         _templateProvider = templateProvider;
     }
-    
+
     private Dictionary<string, string> LoadReplacement()
     {
         return new Dictionary<string, string>
         {
-            {"{Lecturer}", Data.Lecturer},
-            { "{Search-nilai}", _lex.Search("nilai") },
+            { "{Lecturer}", Data.Lecturer }, { "{Search-nilai}", _lex.Search("nilai") }
         };
     }
 

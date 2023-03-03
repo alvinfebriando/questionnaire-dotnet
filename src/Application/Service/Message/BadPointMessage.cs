@@ -38,27 +38,14 @@ public class BadPointMessage : BaseMessage<PointDto>, IMultiEntitySlottingMessag
         };
     }
 
-    private Dictionary<string, string> LoadReplacement()
-    {
-        return new Dictionary<string, string>
-        {
-            { "{Complement-0}", Complement[0] },
-            { "{Complement-1}", Complement[1] },
-            { "{Lecturer}", Data.Lecturer },
-            { "{Search-aspek}", _lex.Search("aspek") },
-            { "{Answer.Section}", Data.Answer.Section.ToString().Humanize(LetterCasing.LowerCase) },
-            { "{Search-nilai}", _lex.Search("nilai") },
-            { "{Search-didapatkan}", _lex.Search("didapatkan") },
-            { "{Answer.AverageScore}", Data.Answer.AverageScore.ToString() }
-        };
-    }
-
     public string EntitySlotting(IList<AveragedAnswer> messages)
     {
         var sentence = "";
         var second = messages[1];
         var replacement = LoadReplacement();
-        replacement.Add("{second.Section}", second.Section.ToString().Humanize(LetterCasing.LowerCase));
+        replacement.Add(
+            "{second.Section}",
+            second.Section.ToString().Humanize(LetterCasing.LowerCase));
         replacement.Add("{second.AverageScore}", second.AverageScore.ToString());
         switch (messages.Count)
         {
@@ -67,13 +54,33 @@ public class BadPointMessage : BaseMessage<PointDto>, IMultiEntitySlottingMessag
                 break;
             case >= 3:
                 var third = messages[2];
-                replacement.Add("{third.Section}", third.Section.ToString().Humanize(LetterCasing.LowerCase));
+                replacement.Add(
+                    "{third.Section}",
+                    third.Section.ToString().Humanize(LetterCasing.LowerCase));
                 replacement.Add("{third.AverageScore}", third.AverageScore.ToString());
                 sentence = Replace(_templateProvider.Template["bad3"], replacement);
                 break;
         }
 
         return sentence;
+    }
+
+    private Dictionary<string, string> LoadReplacement()
+    {
+        return new Dictionary<string, string>
+        {
+            { "{Complement-0}", Complement[0] },
+            { "{Complement-1}", Complement[1] },
+            { "{Lecturer}", Data.Lecturer },
+            { "{Search-aspek}", _lex.Search("aspek") },
+            {
+                "{Answer.Section}",
+                Data.Answer.Section.ToString().Humanize(LetterCasing.LowerCase)
+            },
+            { "{Search-nilai}", _lex.Search("nilai") },
+            { "{Search-didapatkan}", _lex.Search("didapatkan") },
+            { "{Answer.AverageScore}", Data.Answer.AverageScore.ToString() }
+        };
     }
 
     public override string EntitySlotting()

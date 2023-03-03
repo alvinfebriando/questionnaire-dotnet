@@ -46,7 +46,7 @@ public class AverageScoreMessage : BaseMessage<OverviewDto>, IComplemented
             { "{Search-nilai}", _lex.Search("nilai") },
             { "{AverageScore}", Data.AverageScore.ToString() },
             { "{QuestionCount}", Data.QuestionCount.ToString() },
-            { "{AspectCount}", Data.AspectCount.ToString() },
+            { "{AspectCount}", Data.AspectCount.ToString() }
         };
     }
 

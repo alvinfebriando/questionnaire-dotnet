@@ -37,7 +37,7 @@ public class NoBadPointMessage : BaseMessage<PointDto>, IComplemented
             _ => Complement[0]
         };
     }
-    
+
     private Dictionary<string, string> LoadReplacement()
     {
         return new Dictionary<string, string>
@@ -49,7 +49,10 @@ public class NoBadPointMessage : BaseMessage<PointDto>, IComplemented
             { "{Search-terendah}", _lex.Search("terendah") },
             { "{Search-didapatkan}", _lex.Search("didapatkan") },
             { "{Answer.AverageScore}", Data.Answer.AverageScore.ToString() },
-            { "{Answer.Section}", Data.Answer.Section.ToString().Humanize(LetterCasing.LowerCase) }
+            {
+                "{Answer.Section}",
+                Data.Answer.Section.ToString().Humanize(LetterCasing.LowerCase)
+            }
         };
     }
 

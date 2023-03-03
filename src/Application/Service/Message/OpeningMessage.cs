@@ -6,8 +6,8 @@ namespace Questionnaire.Application.Service.Message;
 public class OpeningMessage : BaseMessage<OpeningDto>
 {
     private readonly ILexicalization _lex;
-    private readonly ITemplateProvider _templateProvider;
     private readonly Dictionary<string, string> _replacement;
+    private readonly ITemplateProvider _templateProvider;
 
     public OpeningMessage(
         OpeningDto data,
@@ -31,7 +31,7 @@ public class OpeningMessage : BaseMessage<OpeningDto>
             { "{Date}", Data.Date.ToString() },
             { "{Subject}", Data.Subject },
             { "{Respondent}", Data.Respondent },
-            { "{Place}", Data.Place },
+            { "{Place}", Data.Place }
         };
     }
 }

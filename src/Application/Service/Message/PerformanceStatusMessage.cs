@@ -36,7 +36,7 @@ public class PerformanceStatusMessage : BaseMessage<OverviewDto>, IComplemented
         {
             { "{Complement-0}", Complement[0] },
             { "{Search-mendapat}", _lex.Search("mendapat") },
-            { "{Status}", Status },
+            { "{Status}", Status }
         };
     }
 

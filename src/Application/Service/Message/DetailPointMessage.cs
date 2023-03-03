@@ -54,7 +54,10 @@ public class DetailPointMessage : BaseMessage<PointDto>, IComplemented
             { "{Complement-0}", Complement[0] },
             { "{Complement-1}", Complement[1] },
             { "{Search-aspek}", _lex.Search("aspek") },
-            { "{Answer.Section}", Data.Answer.Section.ToString().Humanize(LetterCasing.LowerCase) }
+            {
+                "{Answer.Section}",
+                Data.Answer.Section.ToString().Humanize(LetterCasing.LowerCase)
+            }
         };
     }
 }
