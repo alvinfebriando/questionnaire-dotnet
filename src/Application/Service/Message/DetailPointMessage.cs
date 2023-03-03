@@ -1,4 +1,5 @@
-﻿using Questionnaire.Application.Common.Interfaces;
+﻿using Humanizer;
+using Questionnaire.Application.Common.Interfaces;
 using Questionnaire.Application.Service.Dto;
 using Questionnaire.Domain.ValueObjects;
 
@@ -53,7 +54,7 @@ public class DetailPointMessage : BaseMessage<PointDto>, IComplemented
             { "{Complement-0}", Complement[0] },
             { "{Complement-1}", Complement[1] },
             { "{Search-aspek}", _lex.Search("aspek") },
-            { "{Answer.Section}", Data.Answer.Section.ToString() }
+            { "{Answer.Section}", Data.Answer.Section.ToString().Humanize(LetterCasing.LowerCase) }
         };
     }
 }

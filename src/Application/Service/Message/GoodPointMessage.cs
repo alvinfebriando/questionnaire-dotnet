@@ -1,4 +1,5 @@
-﻿using Questionnaire.Application.Common.Interfaces;
+﻿using Humanizer;
+using Questionnaire.Application.Common.Interfaces;
 using Questionnaire.Application.Service.Dto;
 using Questionnaire.Domain.ValueObjects;
 
@@ -44,7 +45,7 @@ public class GoodPointMessage : BaseMessage<PointDto>, IMultiEntitySlottingMessa
             { "{Complement-0}", Complement[0] },
             { "{Complement-1}", Complement[1] },
             { "{Search-aspek}", _lex.Search("aspek") },
-            { "{Answer.Section}", Data.Answer.Section.ToString() },
+            { "{Answer.Section}", Data.Answer.Section.ToString().Humanize(LetterCasing.LowerCase) },
             { "{Lecturer}", Data.Lecturer },
             { "{Search-nilai}", _lex.Search("nilai") },
             { "{Search-didapatkan}", _lex.Search("didapatkan") },
@@ -57,7 +58,7 @@ public class GoodPointMessage : BaseMessage<PointDto>, IMultiEntitySlottingMessa
         var sentence = "";
         var second = messages[1];
         var replacement = LoadReplacement();
-        replacement.Add("{second.Section}", second.Section.ToString());
+        replacement.Add("{second.Section}", second.Section.ToString().Humanize(LetterCasing.LowerCase));
         replacement.Add("{second.AverageScore}", second.AverageScore.ToString());
         switch (messages.Count)
         {
@@ -66,7 +67,7 @@ public class GoodPointMessage : BaseMessage<PointDto>, IMultiEntitySlottingMessa
                 break;
             case >= 3:
                 var third = messages[2];
-                replacement.Add("{third.Section}", third.Section.ToString());
+                replacement.Add("{third.Section}", third.Section.ToString().Humanize(LetterCasing.LowerCase));
                 replacement.Add("{third.AverageScore}", third.AverageScore.ToString());
                 sentence = Replace(_templateProvider.Template["good3"], replacement);
                 break;

@@ -1,4 +1,5 @@
-﻿using Questionnaire.Application.Common.Interfaces;
+﻿using Humanizer;
+using Questionnaire.Application.Common.Interfaces;
 using Questionnaire.Application.Service.Dto;
 using Questionnaire.Domain.ValueObjects;
 
@@ -48,7 +49,7 @@ public class NoBadPointMessage : BaseMessage<PointDto>, IComplemented
             { "{Search-terendah}", _lex.Search("terendah") },
             { "{Search-didapatkan}", _lex.Search("didapatkan") },
             { "{Answer.AverageScore}", Data.Answer.AverageScore.ToString() },
-            { "{Answer.Section}", Data.Answer.Section.ToString() }
+            { "{Answer.Section}", Data.Answer.Section.ToString().Humanize(LetterCasing.LowerCase) }
         };
     }
 
