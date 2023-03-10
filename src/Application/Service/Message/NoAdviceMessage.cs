@@ -7,7 +7,6 @@ namespace Questionnaire.Application.Service.Message;
 public class NoAdviceMessage : BaseMessage<AdviceDto>
 {
     private readonly ILexicalization _lex;
-    private readonly ITemplateProvider _templateProvider;
 
     public NoAdviceMessage(
         AdviceDto data,
@@ -15,7 +14,7 @@ public class NoAdviceMessage : BaseMessage<AdviceDto>
         ITemplateProvider templateProvider) : base(data)
     {
         _lex = lex;
-        _templateProvider = templateProvider;
+        Template = templateProvider.Template["no advice"];
     }
 
     private Dictionary<string, string> LoadReplacement()
@@ -28,7 +27,7 @@ public class NoAdviceMessage : BaseMessage<AdviceDto>
         var advice = Util.GetRandom(Data.Advice);
         var replacement = LoadReplacement();
         replacement.Add("{advice}", advice);
-        var sentence = Replace(_templateProvider.Template["no advice"], replacement);
+        var sentence = Replace(replacement);
         return sentence;
     }
 }

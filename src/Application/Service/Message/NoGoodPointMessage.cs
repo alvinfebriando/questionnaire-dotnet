@@ -8,7 +8,6 @@ namespace Questionnaire.Application.Service.Message;
 public class NoGoodPointMessage : BaseMessage<PointDto>, IComplemented
 {
     private readonly ILexicalization _lex;
-    private readonly ITemplateProvider _templateProvider;
 
     public NoGoodPointMessage(
         PointDto data,
@@ -16,7 +15,7 @@ public class NoGoodPointMessage : BaseMessage<PointDto>, IComplemented
         ITemplateProvider templateProvider) : base(data)
     {
         _lex = lex;
-        _templateProvider = templateProvider;
+        Template = templateProvider.Template["no good"];
         Complement.Add("");
         Complement.Add("");
     }
@@ -59,7 +58,7 @@ public class NoGoodPointMessage : BaseMessage<PointDto>, IComplemented
     public override string EntitySlotting()
     {
         var replacement = LoadReplacement();
-        var sentence = Replace(_templateProvider.Template["no good"], replacement);
+        var sentence = Replace(replacement);
         return sentence;
     }
 }

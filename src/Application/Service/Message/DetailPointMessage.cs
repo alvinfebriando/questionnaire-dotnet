@@ -8,7 +8,6 @@ namespace Questionnaire.Application.Service.Message;
 public class DetailPointMessage : BaseMessage<PointDto>, IComplemented
 {
     private readonly ILexicalization _lex;
-    private readonly ITemplateProvider _templateProvider;
 
     public DetailPointMessage(
         PointDto data,
@@ -16,7 +15,7 @@ public class DetailPointMessage : BaseMessage<PointDto>, IComplemented
         ITemplateProvider templateProvider) : base(data)
     {
         _lex = lex;
-        _templateProvider = templateProvider;
+        Template = templateProvider.Template["detail"];
         Complement.Add("");
         Complement.Add("");
     }
@@ -40,7 +39,7 @@ public class DetailPointMessage : BaseMessage<PointDto>, IComplemented
     public override string EntitySlotting()
     {
         var replacement = LoadReplacement();
-        var sentence = Replace(_templateProvider.Template["detail"], replacement);
+        var sentence = Replace(replacement);
         var s = Data.Answer.Answer.Select(
                 a => $"- {a.Question.Title}: {a.Score}")
             .ToList();
