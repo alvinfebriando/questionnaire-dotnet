@@ -31,7 +31,8 @@ public class AdviceMessage : BaseMessage<AdviceDto>
         var advice = Util.GetRandom(Data.Advice);
         var replacement = LoadReplacement();
         replacement.Add("{advice}", advice);
-        var sentence = Replace(_templateProvider.Template["advice1"], replacement);
+        Template = _templateProvider.Template["advice1"];
+        var sentence = Replace(replacement);
         return sentence;
     }
 
@@ -45,13 +46,15 @@ public class AdviceMessage : BaseMessage<AdviceDto>
         replacement.Add("{advice2}", advice2);
         if (advices.Count == 1)
         {
-            sentence = Replace(_templateProvider.Template["advice2"], replacement);
+            Template = _templateProvider.Template["advice2"];
+            sentence = Replace(replacement);
         }
         else
         {
             var advice3 = Util.GetRandom(advices[1]);
             replacement.Add("{advice3}", advice3);
-            sentence = Replace(_templateProvider.Template["advice3"], replacement);
+            Template = _templateProvider.Template["advice3"];
+            sentence = Replace(replacement);
         }
 
         return sentence;

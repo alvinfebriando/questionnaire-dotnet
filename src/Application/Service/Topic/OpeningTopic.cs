@@ -2,6 +2,7 @@
 using Questionnaire.Application.Service.Dto;
 using Questionnaire.Application.Service.Message;
 using Questionnaire.Domain.Entities;
+using Questionnaire.Domain.ValueObjects;
 
 namespace Questionnaire.Application.Service.Topic;
 
@@ -36,9 +37,9 @@ public class OpeningTopic : GenericTopic<OpeningDto>
         return new List<BaseMessage<OpeningDto>> { openingMsg };
     }
 
-    public override IList<string> Aggregate()
+    public override IList<Aggregated> Aggregate()
     {
         var order = Sort();
-        return order.Select(message => message.EntitySlotting()).ToList();
+        return order.Select(message => new Aggregated(message.Template, message.EntitySlotting())).ToList();
     }
 }

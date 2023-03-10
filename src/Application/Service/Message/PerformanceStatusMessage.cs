@@ -7,7 +7,6 @@ namespace Questionnaire.Application.Service.Message;
 public class PerformanceStatusMessage : BaseMessage<OverviewDto>, IComplemented
 {
     private readonly ILexicalization _lex;
-    private readonly ITemplateProvider _templateProvider;
 
     public PerformanceStatusMessage(
         OverviewDto data,
@@ -16,7 +15,7 @@ public class PerformanceStatusMessage : BaseMessage<OverviewDto>, IComplemented
         base(data)
     {
         _lex = lex;
-        _templateProvider = templateProvider;
+        Template = templateProvider.Template["performance"];
         Status = _lex.GetStatus(Data.AverageScore);
         Complement.Add(Data.Lecturer);
     }
@@ -42,7 +41,7 @@ public class PerformanceStatusMessage : BaseMessage<OverviewDto>, IComplemented
 
     public override string EntitySlotting()
     {
-        var sentence = Replace(_templateProvider.Template["performance"], LoadReplacement());
+        var sentence = Replace(LoadReplacement());
         return sentence;
     }
 }

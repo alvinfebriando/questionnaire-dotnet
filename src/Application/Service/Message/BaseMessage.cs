@@ -5,7 +5,7 @@ namespace Questionnaire.Application.Service.Message;
 public abstract class BaseMessage<T> where T : class
 {
     public readonly T Data;
-
+    public string Template { get; set; }
     protected BaseMessage(T data)
     {
         Data = data;
@@ -13,9 +13,9 @@ public abstract class BaseMessage<T> where T : class
 
     public abstract string EntitySlotting();
 
-    public string Replace(string template, Dictionary<string, string> map)
+    public string Replace(Dictionary<string, string> map)
     {
-        var replaced = template;
+        var replaced = Template;
         foreach (var key in map.Keys)
         {
             var pattern = $"{key}";

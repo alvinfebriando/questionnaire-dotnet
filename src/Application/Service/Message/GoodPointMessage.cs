@@ -50,7 +50,8 @@ public class GoodPointMessage : BaseMessage<PointDto>, IMultiEntitySlottingMessa
         switch (messages.Count)
         {
             case 2:
-                sentence = Replace(_templateProvider.Template["good2"], replacement);
+                Template = _templateProvider.Template["good2"];
+                sentence = Replace(replacement);
                 break;
             case >= 3:
                 var third = messages[2];
@@ -58,7 +59,8 @@ public class GoodPointMessage : BaseMessage<PointDto>, IMultiEntitySlottingMessa
                     "{third.Section}",
                     third.Section.ToString().Humanize(LetterCasing.LowerCase));
                 replacement.Add("{third.AverageScore}", third.AverageScore.ToString());
-                sentence = Replace(_templateProvider.Template["good3"], replacement);
+                Template = _templateProvider.Template["good3"];
+                sentence = Replace(replacement);
                 break;
         }
 
@@ -86,7 +88,8 @@ public class GoodPointMessage : BaseMessage<PointDto>, IMultiEntitySlottingMessa
     public override string EntitySlotting()
     {
         var replacement = LoadReplacement();
-        var sentence = Replace(_templateProvider.Template["good1"], replacement);
+        Template = _templateProvider.Template["good1"];
+        var sentence = Replace(replacement);
         return sentence;
     }
 }

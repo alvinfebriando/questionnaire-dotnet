@@ -22,7 +22,8 @@ public class Realization : IRealization
         var output = new List<string>();
         foreach (var topic in Topics)
         {
-            var sentences = topic.Aggregate();
+            var aggregates = topic.Aggregate();
+            IList<string> sentences = aggregates.Select(a => a.Result).ToList();
             sentences = FormatNewLine(sentences, topic.GetType());
             output.AddRange(sentences);
         }

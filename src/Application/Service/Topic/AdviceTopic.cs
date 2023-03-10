@@ -2,6 +2,7 @@
 using Questionnaire.Application.Service.Dto;
 using Questionnaire.Application.Service.Message;
 using Questionnaire.Domain.Entities;
+using Questionnaire.Domain.ValueObjects;
 
 namespace Questionnaire.Application.Service.Topic;
 
@@ -46,23 +47,24 @@ public class AdviceTopic : GenericTopic<AdviceDto>
         return messages;
     }
 
-    public override IList<string> Aggregate()
+    public override IList<Aggregated> Aggregate()
     {
         var order = Sort();
-        var output = new List<string>();
+        var output = new List<Aggregated>();
+        var s = "";
         if (order.Count <= 1)
         {
-            var s = order[0].EntitySlotting();
-            output.Add(s);
+            s = order[0].EntitySlotting();
         }
         else
         {
             var advices = order.Select(m => m.Data.Advice)
                 .Skip(1)
                 .ToList();
-            var s = ((AdviceMessage)order[0]).EntitySlotting(advices);
-            output.Add(s);
+            s = ((AdviceMessage)order[0]).EntitySlotting(advices);
         }
+
+        output.Add(new Aggregated(order[0].Template, s));
 
         return output;
     }

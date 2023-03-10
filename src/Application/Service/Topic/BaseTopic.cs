@@ -1,4 +1,5 @@
 ﻿using Questionnaire.Domain.Entities;
+using Questionnaire.Domain.ValueObjects;
 
 namespace Questionnaire.Application.Service.Topic;
 
@@ -12,5 +13,17 @@ public abstract class BaseTopic
 
     public Content Content { get; set; }
     public Structure Structure { get; set; }
-    public abstract IList<string> Aggregate();
+    public abstract IList<Aggregated> Aggregate();
+
+    public IEnumerable<BleuScoreContainer> CalculateBleuScore()
+    {
+        var aggregates = Aggregate();
+        var bleu = new BLEU.BleuScore();
+        var output = aggregates.Select(
+            a => new BleuScoreContainer(
+                a.Template,
+                a.Result,
+                bleu.Score(new List<string> { a.Template }, a.Result)));
+        return output;
+    }
 }

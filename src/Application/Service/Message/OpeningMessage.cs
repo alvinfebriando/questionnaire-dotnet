@@ -6,8 +6,6 @@ namespace Questionnaire.Application.Service.Message;
 public class OpeningMessage : BaseMessage<OpeningDto>
 {
     private readonly ILexicalization _lex;
-    private readonly Dictionary<string, string> _replacement;
-    private readonly ITemplateProvider _templateProvider;
 
     public OpeningMessage(
         OpeningDto data,
@@ -15,12 +13,12 @@ public class OpeningMessage : BaseMessage<OpeningDto>
         ITemplateProvider templateProvider) : base(data)
     {
         _lex = lex;
-        _templateProvider = templateProvider;
+        Template = templateProvider.Template["opening"];
     }
 
     public override string EntitySlotting()
     {
-        var sentence = Replace(_templateProvider.Template["opening"], LoadReplacement());
+        var sentence = Replace(LoadReplacement());
         return sentence;
     }
 

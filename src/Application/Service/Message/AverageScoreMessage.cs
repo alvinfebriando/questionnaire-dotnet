@@ -7,7 +7,6 @@ namespace Questionnaire.Application.Service.Message;
 public class AverageScoreMessage : BaseMessage<OverviewDto>, IComplemented
 {
     private readonly ILexicalization _lex;
-    private readonly ITemplateProvider _templateProvider;
 
     public AverageScoreMessage(
         OverviewDto data,
@@ -16,7 +15,7 @@ public class AverageScoreMessage : BaseMessage<OverviewDto>, IComplemented
         base(data)
     {
         _lex = lex;
-        _templateProvider = templateProvider;
+        Template = templateProvider.Template["average"];
         Complement.Add("");
         Complement.Add(Data.Lecturer);
     }
@@ -52,7 +51,7 @@ public class AverageScoreMessage : BaseMessage<OverviewDto>, IComplemented
 
     public override string EntitySlotting()
     {
-        var sentence = Replace(_templateProvider.Template["average"], LoadReplacement());
+        var sentence = Replace( LoadReplacement());
         return sentence;
     }
 }
