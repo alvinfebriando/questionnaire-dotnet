@@ -37,7 +37,7 @@ public class OverviewTopic : GenericTopic<OverviewDto>
             : new List<BaseMessage<OverviewDto>> { performanceMsg, averageScoreMsg };
     }
 
-    public override IList<string> Aggregate()
+    public override IList<Aggregated> Aggregate()
     {
         var order = Sort();
         if (Structure.Get(1) == "score")
@@ -50,6 +50,6 @@ public class OverviewTopic : GenericTopic<OverviewDto>
             ((IComplemented)order[1]).EmbedComplement(new Option("second"));
         }
 
-        return order.Select(message => message.EntitySlotting()).ToList();
+        return order.Select(message => new Aggregated(message.Template, message.EntitySlotting())).ToList();
     }
 }

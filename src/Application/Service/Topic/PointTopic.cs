@@ -50,24 +50,25 @@ public class PointTopic : GenericTopic<PointDto>
         return order;
     }
 
-    public override IList<string> Aggregate()
+    public override IList<Aggregated> Aggregate()
     {
         var order = Sort();
-        var output = new List<string>();
+        var output = new List<Aggregated>();
         if (IsGnG())
         {
+            var s = "";
             if (GoodPoints.Count > 1)
             {
                 var message = (IMultiEntitySlottingMessage)order[0];
                 var averagedAnswers = GoodPoints.Select(p => p.Data.Answer).ToList();
-                var s = message.EntitySlotting(averagedAnswers);
-                output.Add(s);
+                s = message.EntitySlotting(averagedAnswers);
             }
             else
             {
-                var s = order[0].EntitySlotting();
-                output.Add(s);
+                s = order[0].EntitySlotting();
             }
+
+            output.Add(new Aggregated(order[0].Template, s));
 
             ((IComplemented)order[1]).EmbedComplement(new Option(Structure.Get(3)));
 
@@ -75,29 +76,30 @@ public class PointTopic : GenericTopic<PointDto>
             {
                 var message = (IMultiEntitySlottingMessage)order[1];
                 var averagedAnswers = BadPoints.Select(p => p.Data.Answer).ToList();
-                var s = message.EntitySlotting(averagedAnswers);
-                output.Add(s);
+                s = message.EntitySlotting(averagedAnswers);
             }
             else
             {
-                var s = order[1].EntitySlotting();
-                output.Add(s);
+                s = order[1].EntitySlotting();
             }
+
+            output.Add(new Aggregated(order[1].Template, s));
         }
         else
         {
+            var s = "";
             if (BadPoints.Count > 1)
             {
                 var message = (IMultiEntitySlottingMessage)order[0];
                 var averagedAnswers = BadPoints.Select(p => p.Data.Answer).ToList();
-                var s = message.EntitySlotting(averagedAnswers);
-                output.Add(s);
+                s = message.EntitySlotting(averagedAnswers);
             }
             else
             {
-                var s = order[0].EntitySlotting();
-                output.Add(s);
+                s = order[0].EntitySlotting();
             }
+
+            output.Add(new Aggregated(order[0].Template, s));
 
             ((IComplemented)order[1]).EmbedComplement(new Option(Structure.Get(3)));
 
@@ -105,22 +107,22 @@ public class PointTopic : GenericTopic<PointDto>
             {
                 var message = (IMultiEntitySlottingMessage)order[1];
                 var averagedAnswers = GoodPoints.Select(p => p.Data.Answer).ToList();
-                var s = message.EntitySlotting(averagedAnswers);
-                output.Add(s);
+                s = message.EntitySlotting(averagedAnswers);
             }
             else
             {
-                var s = order[1].EntitySlotting();
-                output.Add(s);
+                s = order[1].EntitySlotting();
             }
+
+            output.Add(new Aggregated(order[1].Template, s));
         }
 
         ((IComplemented)order[2]).EmbedComplement(new Option("max"));
         ((IComplemented)order[3]).EmbedComplement(new Option("min"));
         var detail1 = order[2].EntitySlotting();
         var detail2 = order[3].EntitySlotting();
-        output.Add(detail1);
-        output.Add(detail2);
+        output.Add(new Aggregated(order[2].Template, detail1));
+        output.Add(new Aggregated(order[3].Template, detail2));
         return output;
     }
 
