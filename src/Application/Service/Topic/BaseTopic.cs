@@ -23,7 +23,7 @@ public abstract class BaseTopic
             a => new BleuScoreContainer(
                 a.Template,
                 a.Result,
-                bleu.Score(new List<string> { a.Template }, a.Result)));
+                bleu.RoundedScore(new List<string> { a.Template }, a.Result)));
         return output;
     }
 }
