@@ -27,7 +27,8 @@ public class OverviewTopicTests
             point);
         var structure = new Structure();
         var lex = Lexicalization.Create();
-        _sut = new OverviewTopic(content, structure, lex);
+        var tp = TemplateProvider.Create();
+        _sut = new OverviewTopic(content, structure, lex, tp);
     }
 
     [Fact]

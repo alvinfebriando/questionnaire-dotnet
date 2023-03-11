@@ -27,7 +27,8 @@ public class OpeningTopicTests
             point);
         var structure = new Structure();
         var lex = Lexicalization.Create();
-        _sut = new OpeningTopic(content, structure, lex);
+        var tp = TemplateProvider.Create();
+        _sut = new OpeningTopic(content, structure, lex, tp);
     }
 
     [Fact]
@@ -52,7 +53,7 @@ public class OpeningTopicTests
         // Act
         var s = _sut.Aggregate();
         // Assert
-        Assert.Contains(expected, s[0]);
-        Assert.Contains(expected2, s[0]);
+        Assert.Contains(expected, s[0].Result);
+        Assert.Contains(expected2, s[0].Result);
     }
 }

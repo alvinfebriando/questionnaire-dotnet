@@ -27,7 +27,8 @@ public class AdviceTopicTests
             point);
         var structure = new Structure();
         var lex = Lexicalization.Create();
-        _sut = new AdviceTopic(content, structure, lex);
+        var tp = TemplateProvider.Create();
+        _sut = new AdviceTopic(content, structure, lex, tp);
     }
 
     [Fact]
@@ -123,7 +124,6 @@ public class AdviceTopicTests
         // Act
         var s = _sut.Aggregate();
         // Assert
-        _output.WriteLine(s[0]);
     }
 
     [Fact]
@@ -147,7 +147,6 @@ public class AdviceTopicTests
         // Act
         var s = _sut.Aggregate();
         // Assert
-        _output.WriteLine(s[0]);
     }
 
     [Fact]
@@ -173,7 +172,6 @@ public class AdviceTopicTests
         // Act
         var s = _sut.Aggregate();
         // Assert
-        _output.WriteLine(s[0]);
     }
 
     [Fact]
@@ -195,7 +193,7 @@ public class AdviceTopicTests
         // Act
         var s = _sut.Aggregate();
         // Assert
-        _output.WriteLine(s[0]);
+        _output.WriteLine(s[0].Result);
     }
 
     private static AveragedAnswer GenerateAveragedAnswer(string type, QuestionSection section)

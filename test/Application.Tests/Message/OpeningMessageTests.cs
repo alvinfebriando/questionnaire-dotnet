@@ -18,7 +18,8 @@ public class OpeningMessageTests
             "topik",
             "mahasiswa");
         var lex = Lexicalization.Create();
-        _sut = new OpeningMessage(dto, lex);
+        var tp = TemplateProvider.Create();
+        _sut = new OpeningMessage(dto, lex, tp);
     }
 
     [Fact]

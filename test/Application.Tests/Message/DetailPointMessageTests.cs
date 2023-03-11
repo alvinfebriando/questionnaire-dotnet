@@ -24,7 +24,8 @@ public class DetailPointMessageTests
         var averagedAnswer = new AveragedAnswer(QuestionSection.KedisiplinanWaktu, 4.1, answers);
         var dto = new PointDto("pak alvin", averagedAnswer);
         var lex = Lexicalization.Create();
-        _sut = new DetailPointMessage(dto, lex);
+        var tp = TemplateProvider.Create();
+        _sut = new DetailPointMessage(dto, lex, tp);
     }
 
     [Fact]

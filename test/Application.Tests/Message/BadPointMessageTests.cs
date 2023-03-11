@@ -26,7 +26,8 @@ public class BadPointMessageTests
         var averagedAnswer = new AveragedAnswer(QuestionSection.KedisiplinanWaktu, 1.3, answers);
         var dto = new PointDto("pak alvin", averagedAnswer);
         var lex = Lexicalization.Create();
-        _sut = new BadPointMessage(dto, lex);
+        var tp = TemplateProvider.Create();
+        _sut = new BadPointMessage(dto, lex, tp);
     }
 
 

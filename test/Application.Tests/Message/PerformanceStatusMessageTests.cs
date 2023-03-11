@@ -19,7 +19,8 @@ public class PerformanceStatusMessageTests
             13,
             6);
         var lex = Lexicalization.Create();
-        _sut = new PerformanceStatusMessage(overviewDto, lex);
+        var tp = TemplateProvider.Create();
+        _sut = new PerformanceStatusMessage(overviewDto, lex, tp);
     }
 
     [Fact]

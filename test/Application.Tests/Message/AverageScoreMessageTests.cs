@@ -19,7 +19,8 @@ public class AverageScoreMessageTests
             13,
             6);
         var lex = Lexicalization.Create();
-        _sut = new AverageScoreMessage(overviewDto, lex);
+        var tp = TemplateProvider.Create();
+        _sut = new AverageScoreMessage(overviewDto, lex, tp);
     }
 
     [Fact]

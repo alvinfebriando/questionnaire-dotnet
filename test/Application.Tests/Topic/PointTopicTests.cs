@@ -27,7 +27,8 @@ public class PointTopicTests
             point);
         var structure = new Structure();
         var lex = Lexicalization.Create();
-        _sut = new PointTopic(content, structure, lex);
+        var tp = TemplateProvider.Create();
+        _sut = new PointTopic(content, structure, lex, tp);
     }
 
     [Fact]
@@ -189,10 +190,6 @@ public class PointTopicTests
 
         // Assert
         Assert.Equal(expected, s.Count);
-        _output.WriteLine(s[0]);
-        _output.WriteLine(s[1]);
-        _output.WriteLine(s[2]);
-        _output.WriteLine(s[3]);
     }
 
     [Fact]
@@ -218,10 +215,6 @@ public class PointTopicTests
 
         // Assert
         Assert.Equal(expected, s.Count);
-        _output.WriteLine(s[0]);
-        _output.WriteLine(s[1]);
-        _output.WriteLine(s[2]);
-        _output.WriteLine(s[3]);
     }
 
     [Fact]
@@ -247,10 +240,6 @@ public class PointTopicTests
 
         // Assert
         Assert.Equal(expected, s.Count);
-        _output.WriteLine(s[0]);
-        _output.WriteLine(s[1]);
-        _output.WriteLine(s[2]);
-        _output.WriteLine(s[3]);
     }
 
     [Fact]
@@ -276,10 +265,6 @@ public class PointTopicTests
 
         // Assert
         Assert.Equal(expected, s.Count);
-        _output.WriteLine(s[0]);
-        _output.WriteLine(s[1]);
-        _output.WriteLine(s[2]);
-        _output.WriteLine(s[3]);
     }
 
     [Fact]
@@ -305,10 +290,6 @@ public class PointTopicTests
 
         // Assert
         Assert.Equal(expected, s.Count);
-        _output.WriteLine(s[0]);
-        _output.WriteLine(s[1]);
-        _output.WriteLine(s[2]);
-        _output.WriteLine(s[3]);
     }
 
     [Fact]
@@ -334,10 +315,6 @@ public class PointTopicTests
 
         // Assert
         Assert.Equal(expected, s.Count);
-        _output.WriteLine(s[0]);
-        _output.WriteLine(s[1]);
-        _output.WriteLine(s[2]);
-        _output.WriteLine(s[3]);
     }
 
     private static AveragedAnswer GenerateAveragedAnswer(string type, QuestionSection section)

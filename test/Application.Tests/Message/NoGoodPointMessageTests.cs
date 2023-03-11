@@ -24,7 +24,8 @@ public class NoGoodPointMessageTests
         var averagedAnswer = new AveragedAnswer(QuestionSection.TransparansiNilai, 3.1, answers);
         var dto = new PointDto("pak alvin", averagedAnswer);
         var lex = Lexicalization.Create();
-        _sut = new NoGoodPointMessage(dto, lex);
+        var tp = TemplateProvider.Create();
+        _sut = new NoGoodPointMessage(dto, lex, tp);
     }
 
     [Fact]
