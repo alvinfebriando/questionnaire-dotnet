@@ -58,7 +58,7 @@ public class NoBadPointMessage : BaseMessage<PointDto>, IComplemented
     public override string EntitySlotting()
     {
         var replacement = LoadReplacement();
-        var sentence = Replace( replacement);
+        var sentence = Replace(replacement);
         return sentence;
     }
 }

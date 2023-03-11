@@ -28,7 +28,11 @@ public class AdviceTopicTests
         var structure = new Structure();
         var lex = Lexicalization.Create();
         var tp = TemplateProvider.Create();
-        _sut = new AdviceTopic(content, structure, lex, tp);
+        _sut = new AdviceTopic(
+            content,
+            structure,
+            lex,
+            tp);
     }
 
     [Fact]

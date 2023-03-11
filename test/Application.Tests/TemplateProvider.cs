@@ -8,7 +8,7 @@ public static class TemplateProvider
     public static ITemplateProvider Create()
     {
         var templateProvider = new Mock<ITemplateProvider>();
-        
+
         return templateProvider.Object;
     }
 }

@@ -40,6 +40,7 @@ public class OpeningTopic : GenericTopic<OpeningDto>
     public override IList<Aggregated> Aggregate()
     {
         var order = Sort();
-        return order.Select(message => new Aggregated(message.Template, message.EntitySlotting())).ToList();
+        return order.Select(message => new Aggregated(message.Template, message.EntitySlotting()))
+            .ToList();
     }
 }

@@ -5,11 +5,13 @@ namespace Questionnaire.Application.Service.Message;
 public abstract class BaseMessage<T> where T : class
 {
     public readonly T Data;
-    public string Template { get; set; }
+
     protected BaseMessage(T data)
     {
         Data = data;
     }
+
+    public string Template { get; set; }
 
     public abstract string EntitySlotting();
 

@@ -9,9 +9,9 @@ namespace Questionnaire.Application.BleuScore.Queries;
 
 public class BleuQueryHandler : IRequestHandler<BleuQuery, BleuScoreResult>
 {
-    private readonly IQuestionProvider _questionProvider;
     private readonly IDocumentPlanning _documentPlanning;
     private readonly IMicroPlanning _microPlanning;
+    private readonly IQuestionProvider _questionProvider;
 
     public BleuQueryHandler(
         IQuestionProvider questionProvider,
@@ -48,10 +48,7 @@ public class BleuQueryHandler : IRequestHandler<BleuQuery, BleuScoreResult>
         var topics = _microPlanning.Create();
 
         var output = new List<BleuScoreContainer>();
-        foreach (var topic in topics)
-        {
-            output.AddRange(topic.CalculateBleuScore());
-        }
+        foreach (var topic in topics) output.AddRange(topic.CalculateBleuScore());
 
         return new BleuScoreResult(output);
     }

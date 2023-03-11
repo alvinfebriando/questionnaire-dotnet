@@ -89,7 +89,7 @@ public class BadPointMessage : BaseMessage<PointDto>, IMultiEntitySlottingMessag
     {
         var replacement = LoadReplacement();
         Template = _templateProvider.Template["bad1"];
-        var sentence = Replace( replacement);
+        var sentence = Replace(replacement);
         return sentence;
     }
 }

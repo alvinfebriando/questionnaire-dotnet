@@ -28,7 +28,11 @@ public class OpeningTopicTests
         var structure = new Structure();
         var lex = Lexicalization.Create();
         var tp = TemplateProvider.Create();
-        _sut = new OpeningTopic(content, structure, lex, tp);
+        _sut = new OpeningTopic(
+            content,
+            structure,
+            lex,
+            tp);
     }
 
     [Fact]

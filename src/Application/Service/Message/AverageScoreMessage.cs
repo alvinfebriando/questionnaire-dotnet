@@ -51,7 +51,7 @@ public class AverageScoreMessage : BaseMessage<OverviewDto>, IComplemented
 
     public override string EntitySlotting()
     {
-        var sentence = Replace( LoadReplacement());
+        var sentence = Replace(LoadReplacement());
         return sentence;
     }
 }
