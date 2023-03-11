@@ -5,16 +5,42 @@ namespace Questionnaire.Application.Tests;
 
 public static class Lexicalization
 {
+    private static readonly Dictionary<string, string> Lex =
+        new()
+        {
+            { "mendapat", "mendapat" },
+            { "menerima", "mendapat" },
+            { "didapatkan", "didapatkan" },
+            { "diterima", "didapatkan" },
+            { "nilai", "nilai" },
+            { "skor", "nilai" },
+            { "tertinggi", "tertinggi" },
+            { "paling tinggi", "tertinggi" },
+            { "terendah", "terendah" },
+            { "paling rendah", "terendah" },
+            { "meskipun demikian", "meskipun demikian" },
+            { "walaupun demikian", "meskipun demikian" },
+            { "namun", "namun" },
+            { "tetapi", "namun" },
+            { "serta", "serta" },
+            { "kemudian", "serta" },
+            { "lalu", "serta" },
+            { "untuk", "untuk" },
+            { "pada", "untuk" },
+            { "sedangkan", "sedangkan" },
+            { "aspek", "aspek" },
+            { "bagian", "aspek" }
+        };
+
     public static ILexicalization Create()
     {
         var lex = new Mock<ILexicalization>();
-        lex.Setup(l => l.Search("nilai")).Returns("nilai");
-        lex.Setup(l => l.Search("meskipun demikian")).Returns("meskipun demikian");
-        lex.Setup(l => l.Search("namun")).Returns("namun");
-        lex.Setup(l => l.Search("tertinggi")).Returns("tertinggi");
-        lex.Setup(l => l.Search("terendah")).Returns("terendah");
-        lex.Setup(l => l.Search("sedangkan")).Returns("sedangkan");
-        lex.Setup(l => l.Search("serta")).Returns("serta");
+        foreach (var key in Lex.Keys)
+        {
+            lex.Setup(l => l.Search(key)).Returns(Lex[key]);
+        }
+
+        lex.Setup(l => l.GetStatus(It.IsAny<double>())).Returns("status");
         return lex.Object;
     }
 }
