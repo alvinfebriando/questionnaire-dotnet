@@ -14,7 +14,7 @@ public class NoAdviceMessage : BaseMessage<AdviceDto>
         ITemplateProvider templateProvider) : base(data)
     {
         _lex = lex;
-        Template = templateProvider.Template["no advice"];
+        Template = templateProvider.Get("no advice");
     }
 
     private Dictionary<string, string> LoadReplacement()

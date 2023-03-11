@@ -15,7 +15,7 @@ public class NoBadPointMessage : BaseMessage<PointDto>, IComplemented
         ITemplateProvider templateProvider) : base(data)
     {
         _lex = lex;
-        Template = templateProvider.Template["no bad"];
+        Template = templateProvider.Get("no bad");
         Complement.Add("");
         Complement.Add("");
     }

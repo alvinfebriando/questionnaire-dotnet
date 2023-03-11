@@ -15,7 +15,7 @@ public class PerformanceStatusMessage : BaseMessage<OverviewDto>, IComplemented
         base(data)
     {
         _lex = lex;
-        Template = templateProvider.Template["performance"];
+        Template = templateProvider.Get("performance");
         Status = _lex.GetStatus(Data.AverageScore);
         Complement.Add(Data.Lecturer);
     }

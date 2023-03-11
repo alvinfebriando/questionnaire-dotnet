@@ -2,5 +2,10 @@
 
 public interface ITemplateProvider
 {
-    public Dictionary<string, string> Template { get; set; }
+    protected Dictionary<string, string> Template { get; set; }
+
+    public string Get(string key)
+    {
+        return Template[key];
+    }
 }

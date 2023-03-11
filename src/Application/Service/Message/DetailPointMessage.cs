@@ -15,7 +15,7 @@ public class DetailPointMessage : BaseMessage<PointDto>, IComplemented
         ITemplateProvider templateProvider) : base(data)
     {
         _lex = lex;
-        Template = templateProvider.Template["detail"];
+        Template = templateProvider.Get("detail");
         Complement.Add("");
         Complement.Add("");
     }

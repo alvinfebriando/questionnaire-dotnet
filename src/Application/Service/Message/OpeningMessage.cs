@@ -13,7 +13,7 @@ public class OpeningMessage : BaseMessage<OpeningDto>
         ITemplateProvider templateProvider) : base(data)
     {
         _lex = lex;
-        Template = templateProvider.Template["opening"];
+        Template = templateProvider.Get("opening");
     }
 
     public override string EntitySlotting()

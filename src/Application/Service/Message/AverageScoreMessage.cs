@@ -15,7 +15,7 @@ public class AverageScoreMessage : BaseMessage<OverviewDto>, IComplemented
         base(data)
     {
         _lex = lex;
-        Template = templateProvider.Template["average"];
+        Template = templateProvider.Get("average");
         Complement.Add("");
         Complement.Add(Data.Lecturer);
     }
