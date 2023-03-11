@@ -1,7 +1,7 @@
 ﻿using Moq;
 using Questionnaire.Application.Common.Interfaces;
 
-namespace Questionnaire.Application.Tests;
+namespace SharedKernel;
 
 public static class Lexicalization
 {

@@ -2,6 +2,7 @@
 using Questionnaire.Application.Service.Topic;
 using Questionnaire.Domain.Entities;
 using Questionnaire.Domain.ValueObjects;
+using SharedKernel;
 using Xunit.Abstractions;
 
 namespace Questionnaire.Application.Tests.Topic;

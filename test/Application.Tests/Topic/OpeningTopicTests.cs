@@ -1,6 +1,7 @@
 ﻿using Questionnaire.Application.Service.Message;
 using Questionnaire.Application.Service.Topic;
 using Questionnaire.Domain.Entities;
+using SharedKernel;
 using Xunit.Abstractions;
 
 namespace Questionnaire.Application.Tests.Topic;

@@ -3,6 +3,7 @@ using Questionnaire.Application.Service.Dto;
 using Questionnaire.Application.Service.Message;
 using Questionnaire.Domain.Entities;
 using Questionnaire.Domain.ValueObjects;
+using SharedKernel;
 using Xunit.Abstractions;
 
 namespace Questionnaire.Application.Tests.Message;
