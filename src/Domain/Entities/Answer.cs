@@ -1,11 +1,12 @@
 ﻿namespace Questionnaire.Domain.Entities;
 
-public class Answer
+public class Answer : BaseEntity
 {
-    public Answer(double score, Question question)
+    public Answer(Guid id, double score, Question question)
     {
         Score = score;
         Question = question;
+        Id = id;
     }
 
     public Question Question { get; set; }

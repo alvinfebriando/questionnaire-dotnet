@@ -38,7 +38,7 @@ var scores = new List<double>
     4.5
 };
 
-var answers = scores.Select((score, index) => new Answer(score, Data.Questions[index])).ToList();
+var answers = scores.Select((score, index) => new Answer(Guid.NewGuid() ,score, Data.Questions[index])).ToList();
 var averageScore = Preprocessing.CalculateAverageScore(answers);
 
 

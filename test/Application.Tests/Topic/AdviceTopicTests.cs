@@ -226,9 +226,9 @@ public class AdviceTopicTests
         }
 
         var question1 = new Question($"{section}-title1", section, $"{section}-advice1");
-        var answer1 = new Answer(score1, question1);
+        var answer1 = new Answer(Guid.NewGuid(), score1, question1);
         var question2 = new Question($"{section}-title2", section, $"{section}-advice2");
-        var answer2 = new Answer(score2, question2);
+        var answer2 = new Answer(Guid.NewGuid(),score2, question2);
         var answers = new List<Answer> { answer1, answer2 };
         var averageScore = (score1 + score2) / 2;
         averageScore = Math.Round(averageScore, 2);

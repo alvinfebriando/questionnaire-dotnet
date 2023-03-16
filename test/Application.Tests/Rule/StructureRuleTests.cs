@@ -43,9 +43,11 @@ public class StructureRuleTests
         // Arrange
         var p = new Point();
         var answer1 = new Answer(
+            Guid.NewGuid(),
             1.7,
             new Question("title1", QuestionSection.KedisiplinanWaktu, "advice1"));
         var answer2 = new Answer(
+            Guid.NewGuid(),
             1.7,
             new Question("title2", QuestionSection.KedisiplinanWaktu, "2"));
         var answers = new List<Answer> { answer1, answer2 };
@@ -73,9 +75,11 @@ public class StructureRuleTests
         // Arrange
         var p = new Point();
         var answer1 = new Answer(
+            Guid.NewGuid(),
             4.1,
             new Question("title1", QuestionSection.KedisiplinanWaktu, "advice1"));
         var answer2 = new Answer(
+            Guid.NewGuid(),
             4.1,
             new Question("title2", QuestionSection.KedisiplinanWaktu, "advice2"));
         var answers = new List<Answer> { answer1, answer2 };
@@ -103,15 +107,19 @@ public class StructureRuleTests
         // Arrange
         var p = new Point();
         var answer1 = new Answer(
+            Guid.NewGuid(),
             4.1,
             new Question("title1", QuestionSection.KedisiplinanWaktu, "advice1"));
         var answer2 = new Answer(
+            Guid.NewGuid(),
             4.1,
             new Question("title2", QuestionSection.KedisiplinanWaktu, "advice2"));
         var answer3 = new Answer(
+            Guid.NewGuid(),
             1.1,
             new Question("title3", QuestionSection.KedisiplinanWaktu, "advice3"));
         var answer4 = new Answer(
+            Guid.NewGuid(),
             1.1,
             new Question("title4", QuestionSection.KedisiplinanWaktu, "advice4"));
         var answers1 = new List<Answer> { answer1, answer2 };

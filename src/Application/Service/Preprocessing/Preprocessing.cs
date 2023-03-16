@@ -17,7 +17,7 @@ public static class Preprocessing
     {
         var question = await questionRepository.GetById(Guid.Empty);
         return answers
-            .Select((score, index) => new Answer(score, question))
+            .Select((score, index) => new Answer(Guid.NewGuid(), score, question))
             .ToList();
     }
 }

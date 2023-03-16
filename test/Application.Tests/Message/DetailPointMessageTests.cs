@@ -16,9 +16,11 @@ public class DetailPointMessageTests
     {
         _output = output;
         var answer1 = new Answer(
+            Guid.NewGuid(),
             4.1,
             new Question("title1", QuestionSection.KedisiplinanWaktu, "advice1"));
         var answer2 = new Answer(
+            Guid.NewGuid(),
             4.1,
             new Question("title2", QuestionSection.KedisiplinanWaktu, "advice2"));
         var answers = new List<Answer> { answer1, answer2 };

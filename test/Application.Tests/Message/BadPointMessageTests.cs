@@ -18,9 +18,11 @@ public class BadPointMessageTests
         _output = output;
         _output = output;
         var answer1 = new Answer(
+            Guid.NewGuid(),
             1.3,
             new Question("title1", QuestionSection.KedisiplinanWaktu, "advice1"));
         var answer2 = new Answer(
+            Guid.NewGuid(),
             1.3,
             new Question("title2", QuestionSection.KedisiplinanWaktu, "advice2"));
         var answers = new List<Answer> { answer1, answer2 };
@@ -49,18 +51,22 @@ public class BadPointMessageTests
     {
         // Arrange
         var answer1 = new Answer(
+            Guid.NewGuid(),
             4.1,
             new Question("title1", QuestionSection.KedisiplinanWaktu, "advice1"));
         var answer2 = new Answer(
+            Guid.NewGuid(),
             4.1,
             new Question("title2", QuestionSection.KedisiplinanWaktu, "advice2"));
         var answers = new List<Answer> { answer1, answer2 };
         var averagedAnswer1 = new AveragedAnswer(QuestionSection.TransparansiNilai, 4.1, answers);
 
         var answer3 = new Answer(
+            Guid.NewGuid(),
             4.1,
             new Question("title1", QuestionSection.TransparansiNilai, "advice3"));
         var answer4 = new Answer(
+            Guid.NewGuid(),
             4.1,
             new Question("title2", QuestionSection.TransparansiNilai, "advice4"));
         var answers2 = new List<Answer> { answer3, answer4 };
@@ -81,9 +87,11 @@ public class BadPointMessageTests
     {
         // Arrange
         var answer1 = new Answer(
+            Guid.NewGuid(),
             4.1,
             new Question("title1", QuestionSection.PenggunaanElearning, "advice1"));
         var answer2 = new Answer(
+            Guid.NewGuid(),
             4.1,
             new Question("title2", QuestionSection.PenggunaanElearning, "advice2"));
         var answers = new List<Answer> { answer1, answer2 };
