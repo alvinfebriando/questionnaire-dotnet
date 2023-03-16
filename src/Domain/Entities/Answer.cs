@@ -9,6 +9,11 @@ public class Answer : BaseEntity
         Id = id;
     }
 
+    public Answer()
+    {
+        
+    }
+
     public Question Question { get; set; }
     public double Score { get; set; }
 }
