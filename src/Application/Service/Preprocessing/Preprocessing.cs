@@ -1,5 +1,6 @@
 ﻿using Questionnaire.Application.Common.Interfaces;
 using Questionnaire.Domain.Entities;
+using Questionnaire.Domain.ValueObjects;
 
 namespace Questionnaire.Application.Service.Preprocessing;
 
@@ -13,11 +14,14 @@ public static class Preprocessing
 
     public static async Task<IEnumerable<Answer>> Convert(
         IQuestionRepository questionRepository,
-        IEnumerable<double> answers)
+        IEnumerable<AnswerScore> answers)
     {
-        var question = await questionRepository.GetById(Guid.Empty);
-        return answers
-            .Select((score, index) => new Answer(Guid.NewGuid(), score, question))
-            .ToList();
+        var output = new List<Answer>();
+        foreach (var answer in answers)
+        {
+            output.Add(new Answer(Guid.NewGuid(), answer.Score, await questionRepository.GetById(answer.QuestionId)));
+        }
+
+        return output;
     }
 }

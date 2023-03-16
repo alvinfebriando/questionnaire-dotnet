@@ -9,4 +9,6 @@ public record SurveyRequest(
     double Score,
     int QuestionCount,
     int AspectCount,
-    List<double> Answers);
+    List<AnswerScore> Answers);
+    
+    public record AnswerScore(Guid QuestionId, double Score);

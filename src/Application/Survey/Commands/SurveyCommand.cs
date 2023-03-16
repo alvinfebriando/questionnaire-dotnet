@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Questionnaire.Domain.ValueObjects;
 
 namespace Questionnaire.Application.Survey.Commands;
 
@@ -10,4 +11,4 @@ public record SurveyCommand(
     string Lecturer,
     int QuestionCount,
     int AspectCount,
-    IList<double> Answers) : IRequest<string>;
+    IList<AnswerScore> Answers) : IRequest<string>;

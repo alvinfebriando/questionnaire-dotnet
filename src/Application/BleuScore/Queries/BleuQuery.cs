@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Questionnaire.Domain.ValueObjects;
 
 namespace Questionnaire.Application.BleuScore.Queries;
 
@@ -10,4 +11,4 @@ public record BleuQuery(
     string Lecturer,
     int QuestionCount,
     int AspectCount,
-    IList<double> Answers) : IRequest<BleuScoreResult>;
+    IList<AnswerScore> Answers) : IRequest<BleuScoreResult>;
