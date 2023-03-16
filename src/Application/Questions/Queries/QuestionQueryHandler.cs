@@ -18,6 +18,6 @@ public class QuestionQueryHandler : IRequestHandler<QuestionQuery, QuestionResul
     {
         await Task.CompletedTask;
         var questions = await _questionRepository.All();
-        return new QuestionResult(questions.Select(q=>q.Title));
+        return new QuestionResult(questions.Select(q => new QuestionData(q.Id, q.Title)));
     }
 }

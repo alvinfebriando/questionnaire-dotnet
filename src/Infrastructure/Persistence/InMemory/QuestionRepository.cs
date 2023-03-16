@@ -1,8 +1,7 @@
 ﻿using Questionnaire.Application.Common.Interfaces;
 using Questionnaire.Domain.Entities;
-using Questionnaire.Infrastructure.Persistence.InMemory;
 
-namespace Questionnaire.Infrastructure;
+namespace Questionnaire.Infrastructure.Persistence.InMemory;
 
 public class QuestionRepository : GenericRepository<Question>, IQuestionRepository
 {
