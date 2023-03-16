@@ -11,12 +11,13 @@ public static class Preprocessing
         return Math.Round(enumerable.Select(x => x.Score).Average(), 2);
     }
 
-    public static IEnumerable<Answer> Convert(
+    public static async Task<IEnumerable<Answer>> Convert(
         IQuestionRepository questionRepository,
         IEnumerable<double> answers)
     {
+        var question = await questionRepository.GetById(Guid.Empty);
         return answers
-            .Select((score, index) => new Answer(score, questionRepository.Questions[index]))
+            .Select((score, index) => new Answer(score, question))
             .ToList();
     }
 }

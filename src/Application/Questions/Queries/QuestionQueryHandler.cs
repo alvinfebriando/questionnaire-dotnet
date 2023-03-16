@@ -17,6 +17,7 @@ public class QuestionQueryHandler : IRequestHandler<QuestionQuery, QuestionResul
         CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
-        return new QuestionResult(_questionRepository.Questions.Select(q => q.Title));
+        var questions = await _questionRepository.All();
+        return new QuestionResult(questions.Select(q=>q.Title));
     }
 }

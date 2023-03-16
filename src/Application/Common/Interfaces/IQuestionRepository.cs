@@ -2,7 +2,6 @@
 
 namespace Questionnaire.Application.Common.Interfaces;
 
-public interface IQuestionRepository
+public interface IQuestionRepository : IGenericRepository<Question>
 {
-    public IList<Question> Questions { get; set; }
 }

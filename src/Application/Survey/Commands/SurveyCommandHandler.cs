@@ -31,7 +31,7 @@ public class SurveyCommandHandler : IRequestHandler<SurveyCommand, string>
         CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
-        var answers = Preprocessing.Convert(_questionRepository, request.Answers).ToList();
+        var answers = (await Preprocessing.Convert(_questionRepository, request.Answers)).ToList();
         var averageScore = Preprocessing.CalculateAverageScore(answers);
 
         var content = _documentPlanning.DetermineContent(
