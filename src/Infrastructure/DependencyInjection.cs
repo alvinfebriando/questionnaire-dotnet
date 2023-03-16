@@ -14,7 +14,7 @@ public static class DependencyInjection
         IConfiguration config)
     {
         services.AddScoped<ILexicalization, Lexicalization>();
-        services.AddSingleton<IQuestionRepository, QuestionRepository>();
+        services.AddScoped<IQuestionRepository, Persistence.Postgres.QuestionRepository>();
         services.AddScoped<IWeightProvider, WeightProvider>();
         services.AddScoped<ITemplateProvider, TemplateProvider>();
 
