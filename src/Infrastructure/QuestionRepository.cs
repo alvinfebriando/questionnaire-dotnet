@@ -3,7 +3,7 @@ using Questionnaire.Domain.Entities;
 
 namespace Questionnaire.Infrastructure;
 
-public class QuestionProvider : IQuestionProvider
+public class QuestionRepository : IQuestionRepository
 {
     public IList<Question> Questions { get; set; } = new List<Question>
     {

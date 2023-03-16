@@ -11,16 +11,16 @@ public class SurveyCommandHandler : IRequestHandler<SurveyCommand, string>
 {
     private readonly IDocumentPlanning _documentPlanning;
     private readonly IMicroPlanning _microPlanning;
-    private readonly IQuestionProvider _questionProvider;
+    private readonly IQuestionRepository _questionRepository;
     private readonly IRealization _realization;
 
     public SurveyCommandHandler(
-        IQuestionProvider questionProvider,
+        IQuestionRepository questionRepository,
         IDocumentPlanning documentPlanning,
         IMicroPlanning microPlanning,
         IRealization realization)
     {
-        _questionProvider = questionProvider;
+        _questionRepository = questionRepository;
         _documentPlanning = documentPlanning;
         _microPlanning = microPlanning;
         _realization = realization;
@@ -31,7 +31,7 @@ public class SurveyCommandHandler : IRequestHandler<SurveyCommand, string>
         CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
-        var answers = Preprocessing.Convert(_questionProvider, request.Answers).ToList();
+        var answers = Preprocessing.Convert(_questionRepository, request.Answers).ToList();
         var averageScore = Preprocessing.CalculateAverageScore(answers);
 
         var content = _documentPlanning.DetermineContent(

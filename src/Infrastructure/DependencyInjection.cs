@@ -9,7 +9,7 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
         services.AddScoped<ILexicalization, Lexicalization>();
-        services.AddScoped<IQuestionProvider, QuestionProvider>();
+        services.AddScoped<IQuestionRepository, QuestionRepository>();
         services.AddScoped<IWeightProvider, WeightProvider>();
         services.AddScoped<ITemplateProvider, TemplateProvider>();
         return services;

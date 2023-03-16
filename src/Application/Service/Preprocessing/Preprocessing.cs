@@ -12,11 +12,11 @@ public static class Preprocessing
     }
 
     public static IEnumerable<Answer> Convert(
-        IQuestionProvider questionProvider,
+        IQuestionRepository questionRepository,
         IEnumerable<double> answers)
     {
         return answers
-            .Select((score, index) => new Answer(score, questionProvider.Questions[index]))
+            .Select((score, index) => new Answer(score, questionRepository.Questions[index]))
             .ToList();
     }
 }

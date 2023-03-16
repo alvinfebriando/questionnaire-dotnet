@@ -2,7 +2,7 @@
 
 namespace Questionnaire.Application.Common.Interfaces;
 
-public interface IQuestionProvider
+public interface IQuestionRepository
 {
     public IList<Question> Questions { get; set; }
 }

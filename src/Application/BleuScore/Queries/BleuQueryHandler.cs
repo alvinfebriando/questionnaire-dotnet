@@ -11,14 +11,14 @@ public class BleuQueryHandler : IRequestHandler<BleuQuery, BleuScoreResult>
 {
     private readonly IDocumentPlanning _documentPlanning;
     private readonly IMicroPlanning _microPlanning;
-    private readonly IQuestionProvider _questionProvider;
+    private readonly IQuestionRepository _questionRepository;
 
     public BleuQueryHandler(
-        IQuestionProvider questionProvider,
+        IQuestionRepository questionRepository,
         IDocumentPlanning documentPlanning,
         IMicroPlanning microPlanning)
     {
-        _questionProvider = questionProvider;
+        _questionRepository = questionRepository;
         _documentPlanning = documentPlanning;
         _microPlanning = microPlanning;
     }
@@ -29,7 +29,7 @@ public class BleuQueryHandler : IRequestHandler<BleuQuery, BleuScoreResult>
     {
         await Task.CompletedTask;
 
-        var answers = Preprocessing.Convert(_questionProvider, request.Answers).ToList();
+        var answers = Preprocessing.Convert(_questionRepository, request.Answers).ToList();
         var averageScore = Preprocessing.CalculateAverageScore(answers);
 
         var content = _documentPlanning.DetermineContent(
