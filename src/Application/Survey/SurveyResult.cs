@@ -3,6 +3,7 @@
 namespace Questionnaire.Application.Survey;
 
 public record SurveyResult(
+    Guid Id,
     string Place,
     DateOnly Date,
     string Subject,

@@ -19,6 +19,7 @@ public class GetSurveyQueryHandler : IRequestHandler<GetSurveyQuery, IEnumerable
         var result = await _unitOfWork.SurveyRepository.All();
         return result.Select(
             r => new SurveyResult(
+                r.Id,
                 r.Place,
                 r.Date,
                 r.Subject,

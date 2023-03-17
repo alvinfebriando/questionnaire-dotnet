@@ -3,6 +3,7 @@
 namespace Questionnaire.WebApi.Dto;
 
 public record SurveyResponse(
+    Guid Id,
     string Place,
     DateOnly Date,
     string Subject,
