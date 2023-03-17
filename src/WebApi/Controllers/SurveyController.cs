@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MapsterMapper;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Questionnaire.Application.Survey;
+using Questionnaire.Application.Survey.Commands;
+using Questionnaire.Application.Survey.Queries;
 using Questionnaire.WebApi.Dto;
 
 namespace Questionnaire.WebApi.Controllers;
@@ -7,10 +12,21 @@ namespace Questionnaire.WebApi.Controllers;
 [Route("api/[controller]")]
 public class SurveyController:ControllerBase
 {
-    [HttpGet]
-    public Task<IActionResult> Get()
+    private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
+
+    public SurveyController(IMediator mediator, IMapper mapper)
     {
-        throw new NotImplementedException();
+        _mediator = mediator;
+        _mapper = mapper;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Get()
+    {
+        var query = new GetSurveyQuery();
+        var result = await _mediator.Send(query);
+        return Ok(_mapper.Map<SurveyResponse>(result));
     }
 
     [HttpGet("{id:guid}")]
@@ -20,8 +36,10 @@ public class SurveyController:ControllerBase
     }
 
     [HttpPost]
-    public Task<IActionResult> Post([FromBody] SurveyRequest request)
+    public async Task<IActionResult> Post([FromBody] SurveyRequest request)
     {
-        throw new NotImplementedException();
+        var command = _mapper.Map<AddSurveyCommand>(request);
+        await _mediator.Send(command);
+        return new EmptyResult();
     }
 }
