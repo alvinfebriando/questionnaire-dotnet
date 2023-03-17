@@ -19,4 +19,5 @@ public class Question : BaseEntity
     public string Title { get; set; }
     public QuestionSection Section { get; set; }
     public string Advice { get; set; }
+    public ICollection<SurveyQuestion> SurveyQuestions { get; set; }
 }
