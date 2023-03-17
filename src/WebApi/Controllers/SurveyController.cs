@@ -31,9 +31,11 @@ public class SurveyController:ControllerBase
     }
 
     [HttpGet("{id:guid}")]
-    public Task<IActionResult> GetById(Guid id)
+    public async Task<IActionResult> GetById(Guid id)
     {
-        throw new NotImplementedException();
+        var query = new GetSurveyByIdQuery(id);
+        var result = await _mediator.Send(query);
+        return Ok(_mapper.Map<SurveyResponse>(result));
     }
 
     [HttpPost]

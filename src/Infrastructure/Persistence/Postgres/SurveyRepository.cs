@@ -16,4 +16,11 @@ public class SurveyRepository : GenericRepository<Survey>, ISurveyRepository
             .ThenInclude(sq => sq.Question)
             .ToListAsync();
     }
+
+    public override async Task<Survey> GetById(Guid id)
+    {
+        return await DbSet.Include(s => s.SurveyQuestions)
+            .ThenInclude(sq => sq.Question)
+            .FirstAsync(s=>s.Id==id);
+    }
 }
