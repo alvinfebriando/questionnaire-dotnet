@@ -5,41 +5,41 @@ namespace Questionnaire.Infrastructure.Persistence.Postgres;
 
 public class GenericRepository<T> : IGenericRepository<T> where T : class
 {
-    private readonly ApplicationDbContext _dbContext;
-    private readonly DbSet<T> _dbSet;
+    protected readonly ApplicationDbContext DbContext;
+    protected readonly DbSet<T> DbSet;
 
     public GenericRepository(ApplicationDbContext dbContext)
     {
-        _dbContext = dbContext;
-        _dbSet = _dbContext.Set<T>();
+        DbContext = dbContext;
+        DbSet = DbContext.Set<T>();
     }
 
-    public async Task<IEnumerable<T>> All()
+    public virtual async Task<IEnumerable<T>> All()
     {
-        return await _dbSet.ToListAsync();
+        return await DbSet.ToListAsync();
     }
 
-    public async Task<T> GetById(Guid id)
+    public virtual async Task<T> GetById(Guid id)
     {
-        return await _dbSet.FindAsync(id);
+        return await DbSet.FindAsync(id);
     }
 
-    public async Task Add(T entity)
+    public virtual async Task Add(T entity)
     {
-        _dbSet.Add(entity);
-        await _dbContext.SaveChangesAsync();
+        DbSet.Add(entity);
+        await DbContext.SaveChangesAsync();
     }
 
-    public async Task Delete(Guid id)
+    public virtual async Task Delete(Guid id)
     {
         var e = await GetById(id);
-        _dbSet.Remove(e);
-        await _dbContext.SaveChangesAsync();
+        DbSet.Remove(e);
+        await DbContext.SaveChangesAsync();
     }
 
-    public async Task Update(T entity)
+    public virtual async Task Update(T entity)
     {
-        _dbSet.Update(entity);
-        await _dbContext.SaveChangesAsync();
+        DbSet.Update(entity);
+        await DbContext.SaveChangesAsync();
     }
 }
