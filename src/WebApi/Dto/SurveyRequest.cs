@@ -10,4 +10,4 @@ public record SurveyRequest(
     string Lecturer,
     int QuestionCount,
     int AspectCount,
-    IEnumerable<Guid> QuestionIds);
+    IEnumerable<Guid> QuestionId);
