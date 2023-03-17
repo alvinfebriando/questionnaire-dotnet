@@ -5,11 +5,11 @@ namespace Questionnaire.Application.Questions.Queries;
 
 public class QuestionQueryHandler : IRequestHandler<QuestionQuery, QuestionResult>
 {
-    private readonly IQuestionRepository _questionRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public QuestionQueryHandler(IQuestionRepository questionRepository)
+    public QuestionQueryHandler(IUnitOfWork unitOfWork)
     {
-        _questionRepository = questionRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<QuestionResult> Handle(
@@ -17,7 +17,7 @@ public class QuestionQueryHandler : IRequestHandler<QuestionQuery, QuestionResul
         CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
-        var questions = await _questionRepository.All();
+        var questions = await _unitOfWork.QuestionRepository.All();
         return new QuestionResult(questions.Select(q => new QuestionData(q.Id, q.Title)));
     }
 }

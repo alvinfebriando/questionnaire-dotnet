@@ -5,11 +5,11 @@ namespace Questionnaire.Application.Survey.Commands;
 
 public class AddSurveyCommandHandler : IRequestHandler<AddSurveyCommand, Unit>
 {
-    private readonly ISurveyRepository _surveyRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public AddSurveyCommandHandler(ISurveyRepository surveyRepository)
+    public AddSurveyCommandHandler(IUnitOfWork unitOfWork)
     {
-        _surveyRepository = surveyRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Unit> Handle(AddSurveyCommand request, CancellationToken cancellationToken)
@@ -19,7 +19,7 @@ public class AddSurveyCommandHandler : IRequestHandler<AddSurveyCommand, Unit>
             Id=Guid.NewGuid(),
             
         };
-        await _surveyRepository.Add(survey);
+        await _unitOfWork.SurveyRepository.Add(survey);
         return Unit.Value;
     }
 }

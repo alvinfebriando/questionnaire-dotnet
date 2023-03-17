@@ -1,3 +1,3 @@
 ﻿namespace Questionnaire.Application.Survey;
 
-public record SurveyResult();
+public record SurveyResult(IEnumerable<Domain.Entities.Survey> Surveys);

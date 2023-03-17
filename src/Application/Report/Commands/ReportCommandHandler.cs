@@ -11,19 +11,19 @@ public class ReportCommandHandler : IRequestHandler<ReportCommand, string>
 {
     private readonly IDocumentPlanning _documentPlanning;
     private readonly IMicroPlanning _microPlanning;
-    private readonly IQuestionRepository _questionRepository;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IRealization _realization;
 
     public ReportCommandHandler(
-        IQuestionRepository questionRepository,
         IDocumentPlanning documentPlanning,
         IMicroPlanning microPlanning,
-        IRealization realization)
+        IRealization realization,
+        IUnitOfWork unitOfWork)
     {
-        _questionRepository = questionRepository;
         _documentPlanning = documentPlanning;
         _microPlanning = microPlanning;
         _realization = realization;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<string> Handle(
@@ -31,7 +31,7 @@ public class ReportCommandHandler : IRequestHandler<ReportCommand, string>
         CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
-        var answers = (await Preprocessing.Convert(_questionRepository, request.Answers)).ToList();
+        var answers = (await Preprocessing.Convert(_unitOfWork.QuestionRepository, request.Answers)).ToList();
         var averageScore = Preprocessing.CalculateAverageScore(answers);
 
         var content = _documentPlanning.DetermineContent(
