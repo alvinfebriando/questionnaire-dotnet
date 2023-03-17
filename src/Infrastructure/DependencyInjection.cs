@@ -15,6 +15,7 @@ public static class DependencyInjection
     {
         services.AddScoped<ILexicalization, Lexicalization>();
         services.AddScoped<IQuestionRepository, Persistence.Postgres.QuestionRepository>();
+        services.AddScoped<ISurveyRepository, SurveyRepository>();
         services.AddScoped<IWeightProvider, WeightProvider>();
         services.AddScoped<ITemplateProvider, TemplateProvider>();
 

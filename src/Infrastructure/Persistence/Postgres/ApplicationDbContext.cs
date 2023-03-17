@@ -7,6 +7,8 @@ public class ApplicationDbContext : DbContext
 {
     public virtual DbSet<Question> Questions { get; set; }
     public virtual DbSet<Answer> Answers { get; set; }
+    public virtual DbSet<Survey> Surveys { get; set; }
+    public virtual DbSet<SurveyQuestion> SurveyQuestions { get; set; }
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
@@ -18,8 +20,22 @@ public class ApplicationDbContext : DbContext
             .HasOne<Question>(a => a.Question)
             .WithMany();
 
+        modelBuilder.Entity<SurveyQuestion>()
+            .HasKey(sq => new { sq.SurveyId, sq.QuestionId });
+
+        modelBuilder.Entity<SurveyQuestion>()
+            .HasOne<Survey>(sq => sq.Survey)
+            .WithMany(s => s.SurveyQuestions)
+            .HasForeignKey(sq => sq.SurveyId);
+
+        modelBuilder.Entity<SurveyQuestion>()
+            .HasOne<Question>(sq => sq.Question)
+            .WithMany(q => q.SurveyQuestions)
+            .HasForeignKey(sq => sq.QuestionId);
+
         modelBuilder.Entity<Answer>().HasKey(a => a.Id);
         modelBuilder.Entity<Question>().HasKey(q => q.Id);
+        modelBuilder.Entity<Survey>().HasKey(s=>s.Id);
 
         modelBuilder.Entity<Question>().HasData(LoadQuestion());
     }
