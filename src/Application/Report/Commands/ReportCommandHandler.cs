@@ -5,16 +5,16 @@ using Questionnaire.Application.Service.MicroPlanning;
 using Questionnaire.Application.Service.Preprocessing;
 using Questionnaire.Application.Service.Realization;
 
-namespace Questionnaire.Application.Survey.Commands;
+namespace Questionnaire.Application.Report.Commands;
 
-public class SurveyCommandHandler : IRequestHandler<SurveyCommand, string>
+public class ReportCommandHandler : IRequestHandler<ReportCommand, string>
 {
     private readonly IDocumentPlanning _documentPlanning;
     private readonly IMicroPlanning _microPlanning;
     private readonly IQuestionRepository _questionRepository;
     private readonly IRealization _realization;
 
-    public SurveyCommandHandler(
+    public ReportCommandHandler(
         IQuestionRepository questionRepository,
         IDocumentPlanning documentPlanning,
         IMicroPlanning microPlanning,
@@ -27,7 +27,7 @@ public class SurveyCommandHandler : IRequestHandler<SurveyCommand, string>
     }
 
     public async Task<string> Handle(
-        SurveyCommand request,
+        ReportCommand request,
         CancellationToken cancellationToken)
     {
         await Task.CompletedTask;

@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Questionnaire.Domain.ValueObjects;
 
-namespace Questionnaire.Application.Survey.Commands;
+namespace Questionnaire.Application.Report.Commands;
 
-public record SurveyCommand(
+public record ReportCommand(
     string Place,
     DateOnly Date,
     string Subject,
