@@ -35,7 +35,7 @@ public class DetailPointMessageTests
     public void Lexicalization_NoArgument_ReturnEmbeddedString()
     {
         // Arrange
-        var expected = _sut.Data.Answer.Answer.First().Question.Title;
+        var expected = _sut.Data.Answer.Answer.First().SurveyQuestion.Title;
         // Act
         var s = _sut.EntitySlotting();
         // Assert

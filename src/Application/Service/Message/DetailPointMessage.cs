@@ -41,7 +41,7 @@ public class DetailPointMessage : BaseMessage<PointDto>, IComplemented
         var replacement = LoadReplacement();
         var sentence = Replace(replacement);
         var s = Data.Answer.Answer.Select(
-                a => $"- {a.Question.Title}: {a.Score}")
+                a => $"- {a.SurveyQuestion.Question.Title}: {a.Score}")
             .ToList();
         return sentence + string.Join("\n", s);
     }

@@ -19,7 +19,7 @@ public static class Preprocessing
         var output = new List<Answer>();
         foreach (var answer in answers)
         {
-            output.Add(new Answer(Guid.NewGuid(), answer.Score, await questionRepository.GetById(answer.QuestionId)));
+            // output.Add(new Answer(Guid.NewGuid(), answer.Score, await questionRepository.GetById(answer.QuestionId)));
         }
 
         return output;

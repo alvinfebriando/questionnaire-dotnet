@@ -2,10 +2,10 @@
 
 public class Answer : BaseEntity
 {
-    public Answer(Guid id, double score, Question question)
+    public Answer(Guid id, double score, SurveyQuestion surveyQuestion)
     {
         Score = score;
-        Question = question;
+        SurveyQuestion = surveyQuestion;
         Id = id;
     }
 
@@ -14,6 +14,6 @@ public class Answer : BaseEntity
         
     }
 
-    public Question Question { get; set; }
+    public SurveyQuestion SurveyQuestion { get; set; }
     public double Score { get; set; }
 }

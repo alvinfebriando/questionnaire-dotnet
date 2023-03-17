@@ -17,7 +17,7 @@ public class ApplicationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Answer>()
-            .HasOne<Question>(a => a.Question)
+            .HasOne<SurveyQuestion>(a => a.SurveyQuestion)
             .WithMany();
 
         modelBuilder.Entity<SurveyQuestion>()

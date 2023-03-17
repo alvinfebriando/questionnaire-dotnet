@@ -7,7 +7,7 @@ public class ContentRule : IContentRule
 {
     public Point Rule(IEnumerable<Answer> answers)
     {
-        var averagedAnswers = answers.GroupBy(a => a.Question.Section)
+        var averagedAnswers = answers.GroupBy(a => a.SurveyQuestion.Question.Section)
             .Select(
                 answer => new AveragedAnswer(
                     answer.Key,

@@ -28,7 +28,7 @@ public class AdviceTopic : GenericTopic<AdviceDto>
         var messages = new List<BaseMessage<AdviceDto>>();
         if (Structure.Get("no advice") > 0)
         {
-            var advices = Content.Point.Min.Answer.Select(a => a.Question.Advice).ToList();
+            var advices = Content.Point.Min.Answer.Select(a => a.SurveyQuestion.Question.Advice).ToList();
             var dto = new AdviceDto(Content.Lecturer, advices);
             var noAdviceMessage = new NoAdviceMessage(dto, _lex, _templateProvider);
             messages.Add(noAdviceMessage);
@@ -37,7 +37,7 @@ public class AdviceTopic : GenericTopic<AdviceDto>
         {
             foreach (var answers in Content.Point.Bad)
             {
-                var advices = answers.Answer.Select(a => a.Question.Advice).ToList();
+                var advices = answers.Answer.Select(a => a.SurveyQuestion.Question.Advice).ToList();
                 var dto = new AdviceDto(Content.Lecturer, advices);
                 var adviceMessage = new AdviceMessage(dto, _lex, _templateProvider);
                 messages.Add(adviceMessage);
