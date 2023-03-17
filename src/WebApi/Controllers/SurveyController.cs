@@ -26,7 +26,8 @@ public class SurveyController:ControllerBase
     {
         var query = new GetSurveyQuery();
         var result = await _mediator.Send(query);
-        return Ok(_mapper.Map<SurveyResponse>(result));
+        var response = result.Select(r => _mapper.Map<SurveyResponse>(r));
+        return Ok(response);
     }
 
     [HttpGet("{id:guid}")]

@@ -2,4 +2,12 @@
 
 namespace Questionnaire.WebApi.Dto;
 
-public record SurveyResponse(IEnumerable<Survey> Surveys);
+public record SurveyResponse(
+    string Place,
+    DateOnly Date,
+    string Subject,
+    string Respondent,
+    string Lecturer,
+    int QuestionCount,
+    int AspectCount,
+    ICollection<Question> Questions);
