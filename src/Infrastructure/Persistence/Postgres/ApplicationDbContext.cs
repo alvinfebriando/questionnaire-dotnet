@@ -30,7 +30,7 @@ public class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<SurveyQuestion>()
             .HasOne<Question>(sq => sq.Question)
-            .WithMany(q => q.SurveyQuestions)
+            .WithMany()
             .HasForeignKey(sq => sq.QuestionId);
 
         modelBuilder.Entity<Answer>().HasKey(a => a.Id);

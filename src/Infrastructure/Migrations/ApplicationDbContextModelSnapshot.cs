@@ -41,7 +41,7 @@ namespace Questionnaire.Infrastructure.Migrations
 
                     b.HasIndex("SurveyQuestionSurveyId", "SurveyQuestionQuestionId");
 
-                    b.ToTable("Answers");
+                    b.ToTable("Answers", (string)null);
                 });
 
             modelBuilder.Entity("Questionnaire.Domain.Entities.Question", b =>
@@ -63,7 +63,7 @@ namespace Questionnaire.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Questions");
+                    b.ToTable("Questions", (string)null);
 
                     b.HasData(
                         new
@@ -192,7 +192,7 @@ namespace Questionnaire.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Surveys");
+                    b.ToTable("Surveys", (string)null);
                 });
 
             modelBuilder.Entity("Questionnaire.Domain.Entities.SurveyQuestion", b =>
@@ -207,7 +207,7 @@ namespace Questionnaire.Infrastructure.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("SurveyQuestions");
+                    b.ToTable("SurveyQuestions", (string)null);
                 });
 
             modelBuilder.Entity("Questionnaire.Domain.Entities.Answer", b =>
