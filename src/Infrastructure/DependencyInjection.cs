@@ -18,6 +18,7 @@ public static class DependencyInjection
         services.AddScoped<ISurveyRepository, SurveyRepository>();
         services.AddScoped<IWeightProvider, WeightProvider>();
         services.AddScoped<ITemplateProvider, TemplateProvider>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         services.AddDbContext<ApplicationDbContext>(
             options => options.UseNpgsql(config.GetConnectionString("Default")));
