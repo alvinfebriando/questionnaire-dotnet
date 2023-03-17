@@ -3,7 +3,7 @@ using Questionnaire.Application.Common.Interfaces;
 
 namespace Questionnaire.Application.Questions.Queries;
 
-public class QuestionQueryHandler : IRequestHandler<QuestionQuery, QuestionResult>
+public class QuestionQueryHandler : IRequestHandler<QuestionQuery, IEnumerable<QuestionResult>>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -12,12 +12,12 @@ public class QuestionQueryHandler : IRequestHandler<QuestionQuery, QuestionResul
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<QuestionResult> Handle(
+    public async Task<IEnumerable<QuestionResult>> Handle(
         QuestionQuery request,
         CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
         var questions = await _unitOfWork.QuestionRepository.All();
-        return new QuestionResult(questions.Select(q => new QuestionData(q.Id, q.Title)));
+        return questions.Select(q => new QuestionResult(q.Id, q.Title));
     }
 }
