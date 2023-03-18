@@ -38,7 +38,7 @@ public class ApplicationDbContext : DbContext
             .Property(q => q.Section)
             .HasConversion(
                 v => v.ToString().Humanize(LetterCasing.LowerCase),
-                v => (QuestionSection)Enum.Parse(typeof(QuestionSection), v));
+                v => (QuestionSection)Enum.Parse(typeof(QuestionSection), v.Dehumanize()));
 
         modelBuilder.Entity<Answer>().HasKey(a => a.Id);
         modelBuilder.Entity<Question>().HasKey(q => q.Id);
