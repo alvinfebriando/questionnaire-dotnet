@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Humanizer;
+using Microsoft.EntityFrameworkCore;
 using Questionnaire.Domain.Entities;
 
 namespace Questionnaire.Infrastructure.Persistence.Postgres;
@@ -32,6 +33,12 @@ public class ApplicationDbContext : DbContext
             .HasOne<Question>(sq => sq.Question)
             .WithMany()
             .HasForeignKey(sq => sq.QuestionId);
+
+        modelBuilder.Entity<Question>()
+            .Property(q => q.Section)
+            .HasConversion(
+                v => v.ToString().Humanize(LetterCasing.LowerCase),
+                v => (QuestionSection)Enum.Parse(typeof(QuestionSection), v));
 
         modelBuilder.Entity<Answer>().HasKey(a => a.Id);
         modelBuilder.Entity<Question>().HasKey(q => q.Id);
