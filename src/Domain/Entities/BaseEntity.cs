@@ -1,6 +1,6 @@
 ﻿namespace Questionnaire.Domain.Entities;
 
-public class BaseEntity
+public abstract class BaseEntity
 {
     public Guid Id;
 }
