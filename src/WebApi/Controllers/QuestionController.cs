@@ -1,6 +1,8 @@
-﻿using MediatR;
+﻿using MapsterMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Questionnaire.Application.Questions.Queries;
+using Questionnaire.WebApi.Dto;
 
 namespace Questionnaire.WebApi.Controllers;
 
@@ -9,17 +11,20 @@ namespace Questionnaire.WebApi.Controllers;
 public class QuestionController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
-    public QuestionController(IMediator mediator)
+    public QuestionController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     [HttpGet]
     public async Task<ActionResult> Get()
     {
-        var query = new QuestionQuery();
+        var query = new GetAllQuestionQuery();
         var result = await _mediator.Send(query);
-        return Ok(result);
+        var response = _mapper.Map<AllQuestionResponse>(result);
+        return Ok(response);
     }
 }

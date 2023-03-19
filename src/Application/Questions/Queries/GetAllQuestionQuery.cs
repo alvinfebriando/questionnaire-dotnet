@@ -2,4 +2,4 @@
 
 namespace Questionnaire.Application.Questions.Queries;
 
-public record QuestionQuery : IRequest<IEnumerable<QuestionResult>>;
+public record GetAllQuestionQuery : IRequest<AllQuestionResult>;
