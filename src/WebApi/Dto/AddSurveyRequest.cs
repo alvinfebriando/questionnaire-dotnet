@@ -2,7 +2,7 @@
 
 namespace Questionnaire.WebApi.Dto;
 
-public record SurveyRequest(
+public record AddSurveyRequest(
     string Place,
     DateOnly Date,
     string Subject,

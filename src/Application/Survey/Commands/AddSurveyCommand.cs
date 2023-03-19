@@ -11,4 +11,4 @@ public record AddSurveyCommand(
     string Lecturer,
     int QuestionCount,
     int AspectCount,
-    ICollection<Guid> QuestionId) : IRequest<Unit>;
+    ICollection<Guid> QuestionId) : IRequest<SurveyResult>;

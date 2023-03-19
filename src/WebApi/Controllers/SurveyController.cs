@@ -39,10 +39,11 @@ public class SurveyController:ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] SurveyRequest request)
+    public async Task<IActionResult> Post([FromBody] AddSurveyRequest request)
     {
         var command = _mapper.Map<AddSurveyCommand>(request);
-        await _mediator.Send(command);
-        return new EmptyResult();
+        var result = await _mediator.Send(command);
+        var response = _mapper.Map<SurveyResponse>(result);
+        return Ok(response);
     }
 }

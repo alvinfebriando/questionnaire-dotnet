@@ -4,7 +4,7 @@ using Questionnaire.Domain.Entities;
 
 namespace Questionnaire.Application.Survey.Commands;
 
-public class AddSurveyCommandHandler : IRequestHandler<AddSurveyCommand, Unit>
+public class AddSurveyCommandHandler : IRequestHandler<AddSurveyCommand, SurveyResult>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -13,14 +13,13 @@ public class AddSurveyCommandHandler : IRequestHandler<AddSurveyCommand, Unit>
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Unit> Handle(AddSurveyCommand request, CancellationToken cancellationToken)
+    public async Task<SurveyResult> Handle(
+        AddSurveyCommand request,
+        CancellationToken cancellationToken)
     {
         var id = Guid.NewGuid();
-        var questionIds = request.QuestionId.Select(questionId => new SurveyQuestion
-        {
-            SurveyId = questionId,
-            QuestionId = questionId
-        });
+        var questionIds = request.QuestionId.Select(
+            questionId => new SurveyQuestion { SurveyId = questionId, QuestionId = questionId });
         var survey = new Domain.Entities.Survey
         {
             Id = id,
@@ -35,6 +34,17 @@ public class AddSurveyCommandHandler : IRequestHandler<AddSurveyCommand, Unit>
         };
         await _unitOfWork.SurveyRepository.Add(survey);
         await _unitOfWork.SaveChangesAsync();
-        return Unit.Value;
+        var _ = (await _unitOfWork.SurveyRepository.GetById(survey.Id)).SurveyQuestions.Select(
+            sq => sq.Question);
+        return new SurveyResult(
+            survey.Id,
+            survey.Place,
+            survey.Date,
+            survey.Subject,
+            survey.Respondent,
+            survey.Lecturer,
+            survey.QuestionCount,
+            survey.AspectCount,
+            survey.SurveyQuestions);
     }
 }
