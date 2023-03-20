@@ -34,7 +34,7 @@ public class GoodPointMessage : BaseMessage<PointDto>, IMultiEntitySlottingMessa
         Complement[1] = option.Description switch
         {
             "no bad" => "juga ",
-            _ => Complement[0]
+            _ => Complement[1]
         };
     }
 

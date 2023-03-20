@@ -33,7 +33,7 @@ public class NoBadPointMessage : BaseMessage<PointDto>, IComplemented
         Complement[1] = option.Description switch
         {
             "no bad" => "juga ",
-            _ => Complement[0]
+            _ => Complement[1]
         };
     }
 
