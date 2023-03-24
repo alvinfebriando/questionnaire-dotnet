@@ -23,7 +23,7 @@ public class AddAnswerCommandHandler : IRequestHandler<AddAnswerCommand, Unit>
                 SurveyId = answer.SurveyId, QuestionId = answer.QuestionId
             };
             _context.SurveyQuestions.Attach(surveyQuestion);
-            var a = new Answer(Guid.NewGuid(), answer.Score, surveyQuestion);
+            var a = new Answer{Score = answer.Score,SurveyQuestion = surveyQuestion};
             _context.Answers.Add(a);
         }
 

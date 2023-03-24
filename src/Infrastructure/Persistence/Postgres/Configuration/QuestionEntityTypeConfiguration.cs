@@ -10,7 +10,7 @@ public class QuestionEntityTypeConfiguration : IEntityTypeConfiguration<Question
     public void Configure(EntityTypeBuilder<Question> builder)
     {
         builder.HasKey(q => q.Id);
-        builder.Property(q => q.Id);
+        builder.Property(q => q.Id).ValueGeneratedOnAdd();
         builder
             .Property(q => q.Section)
             .HasConversion(

@@ -9,7 +9,7 @@ public class AnswerEntityTypeConfiguration : IEntityTypeConfiguration<Answer>
     public void Configure(EntityTypeBuilder<Answer> builder)
     {
         builder.HasKey(a => a.Id);
-        builder.Property(a => a.Id);
+        builder.Property(a => a.Id).ValueGeneratedOnAdd();
         builder
             .HasOne<SurveyQuestion>(a => a.SurveyQuestion)
             .WithMany();
