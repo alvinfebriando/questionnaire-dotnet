@@ -1,5 +1,6 @@
 ﻿namespace Questionnaire.WebApi.Dto;
 
+public record AllSurveyResponse(IEnumerable<SurveyResponse> Surveys);
 public record SurveyResponse(
     Guid Id,
     string Place,

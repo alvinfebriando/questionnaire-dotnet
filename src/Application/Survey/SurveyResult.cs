@@ -2,6 +2,7 @@
 
 namespace Questionnaire.Application.Survey;
 
+public record AllSurveyResult(IEnumerable<SurveyResult> Surveys);
 public record SurveyResult(
     Guid Id,
     string Place,
