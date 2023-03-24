@@ -12,8 +12,8 @@ using Questionnaire.Infrastructure.Persistence.Postgres;
 namespace Questionnaire.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230317140532_SeedQuestionDataWithFixedGuid")]
-    partial class SeedQuestionDataWithFixedGuid
+    [Migration("20230324050014_InitialMigrations")]
+    partial class InitialMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -56,8 +56,9 @@ namespace Questionnaire.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Section")
-                        .HasColumnType("integer");
+                    b.Property<string>("Section")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -72,91 +73,91 @@ namespace Questionnaire.Infrastructure.Migrations
                         {
                             Id = new Guid("218408d9-5277-4a87-85b0-49e4d58f562e"),
                             Advice = "dosen memberikan kesempatan bertanya di dalam kelas",
-                            Section = 1,
+                            Section = "kesempatan bertanya",
                             Title = "dosen memberikan kesempatan bertanya di dalam kelas?"
                         },
                         new
                         {
                             Id = new Guid("2345f1b9-68ea-47c0-a07c-308c96bb57f9"),
                             Advice = "dosen memberikan kesempatan bertanya di luar kelas",
-                            Section = 1,
+                            Section = "kesempatan bertanya",
                             Title = "dosen memberikan kesempatan bertanya di luar kelas?"
                         },
                         new
                         {
                             Id = new Guid("26a20919-c2a6-4d55-ba27-d1c9e7494803"),
                             Advice = "dosen memanfaatkan forum yang sudah tersedia",
-                            Section = 5,
+                            Section = "penggunaan elearning",
                             Title = "dosen menggunakan forum e-learning?"
                         },
                         new
                         {
                             Id = new Guid("5eaade91-6711-40f4-bc93-865c1f236e9f"),
                             Advice = "dosen memanfaatkan kuis yang sudah tersedia",
-                            Section = 5,
+                            Section = "penggunaan elearning",
                             Title = "dosen menggunakan kuis e-learning?"
                         },
                         new
                         {
                             Id = new Guid("92629cf6-7fe4-44fc-886e-96dc9fe7e46d"),
                             Advice = "dosen memanfaatkan konferensi yang sudah tersedia",
-                            Section = 5,
+                            Section = "penggunaan elearning",
                             Title = "dosen menggunakan konferensi video e-learning?"
                         },
                         new
                         {
                             Id = new Guid("b242aabb-2a9b-4f6e-b5b2-c3f599ca307e"),
                             Advice = "dosen memberikan nilai tugas secara terbuka",
-                            Section = 2,
+                            Section = "transparansi nilai",
                             Title = "dosen secara terbuka menyampaikan hasil tugas"
                         },
                         new
                         {
                             Id = new Guid("b69bc16e-ae97-471c-80db-6ef12b26638c"),
                             Advice = "dosen memberikan nilai kuis secara terbuka",
-                            Section = 2,
+                            Section = "transparansi nilai",
                             Title = "dosen secara terbuka menyampaikan hasil kuis"
                         },
                         new
                         {
                             Id = new Guid("c8d17dd4-ee70-4ab8-87d4-b5fff5b21e72"),
                             Advice = "dosen memberikan nilai uts dan uas secara terbuka",
-                            Section = 2,
+                            Section = "transparansi nilai",
                             Title = "dosen secara terbuka menyampaikan hasil uts dan uas"
                         },
                         new
                         {
                             Id = new Guid("d7434e14-1b4e-4d05-bc24-17c1fe75f4b9"),
                             Advice = "dosen hadir tepat waktu (maksimal 15 menit)",
-                            Section = 3,
+                            Section = "kedisiplinan waktu",
                             Title = "dosen hadir tepat waktu"
                         },
                         new
                         {
                             Id = new Guid("dade9ae9-02b1-410c-9048-da7ed520c459"),
                             Advice = "dosen memberikan perkuliahan sesuai dengan sesi yang sudah dialokasikan",
-                            Section = 3,
+                            Section = "kedisiplinan waktu",
                             Title = "perkuliahan dilaksanakan sesuai dengan alokasi waktu"
                         },
                         new
                         {
                             Id = new Guid("dfddc352-89d5-40dc-a428-1cccd3bb1925"),
                             Advice = "menyampaikan materi sesuai dengan kontrak kuliah",
-                            Section = 0,
+                            Section = "rencana kontrak kuliah",
                             Title = "materi yang disampaikan sudah sesuai dengan rpp dan rps?"
                         },
                         new
                         {
                             Id = new Guid("f0b09e3c-87d1-4c8a-9408-cb9ee5881552"),
                             Advice = "memberikan tugas sesuai dengan kontrak kuliah",
-                            Section = 0,
+                            Section = "rencana kontrak kuliah",
                             Title = "tugas yang diberikan sesuai dengan beban studi?"
                         },
                         new
                         {
                             Id = new Guid("fa5a6ef2-b376-4122-9f1e-591a29e1a2de"),
                             Advice = "mencari referensi terkait materi yang diajarkan",
-                            Section = 4,
+                            Section = "penguasaan materi",
                             Title = "dosen menguasai materi perkuliahan dengan baik?"
                         });
                 });
@@ -226,7 +227,7 @@ namespace Questionnaire.Infrastructure.Migrations
             modelBuilder.Entity("Questionnaire.Domain.Entities.SurveyQuestion", b =>
                 {
                     b.HasOne("Questionnaire.Domain.Entities.Question", "Question")
-                        .WithMany("SurveyQuestions")
+                        .WithMany()
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -240,11 +241,6 @@ namespace Questionnaire.Infrastructure.Migrations
                     b.Navigation("Question");
 
                     b.Navigation("Survey");
-                });
-
-            modelBuilder.Entity("Questionnaire.Domain.Entities.Question", b =>
-                {
-                    b.Navigation("SurveyQuestions");
                 });
 
             modelBuilder.Entity("Questionnaire.Domain.Entities.Survey", b =>
