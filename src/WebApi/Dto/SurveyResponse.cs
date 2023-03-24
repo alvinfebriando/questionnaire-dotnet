@@ -1,6 +1,4 @@
-﻿using Questionnaire.Domain.Entities;
-
-namespace Questionnaire.WebApi.Dto;
+﻿namespace Questionnaire.WebApi.Dto;
 
 public record SurveyResponse(
     Guid Id,
@@ -11,4 +9,4 @@ public record SurveyResponse(
     string Lecturer,
     int QuestionCount,
     int AspectCount,
-    ICollection<Question> Questions);
+    ICollection<QuestionResponse> Questions);
