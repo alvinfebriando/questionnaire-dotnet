@@ -1,10 +1,11 @@
 ﻿using Humanizer;
 using Microsoft.EntityFrameworkCore;
+using Questionnaire.Application.Data;
 using Questionnaire.Domain.Entities;
 
 namespace Questionnaire.Infrastructure.Persistence.Postgres;
 
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
     public virtual DbSet<Question> Questions { get; set; }
     public virtual DbSet<Answer> Answers { get; set; }
