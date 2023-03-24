@@ -1,22 +1,25 @@
 ﻿using MediatR;
-using Questionnaire.Application.Common.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Questionnaire.Application.Data;
 
 namespace Questionnaire.Application.Survey.Queries;
 
 public class GetSurveyByIdQueryHandler : IRequestHandler<GetSurveyByIdQuery, SurveyResult>
 {
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IApplicationDbContext _context;
 
-    public GetSurveyByIdQueryHandler(IUnitOfWork unitOfWork)
+    public GetSurveyByIdQueryHandler(IApplicationDbContext context)
     {
-        _unitOfWork = unitOfWork;
+        _context = context;
     }
 
     public async Task<SurveyResult> Handle(
         GetSurveyByIdQuery request,
         CancellationToken cancellationToken)
     {
-        var result = await _unitOfWork.SurveyRepository.GetById(request.Id);
+        var result = await _context.Surveys.Include(s => s.SurveyQuestions)
+            .ThenInclude(sq => sq.Question)
+            .FirstAsync(s => s.Id == request.Id, cancellationToken);
         return new SurveyResult(
             result.Id,
             result.Place,

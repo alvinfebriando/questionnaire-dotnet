@@ -1,16 +1,17 @@
 ﻿using MediatR;
-using Questionnaire.Application.Common.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Questionnaire.Application.Data;
 using Questionnaire.Domain.Entities;
 
 namespace Questionnaire.Application.Survey.Commands;
 
 public class AddSurveyCommandHandler : IRequestHandler<AddSurveyCommand, SurveyResult>
 {
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IApplicationDbContext _context;
 
-    public AddSurveyCommandHandler(IUnitOfWork unitOfWork)
+    public AddSurveyCommandHandler(IApplicationDbContext context)
     {
-        _unitOfWork = unitOfWork;
+        _context = context;
     }
 
     public async Task<SurveyResult> Handle(
@@ -32,10 +33,11 @@ public class AddSurveyCommandHandler : IRequestHandler<AddSurveyCommand, SurveyR
             Subject = request.Subject,
             SurveyQuestions = questionIds.ToList()
         };
-        await _unitOfWork.SurveyRepository.Add(survey);
-        await _unitOfWork.SaveChangesAsync();
-        var _ = (await _unitOfWork.SurveyRepository.GetById(survey.Id)).SurveyQuestions.Select(
-            sq => sq.Question);
+        _context.Surveys.Add(survey);
+        await _context.SaveChangesAsync(cancellationToken);
+        var _ = await _context.Surveys.Include(s => s.SurveyQuestions)
+            .ThenInclude(sq => sq.Question)
+            .FirstAsync(s => s.Id == id, cancellationToken);
         return new SurveyResult(
             survey.Id,
             survey.Place,

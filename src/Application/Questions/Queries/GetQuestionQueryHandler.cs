@@ -1,15 +1,16 @@
 ﻿using MediatR;
-using Questionnaire.Application.Common.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Questionnaire.Application.Data;
 
 namespace Questionnaire.Application.Questions.Queries;
 
 public class GetQuestionQueryHandler : IRequestHandler<GetAllQuestionQuery, AllQuestionResult>
 {
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IApplicationDbContext _context;
 
-    public GetQuestionQueryHandler(IUnitOfWork unitOfWork)
+    public GetQuestionQueryHandler(IApplicationDbContext context)
     {
-        _unitOfWork = unitOfWork;
+        _context = context;
     }
 
     public async Task<AllQuestionResult> Handle(
@@ -17,7 +18,7 @@ public class GetQuestionQueryHandler : IRequestHandler<GetAllQuestionQuery, AllQ
         CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
-        var questions = await _unitOfWork.QuestionRepository.All();
+        var questions = await _context.Questions.ToListAsync(cancellationToken);
         var questionResults = questions.Select(q => new QuestionResult(q.Id, q.Title));
         return new AllQuestionResult(questionResults);
     }

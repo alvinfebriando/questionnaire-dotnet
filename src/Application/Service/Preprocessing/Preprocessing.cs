@@ -1,4 +1,4 @@
-﻿using Questionnaire.Application.Common.Interfaces;
+﻿using Questionnaire.Application.Data;
 using Questionnaire.Domain.Entities;
 using Questionnaire.Domain.ValueObjects;
 
@@ -13,7 +13,7 @@ public static class Preprocessing
     }
 
     public static async Task<IEnumerable<Answer>> Convert(
-        IQuestionRepository questionRepository,
+        IApplicationDbContext context,
         IEnumerable<AnswerScore> answers)
     {
         var output = new List<Answer>();
@@ -22,7 +22,7 @@ public static class Preprocessing
             var sq = new SurveyQuestion
             {
                 QuestionId = answer.QuestionId,
-                Question = await questionRepository.GetById(answer.QuestionId)
+                Question = await context.Questions.FindAsync(answer.QuestionId)
             };
             output.Add(new Answer(Guid.NewGuid(), answer.Score, sq));
         }

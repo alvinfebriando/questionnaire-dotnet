@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Questionnaire.Application.Common.Interfaces;
+using Questionnaire.Application.Data;
 using Questionnaire.Application.Service.DocumentPlanning;
 using Questionnaire.Application.Service.MicroPlanning;
 using Questionnaire.Application.Service.Preprocessing;
@@ -9,18 +9,18 @@ namespace Questionnaire.Application.BleuScore.Queries;
 
 public class BleuQueryHandler : IRequestHandler<BleuQuery, BleuScoreResult>
 {
+    private readonly IApplicationDbContext _context;
     private readonly IDocumentPlanning _documentPlanning;
     private readonly IMicroPlanning _microPlanning;
-    private readonly IQuestionRepository _questionRepository;
 
     public BleuQueryHandler(
-        IQuestionRepository questionRepository,
         IDocumentPlanning documentPlanning,
-        IMicroPlanning microPlanning)
+        IMicroPlanning microPlanning,
+        IApplicationDbContext context)
     {
-        _questionRepository = questionRepository;
         _documentPlanning = documentPlanning;
         _microPlanning = microPlanning;
+        _context = context;
     }
 
     public async Task<BleuScoreResult> Handle(
@@ -29,7 +29,7 @@ public class BleuQueryHandler : IRequestHandler<BleuQuery, BleuScoreResult>
     {
         await Task.CompletedTask;
 
-        var answers = (await Preprocessing.Convert(_questionRepository, request.Answers)).ToList();
+        var answers = (await Preprocessing.Convert(_context, request.Answers)).ToList();
         var averageScore = Preprocessing.CalculateAverageScore(answers);
 
         var content = _documentPlanning.DetermineContent(

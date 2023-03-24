@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Questionnaire.Application.Common.Interfaces;
+using Questionnaire.Application.Data;
 using Questionnaire.Application.Service.DocumentPlanning;
 using Questionnaire.Application.Service.MicroPlanning;
 using Questionnaire.Application.Service.Preprocessing;
@@ -11,19 +11,19 @@ public class ReportCommandHandler : IRequestHandler<ReportCommand, string>
 {
     private readonly IDocumentPlanning _documentPlanning;
     private readonly IMicroPlanning _microPlanning;
-    private readonly IUnitOfWork _unitOfWork;
     private readonly IRealization _realization;
+    private readonly IApplicationDbContext _context;
 
     public ReportCommandHandler(
         IDocumentPlanning documentPlanning,
         IMicroPlanning microPlanning,
         IRealization realization,
-        IUnitOfWork unitOfWork)
+        IApplicationDbContext context)
     {
         _documentPlanning = documentPlanning;
         _microPlanning = microPlanning;
         _realization = realization;
-        _unitOfWork = unitOfWork;
+        _context = context;
     }
 
     public async Task<string> Handle(
@@ -31,7 +31,7 @@ public class ReportCommandHandler : IRequestHandler<ReportCommand, string>
         CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
-        var answers = (await Preprocessing.Convert(_unitOfWork.QuestionRepository, request.Answers)).ToList();
+        var answers = (await Preprocessing.Convert(_context, request.Answers)).ToList();
         var averageScore = Preprocessing.CalculateAverageScore(answers);
 
         var content = _documentPlanning.DetermineContent(
