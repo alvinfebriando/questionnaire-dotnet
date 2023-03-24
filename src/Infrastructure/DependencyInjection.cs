@@ -15,11 +15,8 @@ public static class DependencyInjection
         IConfiguration config)
     {
         services.AddScoped<ILexicalization, Lexicalization>();
-        services.AddScoped<IQuestionRepository, Persistence.Postgres.QuestionRepository>();
-        services.AddScoped<ISurveyRepository, SurveyRepository>();
         services.AddScoped<IWeightProvider, WeightProvider>();
         services.AddScoped<ITemplateProvider, TemplateProvider>();
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 
         services.AddDbContext<ApplicationDbContext>(
