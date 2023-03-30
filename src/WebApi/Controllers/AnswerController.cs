@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Questionnaire.Application.Answers.Commands;
+using Questionnaire.Application.Answers.Queries;
 using Questionnaire.WebApi.Dto;
 
 namespace Questionnaire.WebApi.Controllers;
@@ -17,6 +18,15 @@ public class AnswerController : ControllerBase
     {
         _mapper = mapper;
         _mediator = mediator;
+    }
+
+    [HttpGet("{surveyId:guid}")]
+    public async Task<IActionResult> Get(Guid surveyId)
+    {
+        var query = new GetAnswerBySurveyQuery(surveyId);
+        var result = await _mediator.Send(query);
+        var response = _mapper.Map<AllAnswerResponse>(result);
+        return Ok(response);
     }
 
     [HttpPost]
