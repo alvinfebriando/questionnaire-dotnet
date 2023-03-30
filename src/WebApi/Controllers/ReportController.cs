@@ -2,6 +2,7 @@ using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Questionnaire.Application.Report.Commands;
+using Questionnaire.Application.Report.Queries;
 using Questionnaire.WebApi.Dto;
 
 namespace Questionnaire.WebApi.Controllers;
@@ -25,5 +26,13 @@ public class ReportController : ControllerBase
         var command = _mapper.Map<ReportCommand>(request);
         var r = await _mediator.Send(command);
         return Ok(r);
+    }
+
+    [HttpGet("{surveyId:guid}")]
+    public async Task<IActionResult> Get(Guid surveyId)
+    {
+        var query = new GetReportQuery(surveyId);
+        var result = await _mediator.Send(query);
+        return Ok(result);
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Questionnaire.Application.Service.DocumentPlanning;
 using Questionnaire.Application.Service.MicroPlanning;
 using Questionnaire.Application.Service.Realization;
+using Questionnaire.Application.Service.Report;
 using Questionnaire.Application.Service.Rule;
 
 namespace Questionnaire.Application;
@@ -17,6 +18,7 @@ public static class DependencyInjection
         services.AddScoped<IDocumentPlanning, DocumentPlanning>();
         services.AddScoped<IMicroPlanning, MicroPlanning>();
         services.AddScoped<IRealization, Realization>();
+        services.AddScoped<IReport, Service.Report.Report>();
         return services;
     }
 }
