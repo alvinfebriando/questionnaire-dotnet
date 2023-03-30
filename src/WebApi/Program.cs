@@ -18,7 +18,7 @@ var app = builder.Build();
 {
     app.UseExceptionHandler("/error");
     app.UseCors();
-    app.UseHttpsRedirection();
+    // app.UseHttpsRedirection();
     app.UseAuthorization();
     app.MapControllers();
     app.Run();
