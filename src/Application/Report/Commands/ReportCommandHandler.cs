@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Questionnaire.Application.Data;
 using Questionnaire.Application.Service.DocumentPlanning;
 using Questionnaire.Application.Service.MicroPlanning;
@@ -31,7 +32,8 @@ public class ReportCommandHandler : IRequestHandler<ReportCommand, string>
         CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
-        var answers = (await Preprocessing.Convert(_context, request.Answers)).ToList();
+        var questions = await _context.Questions.ToListAsync(cancellationToken);
+        var answers = (await Preprocessing.Convert(questions, request.Answers)).ToList();
         var averageScore = Preprocessing.CalculateAverageScore(answers);
 
         var content = _documentPlanning.DetermineContent(

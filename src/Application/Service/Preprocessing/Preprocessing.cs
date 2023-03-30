@@ -13,7 +13,7 @@ public static class Preprocessing
     }
 
     public static async Task<IEnumerable<Answer>> Convert(
-        IApplicationDbContext context,
+        IEnumerable<Question> questions,
         IEnumerable<AnswerScore> answers)
     {
         var output = new List<Answer>();
@@ -22,7 +22,7 @@ public static class Preprocessing
             var sq = new SurveyQuestion
             {
                 QuestionId = answer.QuestionId,
-                Question = await context.Questions.FindAsync(answer.QuestionId)
+                Question = questions.First(q => q.Id == answer.QuestionId)
             };
             output.Add(new Answer(Guid.NewGuid(), answer.Score, sq));
         }
