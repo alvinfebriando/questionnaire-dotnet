@@ -8,7 +8,7 @@ using Questionnaire.Application.Service.Realization;
 
 namespace Questionnaire.Application.Report.Commands;
 
-public class ReportCommandHandler : IRequestHandler<ReportCommand, string>
+public class ReportCommandHandler : IRequestHandler<ReportCommand, ReportResult>
 {
     private readonly IDocumentPlanning _documentPlanning;
     private readonly IMicroPlanning _microPlanning;
@@ -33,7 +33,7 @@ public class ReportCommandHandler : IRequestHandler<ReportCommand, string>
     {
         await Task.CompletedTask;
         var questions = await _context.Questions.ToListAsync(cancellationToken);
-        var answers = (await Preprocessing.Convert(questions, request.Answers)).ToList();
+        var answers = Preprocessing.Convert(questions, request.Answers).ToList();
         var averageScore = Preprocessing.CalculateAverageScore(answers);
 
         var content = _documentPlanning.DetermineContent(

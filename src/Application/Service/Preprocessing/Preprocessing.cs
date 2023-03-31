@@ -12,7 +12,7 @@ public static class Preprocessing
         return Math.Round(enumerable.Select(x => x.Score).Average(), 2);
     }
 
-    public static async Task<IEnumerable<Answer>> Convert(
+    public static IEnumerable<Answer> Convert(
         IEnumerable<Question> questions,
         IEnumerable<AnswerScore> answers)
     {

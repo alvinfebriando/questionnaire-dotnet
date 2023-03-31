@@ -32,7 +32,7 @@ public class BleuQueryHandler : IRequestHandler<BleuQuery, BleuScoreResult>
 
         var questions = await _context.Questions.ToListAsync(cancellationToken);
 
-        var answers = (await Preprocessing.Convert(questions, request.Answers)).ToList();
+        var answers = Preprocessing.Convert(questions, request.Answers).ToList();
         var averageScore = Preprocessing.CalculateAverageScore(answers);
 
         var content = _documentPlanning.DetermineContent(
