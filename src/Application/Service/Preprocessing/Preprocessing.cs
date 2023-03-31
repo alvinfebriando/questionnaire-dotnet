@@ -29,4 +29,24 @@ public static class Preprocessing
 
         return output;
     }
+
+    public static IEnumerable<Answer> AverageOfEachQuestion(
+        IEnumerable<Answer> answers,
+        IEnumerable<Question> questions)
+    {
+        var groupAnswerByQuestion = answers
+            .GroupBy(a => a.SurveyQuestion.QuestionId)
+            .Select(
+                g => new { QuestionId = g.Key, Score = Math.Round(g.Average(a => a.Score), 2) });
+        var averagedScore = groupAnswerByQuestion
+            .Select(g => new AnswerScore(g.QuestionId, g.Score))
+            .ToList();
+        return (from score in averagedScore
+            let sq = new SurveyQuestion()
+            {
+                QuestionId = score.QuestionId,
+                Question = questions.First(q => q.Id == score.QuestionId)
+            }
+            select new Answer { Score = score.Score, SurveyQuestion = sq }).ToList();
+    }
 }

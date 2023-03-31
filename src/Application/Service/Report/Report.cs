@@ -27,15 +27,10 @@ public class Report : IReport
         IEnumerable<Answer> answers,
         IEnumerable<Question> questions)
     {
-        var groupedAnswer = answers
-            .GroupBy(a => a.SurveyQuestion.QuestionId)
-            .Select(
-                g => new { QuestionId = g.Key, Score = Math.Round(g.Average(a => a.Score), 2) });
-        var averagedScore = groupedAnswer
-            .Select(g => new AnswerScore(g.QuestionId, g.Score)).ToList();
-        var totalAverageScore = Math.Round(averagedScore.Average(a => a.Score), 2);
-
-        var convertedAnswer = Preprocessing.Preprocessing.Convert(questions, averagedScore);
+      
+        var groupAnswerByQuestion =
+            Preprocessing.Preprocessing.AverageOfEachQuestion(answers, questions).ToList();
+        var totalAverageScore = Math.Round(groupAnswerByQuestion.Average(a => a.Score),2);
 
         var content = _documentPlanning.DetermineContent(
             survey.Place,
@@ -46,7 +41,7 @@ public class Report : IReport
             totalAverageScore,
             survey.QuestionCount,
             survey.AspectCount,
-            convertedAnswer
+            groupAnswerByQuestion
         );
         var structure = _documentPlanning.DetermineStructure(content.Point);
 
