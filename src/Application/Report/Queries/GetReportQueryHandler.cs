@@ -19,6 +19,15 @@ public class GetReportQueryHandler : IRequestHandler<GetReportQuery, ReportResul
     public async Task<ReportResult> Handle(GetReportQuery request, CancellationToken cancellationToken)
     {
 
-        throw new NotImplementedException();
+        var survey = _context.Surveys
+            .Include(s => s.SurveyQuestions)
+            .ThenInclude(sq => sq.Question)
+            .FirstOrDefault(s => s.Id == request.SurveyId);
+        var answers = await _context.Answers
+            .Where(a => a.SurveyQuestion.SurveyId == request.SurveyId)
+            .ToListAsync(cancellationToken);
+        var questions = survey.SurveyQuestions.Select(sq => sq.Question);
+        var report = await _report.GenerateReport(survey, answers, questions);
+        return new ReportResult(report);
     }
 }
