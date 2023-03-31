@@ -11,4 +11,4 @@ public record ReportCommand(
     string Lecturer,
     int QuestionCount,
     int AspectCount,
-    IList<AnswerScore> Answers) : IRequest<string>;
+    IList<AnswerScore> Answers) : IRequest<ReportResult>;

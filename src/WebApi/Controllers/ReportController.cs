@@ -24,8 +24,8 @@ public class ReportController : ControllerBase
     public async Task<IActionResult> Submit([FromBody] ReportRequest request)
     {
         var command = _mapper.Map<ReportCommand>(request);
-        var r = await _mediator.Send(command);
-        return Ok(r);
+        var result = await _mediator.Send(command);
+        return Ok(_mapper.Map<ReportResponse>(result));
     }
 
     [HttpGet("{surveyId:guid}")]
@@ -33,6 +33,6 @@ public class ReportController : ControllerBase
     {
         var query = new GetReportQuery(surveyId);
         var result = await _mediator.Send(query);
-        return Ok(result);
+        return Ok(_mapper.Map<ReportResponse>(result));
     }
 }

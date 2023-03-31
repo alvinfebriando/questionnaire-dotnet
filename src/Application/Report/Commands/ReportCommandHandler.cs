@@ -27,7 +27,7 @@ public class ReportCommandHandler : IRequestHandler<ReportCommand, ReportResult>
         _context = context;
     }
 
-    public async Task<string> Handle(
+    public async Task<ReportResult> Handle(
         ReportCommand request,
         CancellationToken cancellationToken)
     {
@@ -55,6 +55,6 @@ public class ReportCommandHandler : IRequestHandler<ReportCommand, ReportResult>
         _realization.AddFormatter(new CapitalSentenceFormatter());
 
         var paragraph = _realization.LinguisticRealization();
-        return _realization.StructureRealization(paragraph);
+        return new ReportResult(_realization.StructureRealization(paragraph));
     }
 }

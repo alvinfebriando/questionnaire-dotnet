@@ -5,7 +5,7 @@ using Questionnaire.Application.Service.Report;
 
 namespace Questionnaire.Application.Report.Queries;
 
-public class GetReportQueryHandler : IRequestHandler<GetReportQuery, string>
+public class GetReportQueryHandler : IRequestHandler<GetReportQuery, ReportResult>
 {
     private readonly IApplicationDbContext _context;
     private readonly IReport _report;
@@ -16,7 +16,7 @@ public class GetReportQueryHandler : IRequestHandler<GetReportQuery, string>
         _report = report;
     }
 
-    public async Task<string> Handle(GetReportQuery request, CancellationToken cancellationToken)
+    public async Task<ReportResult> Handle(GetReportQuery request, CancellationToken cancellationToken)
     {
 
         throw new NotImplementedException();
