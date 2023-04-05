@@ -27,16 +27,18 @@ public class Report : IReport
         IEnumerable<Answer> answers,
         IEnumerable<Question> questions)
     {
-      
+        var listOfAnswer = answers.ToList();
         var groupAnswerByQuestion =
-            Preprocessing.Preprocessing.AverageOfEachQuestion(answers, questions).ToList();
+            Preprocessing.Preprocessing.AverageOfEachQuestion(listOfAnswer, questions).ToList();
         var totalAverageScore = Math.Round(groupAnswerByQuestion.Average(a => a.Score),2);
+
+        var respondent = listOfAnswer.GroupBy(a => a.SurveyQuestion.QuestionId).First().Count();
 
         var content = _documentPlanning.DetermineContent(
             survey.Place,
             survey.Date,
             survey.Subject,
-            survey.Respondent,
+            respondent.ToString(),
             survey.Lecturer,
             totalAverageScore,
             survey.QuestionCount,
