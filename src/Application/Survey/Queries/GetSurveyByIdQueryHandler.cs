@@ -25,7 +25,6 @@ public class GetSurveyByIdQueryHandler : IRequestHandler<GetSurveyByIdQuery, Sur
             result.Place,
             result.Date,
             result.Subject,
-            result.Respondent,
             result.Lecturer,
             result.QuestionCount,
             result.AspectCount,

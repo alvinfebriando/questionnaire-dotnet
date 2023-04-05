@@ -27,7 +27,6 @@ public class AddSurveyCommandHandler : IRequestHandler<AddSurveyCommand, SurveyR
             AspectCount = request.AspectCount,
             Place = request.Place,
             QuestionCount = request.QuestionCount,
-            Respondent = request.Respondent,
             Subject = request.Subject,
             SurveyQuestions = questionIds.ToList()
         };
@@ -41,7 +40,6 @@ public class AddSurveyCommandHandler : IRequestHandler<AddSurveyCommand, SurveyR
             survey.Place,
             survey.Date,
             survey.Subject,
-            survey.Respondent,
             survey.Lecturer,
             survey.QuestionCount,
             survey.AspectCount,

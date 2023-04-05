@@ -27,7 +27,6 @@ public class GetSurveyQueryHandler : IRequestHandler<GetSurveyQuery, AllSurveyRe
                     r.Place,
                     r.Date,
                     r.Subject,
-                    r.Respondent,
                     r.Lecturer,
                     r.QuestionCount,
                     r.AspectCount,
