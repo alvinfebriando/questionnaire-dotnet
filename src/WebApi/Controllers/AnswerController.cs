@@ -34,6 +34,6 @@ public class AnswerController : ControllerBase
     {
         var command = _mapper.Map<AddAnswerCommand>(request);
         await _mediator.Send(command);
-        return Ok();
+        return StatusCode(201);
     }
 }

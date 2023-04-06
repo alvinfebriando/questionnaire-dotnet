@@ -1,7 +1,6 @@
 ﻿using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Questionnaire.Application.Survey;
 using Questionnaire.Application.Survey.Commands;
 using Questionnaire.Application.Survey.Queries;
 using Questionnaire.WebApi.Dto;
@@ -45,6 +44,6 @@ public class SurveyController:ControllerBase
         var command = _mapper.Map<AddSurveyCommand>(request);
         var result = await _mediator.Send(command);
         var response = _mapper.Map<SurveyResponse>(result);
-        return Ok(response);
+        return CreatedAtAction(nameof(GetById), new { id = result.Id }, response);
     }
 }
