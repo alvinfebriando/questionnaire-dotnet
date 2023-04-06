@@ -9,5 +9,6 @@ public interface IApplicationDbContext
     public DbSet<Answer> Answers { get; set; }
     public DbSet<Domain.Entities.Survey> Surveys { get; set; }
     public DbSet<SurveyQuestion> SurveyQuestions { get; set; }
+    public DbSet<Domain.Entities.Lecturer> Lecturers { get; set; }
     public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
