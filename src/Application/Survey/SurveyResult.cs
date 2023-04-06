@@ -8,7 +8,7 @@ public record SurveyResult(
     string Place,
     DateOnly Date,
     string Subject,
-    string Lecturer,
+    Domain.Entities.Lecturer Lecturer,
     int QuestionCount,
     int AspectCount,
     ICollection<SurveyQuestion> SurveyQuestions);

@@ -33,13 +33,14 @@ public class Report : IReport
         var totalAverageScore = Math.Round(groupAnswerByQuestion.Average(a => a.Score),2);
 
         var respondent = listOfAnswer.GroupBy(a => a.SurveyQuestion.QuestionId).First().Count();
+        var lecturer = $"{survey.Lecturer.Title} {survey.Lecturer.Name}";
 
         var content = _documentPlanning.DetermineContent(
             survey.Place,
             survey.Date,
             survey.Subject,
             respondent.ToString(),
-            survey.Lecturer,
+            lecturer,
             totalAverageScore,
             survey.QuestionCount,
             survey.AspectCount,

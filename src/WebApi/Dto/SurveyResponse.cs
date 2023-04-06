@@ -1,4 +1,6 @@
-﻿namespace Questionnaire.WebApi.Dto;
+﻿using Questionnaire.Domain.Entities;
+
+namespace Questionnaire.WebApi.Dto;
 
 public record AllSurveyResponse(IEnumerable<SurveyResponse> Surveys);
 public record SurveyResponse(
@@ -6,7 +8,7 @@ public record SurveyResponse(
     string Place,
     DateOnly Date,
     string Subject,
-    string Lecturer,
+    Lecturer Lecturer,
     int QuestionCount,
     int AspectCount,
     ICollection<QuestionResponse> Questions);

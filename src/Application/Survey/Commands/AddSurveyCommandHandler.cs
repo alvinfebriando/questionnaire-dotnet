@@ -20,10 +20,13 @@ public class AddSurveyCommandHandler : IRequestHandler<AddSurveyCommand, SurveyR
     {
         var questionIds = request.QuestionId.Select(
             questionId => new SurveyQuestion { SurveyId = questionId, QuestionId = questionId });
+        var lecturer = await _context.Lecturers
+            .FirstAsync(l => l.Id == request.Lecturer, cancellationToken);
+        
         var survey = new Domain.Entities.Survey
         {
             Date = request.Date,
-            Lecturer = request.Lecturer,
+            Lecturer = lecturer,
             AspectCount = request.AspectCount,
             Place = request.Place,
             QuestionCount = request.QuestionCount,

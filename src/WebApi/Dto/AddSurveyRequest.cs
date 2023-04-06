@@ -6,7 +6,7 @@ public record AddSurveyRequest(
     string Place,
     DateOnly Date,
     string Subject,
-    string Lecturer,
+    Guid Lecturer,
     int QuestionCount,
     int AspectCount,
     IEnumerable<Guid> QuestionId);
