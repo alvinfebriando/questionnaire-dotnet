@@ -19,6 +19,7 @@ public static class DependencyInjection
                 {
                     options.JsonSerializerOptions.Converters.Add(new DateOnlyJsonConverter());
                     options.JsonSerializerOptions.Converters.Add(new QuestionJsonConverter());
+                    options.JsonSerializerOptions.Converters.Add(new LecturerJsonConverter());
                 });
 
         return services;
