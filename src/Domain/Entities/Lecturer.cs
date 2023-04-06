@@ -2,4 +2,8 @@
 
 namespace Questionnaire.Domain.Entities;
 
-public record Lecturer(Guid Id, string Name, LecturerTitle Title);
+public class Lecturer : BaseEntity
+{
+    public string Name { get; set; }
+    public LecturerTitle Title { get; set; }
+}
