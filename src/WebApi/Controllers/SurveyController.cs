@@ -46,4 +46,12 @@ public class SurveyController:ControllerBase
         var response = _mapper.Map<SurveyResponse>(result);
         return CreatedAtAction(nameof(GetById), new { id = result.Id }, response);
     }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var command = new DeleteSurveyCommand(id);
+        await _mediator.Send(command);
+        return NoContent();
+    }
 }
