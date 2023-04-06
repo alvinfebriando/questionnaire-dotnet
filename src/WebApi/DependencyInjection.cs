@@ -11,7 +11,7 @@ public static class DependencyInjection
         services.AddCors(
             options =>
             {
-                options.AddDefaultPolicy(policy => { policy.AllowAnyOrigin().AllowAnyHeader(); });
+                options.AddDefaultPolicy(policy => { policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod(); });
             });
         services.AddControllers()
             .AddJsonOptions(
