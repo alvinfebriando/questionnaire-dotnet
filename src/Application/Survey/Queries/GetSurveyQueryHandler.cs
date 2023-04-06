@@ -19,6 +19,7 @@ public class GetSurveyQueryHandler : IRequestHandler<GetSurveyQuery, AllSurveyRe
     {
         var result = await _context.Surveys.Include(s => s.SurveyQuestions)
             .ThenInclude(sq => sq.Question)
+            .Include(s=>s.Lecturer)
             .ToListAsync(cancellationToken);
         return new AllSurveyResult(
             result.Select(

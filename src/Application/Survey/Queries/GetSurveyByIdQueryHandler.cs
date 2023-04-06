@@ -19,6 +19,7 @@ public class GetSurveyByIdQueryHandler : IRequestHandler<GetSurveyByIdQuery, Sur
     {
         var result = await _context.Surveys.Include(s => s.SurveyQuestions)
             .ThenInclude(sq => sq.Question)
+            .Include(s=>s.Lecturer)
             .FirstAsync(s => s.Id == request.Id, cancellationToken);
         return new SurveyResult(
             result.Id,
