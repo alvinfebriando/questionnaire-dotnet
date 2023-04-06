@@ -4,7 +4,7 @@ using Questionnaire.Domain.ValueObjects;
 
 namespace Questionnaire.WebApi.Common.JsonConverter;
 
-public class LecturerJsonConverter : JsonConverter<LecturerTitle>
+public class LecturerTitleJsonConverter : JsonConverter<LecturerTitle>
 {
     public override LecturerTitle Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
