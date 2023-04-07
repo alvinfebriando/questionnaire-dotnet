@@ -22,6 +22,7 @@ public class GetReportQueryHandler : IRequestHandler<GetReportQuery, ReportResul
         var survey = _context.Surveys
             .Include(s => s.SurveyQuestions)
             .ThenInclude(sq => sq.Question)
+            .Include(s=>s.Lecturer)
             .FirstOrDefault(s => s.Id == request.SurveyId);
         var answers = await _context.Answers
             .Where(a => a.SurveyQuestion.SurveyId == request.SurveyId)
