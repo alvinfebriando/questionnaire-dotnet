@@ -36,4 +36,12 @@ public class AnswerController : ControllerBase
         await _mediator.Send(command);
         return StatusCode(201);
     }
+
+    [HttpPost("simulate")]
+    public async Task<IActionResult> BulkAdd(SimulateAnswerRequest request)
+    {
+        var command = _mapper.Map<SimulateAnswerCommand>(request);
+        await _mediator.Send(command);
+        return StatusCode(201);
+    }
 }
