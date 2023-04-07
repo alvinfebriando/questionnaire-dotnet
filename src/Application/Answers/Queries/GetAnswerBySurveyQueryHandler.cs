@@ -21,6 +21,7 @@ public class
         var answer = await _context.Answers
             .Include(a => a.SurveyQuestion)
             .ThenInclude(sq => sq.Question)
+            .Where(a=>a.SurveyQuestion.SurveyId==request.SurveyId)
             .ToListAsync(cancellationToken);
         var answerResult = answer.Select(
             a => new AnswerResult(
