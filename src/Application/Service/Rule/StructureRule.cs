@@ -5,6 +5,7 @@ namespace Questionnaire.Application.Service.Rule;
 
 public class StructureRule : IStructureRule
 {
+    private static readonly bool Igf = IsGoodFirst();
     public Structure Rule(Point point)
     {
         var output = new Structure();
@@ -22,12 +23,20 @@ public class StructureRule : IStructureRule
             output.Add("performance");
             output.Add("score");
         }
+        
+        // Old(output, point);
+        // New1(output, point);
+        New2(output, point);
+        return output;
+    }
 
+    private static void Old(Structure output, Point point)
+    {
         // Third section
         // Check if all point are average then add no good, no bad, no advice structure
         if (IsGoodEmpty(point) && IsBadEmpty(point))
         {
-            if (IsGoodFirst())
+            if (Igf)
             {
                 output.Add("no good");
                 output.Add("no bad");
@@ -44,7 +53,7 @@ public class StructureRule : IStructureRule
         // If bad isn't empty then add advice section
         else if (IsGoodEmpty(point) && !IsBadEmpty(point))
         {
-            if (IsGoodFirst())
+            if (Igf)
             {
                 output.Add("no good");
                 output.Add("bad");
@@ -61,7 +70,7 @@ public class StructureRule : IStructureRule
         // if Bad isn't empty but the good is then no advice
         else if (!IsGoodEmpty(point) && IsBadEmpty(point))
         {
-            if (IsGoodFirst())
+            if (Igf)
             {
                 output.Add("good");
                 output.Add("no bad");
@@ -78,7 +87,7 @@ public class StructureRule : IStructureRule
         // If it has good and bad
         else
         {
-            if (IsGoodFirst())
+            if (Igf)
             {
                 output.Add("good");
                 output.Add("bad");
@@ -92,8 +101,52 @@ public class StructureRule : IStructureRule
             // Fourth section
             output.Add("advice");
         }
+    }
 
-        return output;
+    private static void New1(Structure output, Point point)
+    {
+        var ige = IsGoodEmpty(point);
+        var ibe = IsBadEmpty(point);
+        var igf = Igf;
+
+        if (ige && ibe)
+        {
+            output.Add(igf ? "no good" : "no bad");
+            output.Add(igf ? "no bad" : "no good");
+        }
+        else if (ige && !ibe)
+        {
+            output.Add(igf ? "no good" : "bad");
+            output.Add(igf ? "bad" : "no good");
+        }
+        else if (!ige && ibe)
+        {
+            output.Add(igf ? "good" : "no bad");
+            output.Add(igf ? "no bad" : "good");
+        }
+        else
+        {
+            output.Add(igf ? "good" : "bad");
+            output.Add(igf ? "bad" : "good");
+        }
+
+        output.Add(ibe ? "no advice" : "advice");
+    }
+
+    private static void New2(Structure output, Point point)
+    {
+        var ige = IsGoodEmpty(point);
+        var ibe = IsBadEmpty(point);
+        var igf = Igf;
+
+        var firstItem = igf ? (ige ? "no good" : "good") : (ibe ? "no bad" : "bad");
+        var secondItem = igf ? (ibe ? "no bad" : "bad") : (ige ? "no good" : "good");
+        var thirdItem = ibe ? "no advice" : "advice";
+
+        output.Add(firstItem);
+        output.Add(secondItem);
+        output.Add(thirdItem);
+    
     }
 
     private static bool IsGoodFirst()
