@@ -22,14 +22,19 @@ public class AddSurveyCommandHandler : IRequestHandler<AddSurveyCommand, SurveyR
             questionId => new SurveyQuestion { SurveyId = questionId, QuestionId = questionId });
         var lecturer = await _context.Lecturers
             .FirstAsync(l => l.Id == request.Lecturer, cancellationToken);
-        
+        var questionCount = request.QuestionId.Count;
+        var aspectCount = _context.Questions
+            .Where(q => questionIds.Select(q => q.QuestionId).Contains(q.Id))
+            .GroupBy(q => q.Section)
+            .Count();
+
         var survey = new Domain.Entities.Survey
         {
             Date = request.Date,
             Lecturer = lecturer,
-            AspectCount = request.AspectCount,
+            AspectCount = aspectCount,
             Place = request.Place,
-            QuestionCount = request.QuestionCount,
+            QuestionCount = questionCount,
             Subject = request.Subject,
             SurveyQuestions = questionIds.ToList()
         };
