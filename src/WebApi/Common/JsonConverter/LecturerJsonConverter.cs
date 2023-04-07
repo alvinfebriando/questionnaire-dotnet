@@ -18,10 +18,13 @@ public class LecturerJsonConverter : JsonConverter<Lecturer>
     {
         writer.WriteStartObject();
         writer.WriteString("id", value.Id);
-        var json = JsonSerializer.Serialize(value, new JsonSerializerOptions
-        {
-            Converters = { new JsonStringEnumConverter() }
-        });
+        var json = JsonSerializer.Serialize(
+            value,
+            new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                Converters = { new JsonStringEnumConverter() }
+            });
         using (var document = JsonDocument.Parse(json))
         {
             foreach (var property in document.RootElement.EnumerateObject())
