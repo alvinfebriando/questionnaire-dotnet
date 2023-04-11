@@ -29,6 +29,14 @@ public class AnswerController : ControllerBase
         return Ok(response);
     }
 
+    [HttpGet("{surveyId:guid}/chart")]
+    public async Task<IActionResult> GetChartData(Guid surveyId)
+    {
+        var query = new GetChartQuery(surveyId);
+        var result = await _mediator.Send(query);
+        return Ok(result);
+    }
+
     [HttpPost]
     public async Task<IActionResult> Add(AddAnswerRequest request)
     {
