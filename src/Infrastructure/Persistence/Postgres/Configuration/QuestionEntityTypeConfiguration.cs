@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Questionnaire.Domain.Entities;
+using Questionnaire.Domain.ValueObjects;
 
 namespace Questionnaire.Infrastructure.Persistence.Postgres.Configuration;
 

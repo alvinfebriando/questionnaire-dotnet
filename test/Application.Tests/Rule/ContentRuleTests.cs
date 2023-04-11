@@ -1,5 +1,6 @@
 ﻿using Questionnaire.Application.Service.Rule;
 using Questionnaire.Domain.Entities;
+using Questionnaire.Domain.ValueObjects;
 using Xunit.Abstractions;
 
 namespace Questionnaire.Application.Tests.Rule;

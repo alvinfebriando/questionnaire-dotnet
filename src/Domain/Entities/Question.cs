@@ -1,3 +1,5 @@
+using Questionnaire.Domain.ValueObjects;
+
 namespace Questionnaire.Domain.Entities;
 
 public class Question : BaseEntity
