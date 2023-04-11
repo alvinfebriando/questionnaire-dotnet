@@ -15,16 +15,7 @@ public class NoGoodPointMessageTests
     public NoGoodPointMessageTests(ITestOutputHelper output)
     {
         _output = output;
-        var answer1 = new Answer(
-            Guid.NewGuid(),
-            3.1,
-            new Question("title1", QuestionSection.TransparansiNilai, "advice1"));
-        var answer2 = new Answer(
-            Guid.NewGuid(),
-            3.1,
-            new Question("title2", QuestionSection.TransparansiNilai, "advice2"));
-        var answers = new List<Answer> { answer1, answer2 };
-        var averagedAnswer = new AveragedAnswer(QuestionSection.TransparansiNilai, 3.1, answers);
+        var averagedAnswer = Generator.GenerateAveragedAnswer();
         var dto = new PointDto("pak alvin", averagedAnswer);
         var lex = Lexicalization.Create();
         var tp = TemplateProvider.Create();

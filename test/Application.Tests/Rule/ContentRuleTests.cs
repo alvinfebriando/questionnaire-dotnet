@@ -1,4 +1,5 @@
 ﻿using Questionnaire.Application.Service.Rule;
+using Questionnaire.Application.Tests.Message;
 using Questionnaire.Domain.Entities;
 using Questionnaire.Domain.ValueObjects;
 using Xunit.Abstractions;
@@ -20,36 +21,18 @@ public class ContentRuleTests
     public void Rule()
     {
         // Arrange
-        var answer1 = new Answer(
-            Guid.NewGuid(),
-            2.1,
-            new Question("title1", QuestionSection.KedisiplinanWaktu, "advice1"));
-        var answer2 = new Answer(
-            Guid.NewGuid(),
-            1.3,
-            new Question("title2", QuestionSection.KedisiplinanWaktu, "advice2"));
-        var answer3 = new Answer(
-            Guid.NewGuid(),
-            3.5,
-            new Question("title3", QuestionSection.TransparansiNilai, "advice3"));
-        var answer4 = new Answer(
-            Guid.NewGuid(),
-            2.0,
-            new Question("title4", QuestionSection.TransparansiNilai, "advice1"));
-        var answer5 = new Answer(
-            Guid.NewGuid(),
-            4.1,
-            new Question("title5", QuestionSection.PenggunaanElearning, "advice1"));
-
-
-        var answers = new List<Answer>
+        var survey = Generator.GenerateSurvey();
+        var score = new List<double>
         {
-            answer1,
-            answer2,
-            answer3,
-            answer4,
-            answer5
+            2.1,
+            1.3,
+            3.5,
+            2.0,
+            4.1
         };
+        var answers = survey.SurveyQuestions
+            .Zip(score, (x, y) => new Answer(Guid.NewGuid(), y, x));
+
         const double expected = 1.7;
         const double expected2 = 4.1;
         const double expected3 = 1;

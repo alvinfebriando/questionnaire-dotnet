@@ -16,17 +16,7 @@ public class BadPointMessageTests
     public BadPointMessageTests(ITestOutputHelper output)
     {
         _output = output;
-        _output = output;
-        var answer1 = new Answer(
-            Guid.NewGuid(),
-            1.3,
-            new Question("title1", QuestionSection.KedisiplinanWaktu, "advice1"));
-        var answer2 = new Answer(
-            Guid.NewGuid(),
-            1.3,
-            new Question("title2", QuestionSection.KedisiplinanWaktu, "advice2"));
-        var answers = new List<Answer> { answer1, answer2 };
-        var averagedAnswer = new AveragedAnswer(QuestionSection.KedisiplinanWaktu, 1.3, answers);
+        var averagedAnswer = Generator.GenerateAveragedAnswer();
         var dto = new PointDto("pak alvin", averagedAnswer);
         var lex = Lexicalization.Create();
         var tp = TemplateProvider.Create();
@@ -50,27 +40,8 @@ public class BadPointMessageTests
     public void Lexicalization_2Answer_ReturnEmbeddedString()
     {
         // Arrange
-        var answer1 = new Answer(
-            Guid.NewGuid(),
-            4.1,
-            new Question("title1", QuestionSection.KedisiplinanWaktu, "advice1"));
-        var answer2 = new Answer(
-            Guid.NewGuid(),
-            4.1,
-            new Question("title2", QuestionSection.KedisiplinanWaktu, "advice2"));
-        var answers = new List<Answer> { answer1, answer2 };
-        var averagedAnswer1 = new AveragedAnswer(QuestionSection.TransparansiNilai, 4.1, answers);
-
-        var answer3 = new Answer(
-            Guid.NewGuid(),
-            4.1,
-            new Question("title1", QuestionSection.TransparansiNilai, "advice3"));
-        var answer4 = new Answer(
-            Guid.NewGuid(),
-            4.1,
-            new Question("title2", QuestionSection.TransparansiNilai, "advice4"));
-        var answers2 = new List<Answer> { answer3, answer4 };
-        var averagedAnswer2 = new AveragedAnswer(QuestionSection.TransparansiNilai, 4.1, answers2);
+        var averagedAnswer1 = Generator.GenerateAveragedAnswer();
+        var averagedAnswer2 = Generator.GenerateAveragedAnswer();
 
         var expected = averagedAnswer2.AverageScore;
 
@@ -86,16 +57,7 @@ public class BadPointMessageTests
     public void Lexicalization_MoreThan3Answer_ReturnEmbeddedString()
     {
         // Arrange
-        var answer1 = new Answer(
-            Guid.NewGuid(),
-            4.1,
-            new Question("title1", QuestionSection.PenggunaanElearning, "advice1"));
-        var answer2 = new Answer(
-            Guid.NewGuid(),
-            4.1,
-            new Question("title2", QuestionSection.PenggunaanElearning, "advice2"));
-        var answers = new List<Answer> { answer1, answer2 };
-        var averagedAnswer1 = new AveragedAnswer(QuestionSection.PenggunaanElearning, 4.1, answers);
+        var averagedAnswer1 = Generator.GenerateAveragedAnswer();
         var expected = averagedAnswer1.AverageScore;
 
         // Act

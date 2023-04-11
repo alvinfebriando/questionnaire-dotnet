@@ -1,4 +1,5 @@
 ﻿using Questionnaire.Application.Service.Rule;
+using Questionnaire.Application.Tests.Message;
 using Questionnaire.Domain.Entities;
 using Questionnaire.Domain.ValueObjects;
 using Xunit.Abstractions;
@@ -42,16 +43,7 @@ public class StructureRuleTests
     {
         // Arrange
         var p = new Point();
-        var answer1 = new Answer(
-            Guid.NewGuid(),
-            1.7,
-            new Question("title1", QuestionSection.KedisiplinanWaktu, "advice1"));
-        var answer2 = new Answer(
-            Guid.NewGuid(),
-            1.7,
-            new Question("title2", QuestionSection.KedisiplinanWaktu, "2"));
-        var answers = new List<Answer> { answer1, answer2 };
-        var averagedAnswer = new AveragedAnswer(QuestionSection.KedisiplinanWaktu, 1.7, answers);
+        var averagedAnswer = Generator.GenerateAveragedAnswer();
         p.Bad.Add(averagedAnswer);
 
         const string expected = "opening";
@@ -74,16 +66,7 @@ public class StructureRuleTests
     {
         // Arrange
         var p = new Point();
-        var answer1 = new Answer(
-            Guid.NewGuid(),
-            4.1,
-            new Question("title1", QuestionSection.KedisiplinanWaktu, "advice1"));
-        var answer2 = new Answer(
-            Guid.NewGuid(),
-            4.1,
-            new Question("title2", QuestionSection.KedisiplinanWaktu, "advice2"));
-        var answers = new List<Answer> { answer1, answer2 };
-        var averagedAnswer = new AveragedAnswer(QuestionSection.KedisiplinanWaktu, 4.1, answers);
+        var averagedAnswer = Generator.GenerateAveragedAnswer();
         p.Good.Add(averagedAnswer);
 
         const string expected = "opening";
@@ -106,26 +89,8 @@ public class StructureRuleTests
     {
         // Arrange
         var p = new Point();
-        var answer1 = new Answer(
-            Guid.NewGuid(),
-            4.1,
-            new Question("title1", QuestionSection.KedisiplinanWaktu, "advice1"));
-        var answer2 = new Answer(
-            Guid.NewGuid(),
-            4.1,
-            new Question("title2", QuestionSection.KedisiplinanWaktu, "advice2"));
-        var answer3 = new Answer(
-            Guid.NewGuid(),
-            1.1,
-            new Question("title3", QuestionSection.KedisiplinanWaktu, "advice3"));
-        var answer4 = new Answer(
-            Guid.NewGuid(),
-            1.1,
-            new Question("title4", QuestionSection.KedisiplinanWaktu, "advice4"));
-        var answers1 = new List<Answer> { answer1, answer2 };
-        var answers2 = new List<Answer> { answer3, answer4 };
-        var averagedAnswer1 = new AveragedAnswer(QuestionSection.KedisiplinanWaktu, 4.1, answers1);
-        var averagedAnswer2 = new AveragedAnswer(QuestionSection.KedisiplinanWaktu, 1.7, answers2);
+        var averagedAnswer1 = Generator.GenerateAveragedAnswer();
+        var averagedAnswer2 = Generator.GenerateAveragedAnswer();
         p.Good.Add(averagedAnswer1);
         p.Bad.Add(averagedAnswer2);
 
