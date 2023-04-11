@@ -1,7 +1,7 @@
 ﻿using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Questionnaire.Application.Questions.Queries;
+using Questionnaire.Application.QuestionManagement.Queries;
 using Questionnaire.WebApi.Dto;
 
 namespace Questionnaire.WebApi.Controllers;

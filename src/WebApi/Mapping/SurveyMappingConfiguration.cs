@@ -1,5 +1,5 @@
 ﻿using Mapster;
-using Questionnaire.Application.Survey;
+using Questionnaire.Application.SurveyManagement;
 using Questionnaire.WebApi.Dto;
 
 namespace Questionnaire.WebApi.Mapping;

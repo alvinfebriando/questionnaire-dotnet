@@ -4,5 +4,5 @@ namespace Questionnaire.Application.Service.Report;
 
 public interface IReport
 {
-    public Task<string> GenerateReport(Domain.Entities.Survey survey,IEnumerable<Answer> answers, IEnumerable<Question> questions);
+    public Task<string> GenerateReport(Survey survey,IEnumerable<Answer> answers, IEnumerable<Question> questions);
 }

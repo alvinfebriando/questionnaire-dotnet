@@ -18,7 +18,7 @@ public static class DependencyInjection
         services.AddScoped<IDocumentPlanning, DocumentPlanning>();
         services.AddScoped<IMicroPlanning, MicroPlanning>();
         services.AddScoped<IRealization, Realization>();
-        services.AddScoped<IReport, Service.Report.Report>();
+        services.AddScoped<IReport, Report>();
         return services;
     }
 }

@@ -23,7 +23,7 @@ public class Report : IReport
     }
 
     public async Task<string> GenerateReport(
-        Domain.Entities.Survey survey,
+        Survey survey,
         IEnumerable<Answer> answers,
         IEnumerable<Question> questions)
     {
