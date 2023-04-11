@@ -9,10 +9,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="Common\Cors" />
-    </ItemGroup>
-
-    <ItemGroup>
         <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     </ItemGroup>
 
