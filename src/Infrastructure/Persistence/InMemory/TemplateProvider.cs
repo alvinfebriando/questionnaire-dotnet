@@ -53,7 +53,7 @@ public class TemplateProvider : ITemplateProvider
             },
             {
                 "detail",
-                "{Complement-0}berikut adalah nilai dari {Search-aspek} yang {Complement-1} yaitu {Answer.Section}:\n"
+                "{Complement-0}berikut adalah nilai rata-rata jawaban dari {Search-aspek} yang {Complement-1} yaitu {Answer.Section}:\n"
             },
             {
                 "advice1",
