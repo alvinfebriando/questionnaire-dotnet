@@ -4,13 +4,13 @@ using Questionnaire.Application.Service.Preprocessing;
 
 namespace Questionnaire.Application.Service.Message;
 
-public class AdviceMessage : BaseMessage<AdviceDto>
+public class AdviceMessage : BaseMessage<CLosingDto>
 {
     private readonly ILexicalization _lex;
     private readonly ITemplateProvider _templateProvider;
 
     public AdviceMessage(
-        AdviceDto data,
+        CLosingDto data,
         ILexicalization lex,
         ITemplateProvider templateProvider) : base(data)
     {

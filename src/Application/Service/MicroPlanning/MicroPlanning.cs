@@ -41,7 +41,7 @@ public class MicroPlanning : IMicroPlanning
             Structure,
             _lex,
             _templateProvider);
-        var adviceTopic = new AdviceTopic(
+        var adviceTopic = new ClosingTopic(
             Content,
             Structure,
             _lex,

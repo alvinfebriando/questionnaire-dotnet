@@ -7,12 +7,12 @@ using Xunit.Abstractions;
 
 namespace Questionnaire.Application.Tests.Topic;
 
-public class AdviceTopicTests
+public class ClosingTopicTests
 {
     private readonly ITestOutputHelper _output;
-    private readonly AdviceTopic _sut;
+    private readonly ClosingTopic _sut;
 
-    public AdviceTopicTests(ITestOutputHelper output)
+    public ClosingTopicTests(ITestOutputHelper output)
     {
         _output = output;
         var point = new Point();
@@ -29,7 +29,7 @@ public class AdviceTopicTests
         var structure = new Structure();
         var lex = Lexicalization.Create();
         var tp = TemplateProvider.Create();
-        _sut = new AdviceTopic(
+        _sut = new ClosingTopic(
             content,
             structure,
             lex,

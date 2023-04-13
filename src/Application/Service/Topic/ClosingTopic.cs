@@ -6,12 +6,12 @@ using Questionnaire.Domain.ValueObjects;
 
 namespace Questionnaire.Application.Service.Topic;
 
-public class AdviceTopic : GenericTopic<AdviceDto>
+public class ClosingTopic : GenericTopic<CLosingDto>
 {
     private readonly ILexicalization _lex;
     private readonly ITemplateProvider _templateProvider;
 
-    public AdviceTopic(
+    public ClosingTopic(
         Content content,
         Structure structure,
         ILexicalization lex,
@@ -23,13 +23,13 @@ public class AdviceTopic : GenericTopic<AdviceDto>
         _templateProvider = templateProvider;
     }
 
-    public override IList<BaseMessage<AdviceDto>> Sort()
+    public override IList<BaseMessage<CLosingDto>> Sort()
     {
-        var messages = new List<BaseMessage<AdviceDto>>();
+        var messages = new List<BaseMessage<CLosingDto>>();
         if (Structure.Get("no advice") > 0)
         {
             var advices = Content.Point.Min.Answer.Select(a => a.SurveyQuestion.Question.Advice).ToList();
-            var dto = new AdviceDto(Content.Lecturer, advices);
+            var dto = new CLosingDto(Content.Lecturer, advices);
             var noAdviceMessage = new NoAdviceMessage(dto, _lex, _templateProvider);
             messages.Add(noAdviceMessage);
         }
@@ -38,7 +38,7 @@ public class AdviceTopic : GenericTopic<AdviceDto>
             foreach (var answers in Content.Point.Bad)
             {
                 var advices = answers.Answer.Select(a => a.SurveyQuestion.Question.Advice).ToList();
-                var dto = new AdviceDto(Content.Lecturer, advices);
+                var dto = new CLosingDto(Content.Lecturer, advices);
                 var adviceMessage = new AdviceMessage(dto, _lex, _templateProvider);
                 messages.Add(adviceMessage);
             }
