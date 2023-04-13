@@ -26,4 +26,12 @@ public class ReportController : ControllerBase
         var result = await _mediator.Send(query);
         return Ok(_mapper.Map<ReportResponse>(result));
     }
+    
+    [HttpGet("{surveyId:guid}/content")]
+    public async Task<IActionResult> GetContent(Guid surveyId)
+    {
+        var query = new GetContentQuery(surveyId);
+        var result = await _mediator.Send(query);
+        return Ok(result);
+    }
 }

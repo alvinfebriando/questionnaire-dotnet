@@ -57,4 +57,29 @@ public class Report : IReport
         var paragraph = _realization.LinguisticRealization();
         return _realization.StructureRealization(paragraph);
     }
+
+    public async Task<Content> GenerateContent(Survey survey, IEnumerable<Answer> answers, IEnumerable<Question> questions)
+    {
+        var listOfAnswer = answers.ToList();
+        var groupAnswerByQuestion =
+            Preprocessing.Preprocessing.AverageOfEachQuestion(listOfAnswer, questions).ToList();
+        var totalAverageScore = Math.Round(groupAnswerByQuestion.Average(a => a.Score),2);
+
+        var respondent = listOfAnswer.GroupBy(a => a.SurveyQuestion.QuestionId).First().Count();
+        var lecturer = $"{survey.Lecturer.Title} {survey.Lecturer.Name}";
+
+        var content = _documentPlanning.DetermineContent(
+            survey.Place,
+            survey.Date,
+            survey.Subject,
+            respondent.ToString(),
+            lecturer,
+            totalAverageScore,
+            survey.QuestionCount,
+            survey.AspectCount,
+            groupAnswerByQuestion
+        );
+
+        return content;
+    }
 }
