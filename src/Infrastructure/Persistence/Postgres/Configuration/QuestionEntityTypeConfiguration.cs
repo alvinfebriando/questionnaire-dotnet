@@ -42,69 +42,69 @@ public class QuestionEntityTypeConfiguration : IEntityTypeConfiguration<Question
         {
             new(
                 ids[0],
-                "dosen memberikan kesempatan bertanya di dalam kelas?",
+                "Apakah dosen memberikan kesempatan bertanya di dalam kelas?",
                 QuestionSection.KesempatanBertanya,
-                "dosen memberikan kesempatan bertanya di dalam kelas"),
+                "memberikan kesempatan bertanya di dalam kelas"),
             new(
                 ids[1],
-                "dosen memberikan kesempatan bertanya di luar kelas?",
+                "Apakah dosen memberikan kesempatan bertanya di luar kelas?",
                 QuestionSection.KesempatanBertanya,
-                "dosen memberikan kesempatan bertanya di luar kelas"),
+                "memberikan kesempatan bertanya di luar kelas"),
             new(
                 ids[2],
-                "dosen menggunakan forum e-learning?",
+                "Apakah dosen menggunakan fitur forum e-learning?",
                 QuestionSection.PenggunaanElearning,
-                "dosen memanfaatkan forum yang sudah tersedia"),
+                "memanfaatkan fitur forum yang sudah tersedia"),
             new(
                 ids[3],
-                "dosen menggunakan kuis e-learning?",
+                "Apakah dosen menggunakan fitur kuis e-learning?",
                 QuestionSection.PenggunaanElearning,
-                "dosen memanfaatkan kuis yang sudah tersedia"),
+                "memanfaatkan fitur kuis yang sudah tersedia"),
             new(
                 ids[4],
-                "dosen menggunakan konferensi video e-learning?",
+                "Apakah dosen menggunakan fitur konferensi video e-learning?",
                 QuestionSection.PenggunaanElearning,
-                "dosen memanfaatkan konferensi yang sudah tersedia"),
+                "memanfaatkan fitur konferensi video yang sudah tersedia"),
             new(
                 ids[5],
-                "dosen secara terbuka menyampaikan hasil tugas",
+                "Apakah dosen secara terbuka menyampaikan hasil tugas",
                 QuestionSection.TransparansiNilai,
-                "dosen memberikan nilai tugas secara terbuka"),
+                "memberikan nilai tugas secara terbuka"),
             new(
                 ids[6],
-                "dosen secara terbuka menyampaikan hasil kuis",
+                "Apakah dosen secara terbuka menyampaikan hasil kuis",
                 QuestionSection.TransparansiNilai,
-                "dosen memberikan nilai kuis secara terbuka"),
+                "memberikan nilai kuis secara terbuka"),
             new(
                 ids[7],
-                "dosen secara terbuka menyampaikan hasil uts dan uas",
+                "Apakah dosen secara terbuka menyampaikan hasil uts dan uas",
                 QuestionSection.TransparansiNilai,
-                "dosen memberikan nilai uts dan uas secara terbuka"),
+                "memberikan nilai uts dan uas secara terbuka"),
             new(
                 ids[8],
-                "dosen hadir tepat waktu",
+                "Apakah dosen hadir tepat waktu",
                 QuestionSection.KedisiplinanWaktu,
-                "dosen hadir tepat waktu (maksimal 15 menit)"),
+                "hadir tepat waktu (maksimal 15 menit keterlambatan)"),
             new(
                 ids[9],
-                "perkuliahan dilaksanakan sesuai dengan alokasi waktu",
+                "Apakah perkuliahan dilaksanakan sesuai dengan alokasi waktu",
                 QuestionSection.KedisiplinanWaktu,
-                "dosen memberikan perkuliahan sesuai dengan sesi yang sudah dialokasikan"),
+                "memberikan perkuliahan sesuai dengan sesi yang sudah dialokasikan"),
             new(
                 ids[10],
-                "materi yang disampaikan sudah sesuai dengan rpp dan rps?",
+                "Apakah materi yang disampaikan sudah sesuai dengan rpp dan rps?",
                 QuestionSection.RencanaKontrakKuliah,
                 "menyampaikan materi sesuai dengan kontrak kuliah"
             ),
             new(
                 ids[11],
-                "tugas yang diberikan sesuai dengan beban studi?",
+                "Apakah tugas yang diberikan sesuai dengan beban studi?",
                 QuestionSection.RencanaKontrakKuliah,
                 "memberikan tugas sesuai dengan kontrak kuliah"
             ),
             new(
                 ids[12],
-                "dosen menguasai materi perkuliahan dengan baik?",
+                "Apakah dosen menguasai materi perkuliahan dengan baik?",
                 QuestionSection.PenguasaanMateri,
                 "mencari referensi terkait materi yang diajarkan"
             )
