@@ -26,10 +26,12 @@ public class ClosingTopic : GenericTopic<CLosingDto>
     public override IList<BaseMessage<CLosingDto>> Sort()
     {
         var messages = new List<BaseMessage<CLosingDto>>();
+        CLosingDto dto = null!;
+        
         if (Structure.Get("no advice") > 0)
         {
             var advices = Content.Point.Min.Answer.Select(a => a.SurveyQuestion.Question.Advice).ToList();
-            var dto = new CLosingDto(Content.Lecturer, advices);
+            dto = new CLosingDto(Content.Lecturer, Content.Subject, advices);
             var noAdviceMessage = new NoAdviceMessage(dto, _lex, _templateProvider);
             messages.Add(noAdviceMessage);
         }
@@ -38,11 +40,14 @@ public class ClosingTopic : GenericTopic<CLosingDto>
             foreach (var answers in Content.Point.Bad)
             {
                 var advices = answers.Answer.Select(a => a.SurveyQuestion.Question.Advice).ToList();
-                var dto = new CLosingDto(Content.Lecturer, advices);
+                dto = new CLosingDto(Content.Lecturer, Content.Subject, advices);
                 var adviceMessage = new AdviceMessage(dto, _lex, _templateProvider);
                 messages.Add(adviceMessage);
             }
         }
+
+        var closingMessage = new ClosingMessage(dto, _lex, _templateProvider);
+        messages.Add(closingMessage);
 
         return messages;
     }
@@ -63,8 +68,8 @@ public class ClosingTopic : GenericTopic<CLosingDto>
                 .ToList();
             s = ((AdviceMessage)order[0]).EntitySlotting(advices);
         }
-
         output.Add(new Aggregated(order[0].Template, s));
+        output.Add(new Aggregated(order[1].Template, order[1].EntitySlotting()));
 
         return output;
     }

@@ -61,15 +61,19 @@ public class TemplateProvider : ITemplateProvider
             },
             {
                 "advice2",
-                "{Lecturer} dapat melakukan cara-cara ini untuk meningkatkan {Search-nilai} hasil evaluasi yaitu, {advice1} dan {advice2}"
+                "{Lecturer} dapat melakukan cara-cara ini untuk meningkatkan {Search-nilai} hasil evaluasi yaitu, {advice1} dan {advice2}."
             },
             {
                 "advice3",
-                "{Lecturer} dapat melakukan cara-cara ini untuk meningkatkan {Search-nilai} hasil evaluasi yaitu, {advice1}, {advice2}, dan {advice3}"
+                "{Lecturer} dapat melakukan cara-cara ini untuk meningkatkan {Search-nilai} hasil evaluasi yaitu, {advice1}, {advice2}, dan {advice3}."
             },
             {
                 "no advice",
-                "performa {Lecturer} sudah cukup baik, namun beliau dapat melakukan {advice} untuk mempertahankan nilai pada evaluasi mendatang"
+                "performa {Lecturer} sudah cukup baik, namun beliau dapat melakukan {advice} untuk mempertahankan nilai pada evaluasi mendatang."
+            },
+            {
+                "closing",
+                "demikian hasil survei ini kami sampaikan, semoga pengajaran di mata kuliah {Subject} dapat semakin baik dan memuaskan untuk semua pihak."
             }
         };
 }
