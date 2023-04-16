@@ -57,7 +57,7 @@ public class ClosingTopic : GenericTopic<CLosingDto>
         var order = Sort();
         var output = new List<Aggregated>();
         var s = "";
-        if (order.Count <= 1)
+        if (order.Count <= 2)
         {
             s = order[0].EntitySlotting();
         }
