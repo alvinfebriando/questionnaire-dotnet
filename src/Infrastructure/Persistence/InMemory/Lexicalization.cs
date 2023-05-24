@@ -47,7 +47,7 @@ public class Lexicalization : ILexicalization
 
         if (Math.Abs(Math.Round(score) - 2) < tolerance) return "tidak baik";
 
-        if (Math.Abs(Math.Round(score) - 3) < tolerance) return "cukup";
+        if (Math.Abs(Math.Round(score) - 3) < tolerance) return "cukup baik";
 
         return Math.Abs(Math.Round(score) - 4) < tolerance ? "baik" : "sangat baik";
     }

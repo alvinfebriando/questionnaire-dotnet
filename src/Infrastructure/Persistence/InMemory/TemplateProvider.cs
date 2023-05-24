@@ -45,11 +45,11 @@ public class TemplateProvider : ITemplateProvider
             },
             {
                 "no good",
-                "{Complement-0}{Lecturer} {Complement-1}belum mencapai hasil yang diinginkan, dari pertanyaan yang diajukan, {Search-nilai} {Search-tertinggi} hanya sebesar {Answer.AverageScore} untuk pertanyaan {Answer.Section}."
+                "{Complement-0}{Lecturer} {Complement-1}belum mencapai hasil yang memuaskan, karena dari pertanyaan yang diajukan, {Search-nilai} {Search-tertinggi} hanya sebesar {Answer.AverageScore} untuk pertanyaan dari aspek {Answer.Section}."
             },
             {
                 "no bad",
-                "{Complement-0}tidak ada {Search-aspek} yang dinilai di bawah standar, dengan {Search-nilai} {Search-terendah} yang {Search-didapatkan} sebesar {Answer.AverageScore} untuk pertanyaan {Answer.Section}."
+                "{Complement-0}tidak ada {Search-aspek} yang dinilai di bawah standar, dengan {Search-nilai} {Search-terendah} yang {Search-didapatkan} sebesar {Answer.AverageScore} untuk pertanyaan dari aspek {Answer.Section}."
             },
             {
                 "detail",
@@ -69,7 +69,7 @@ public class TemplateProvider : ITemplateProvider
             },
             {
                 "no advice",
-                "performa {Lecturer} sudah cukup baik, namun beliau dapat melakukan {advice} untuk mempertahankan nilai pada evaluasi mendatang."
+                "berdasarkan hasil kuesioner di atas, performa {Lecturer} sudah cukup baik, namun beliau dapat melakukan cara berikut untuk mempertahankan nilai pada evaluasi mendatang yaitu {advice} ."
             },
             {
                 "closing",
