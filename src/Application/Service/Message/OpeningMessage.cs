@@ -1,4 +1,6 @@
-﻿using Questionnaire.Application.Common.Interfaces;
+﻿using System.Globalization;
+using Humanizer;
+using Questionnaire.Application.Common.Interfaces;
 using Questionnaire.Application.Service.Dto;
 
 namespace Questionnaire.Application.Service.Message;
@@ -24,9 +26,11 @@ public class OpeningMessage : BaseMessage<OpeningDto>
 
     private Dictionary<string, string> LoadReplacement()
     {
+        Thread.CurrentThread.CurrentUICulture = new CultureInfo("id-Id");
+        Thread.CurrentThread.CurrentCulture = new CultureInfo("id-Id");
         return new Dictionary<string, string>
         {
-            { "{Date}", Data.Date.ToString() },
+            { "{Date}", Data.Date.ToOrdinalWords() },
             { "{Subject}", Data.Subject },
             { "{Respondent}", Data.Respondent },
             { "{Place}", Data.Place }
