@@ -49,7 +49,7 @@ public class Realization : IRealization
         var output = sentences;
         if (topic == typeof(PointTopic))
         {
-            output[^3] = $"{sentences[^3]}\n";
+            output[^3] = $"{sentences[^3]}\n\n";
             output[^2] = $"{sentences[^2].Trim()}\n";
             output[^1] = $"{sentences[^1]}\n\n";
         }
