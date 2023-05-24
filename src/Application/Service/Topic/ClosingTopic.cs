@@ -69,7 +69,7 @@ public class ClosingTopic : GenericTopic<CLosingDto>
             s = ((AdviceMessage)order[0]).EntitySlotting(advices);
         }
         output.Add(new Aggregated(order[0].Template, s));
-        output.Add(new Aggregated(order[1].Template, order[1].EntitySlotting()));
+        output.Add(new Aggregated(order[^1].Template, order[^1].EntitySlotting()));
 
         return output;
     }
