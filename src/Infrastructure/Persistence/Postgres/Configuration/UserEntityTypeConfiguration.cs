@@ -23,7 +23,7 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
             .RuleFor(u => u.Id, f => f.Random.Guid())
             .RuleFor(u => u.Name, f => f.Name.FirstName())
             .RuleFor(u => u.Email, (f, u) => $"{u.Name.ToLower()}@usu.ac.id")
-            .RuleFor(u => u.Password, (f, u) => $"{u.Name}123");
+            .RuleFor(u => u.Password, (f, u) => $"{u.Name.ToLower()}123");
         var user = testUser.Generate(97);
         user.AddRange(
             new List<User>
