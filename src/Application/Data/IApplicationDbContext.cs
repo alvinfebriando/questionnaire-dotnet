@@ -10,5 +10,6 @@ public interface IApplicationDbContext
     public DbSet<Survey> Surveys { get; set; }
     public DbSet<SurveyQuestion> SurveyQuestions { get; set; }
     public DbSet<Lecturer> Lecturers { get; set; }
+    public DbSet<User> Users { get; set; }
     public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
