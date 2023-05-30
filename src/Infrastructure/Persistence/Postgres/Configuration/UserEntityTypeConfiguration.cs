@@ -19,6 +19,7 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
 
     private static IEnumerable<User> LoadUser()
     {
+        Randomizer.Seed = new Random(10000);
         var testUser = new Faker<User>("id_ID")
             .RuleFor(u => u.Id, f => f.Random.Guid())
             .RuleFor(u => u.Name, f => f.Name.FirstName())
