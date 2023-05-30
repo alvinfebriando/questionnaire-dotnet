@@ -1,5 +1,6 @@
 ﻿using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Questionnaire.Application.AnswerManagement.Commands;
 using Questionnaire.Application.AnswerManagement.Queries;
@@ -28,7 +29,7 @@ public class AnswerController : ControllerBase
         var response = _mapper.Map<AllAnswerResponse>(result);
         return Ok(response);
     }
-
+    [Authorize("AdminOnly")]
     [HttpGet("{surveyId:guid}/chart")]
     public async Task<IActionResult> GetChartData(Guid surveyId)
     {
@@ -44,7 +45,8 @@ public class AnswerController : ControllerBase
         await _mediator.Send(command);
         return StatusCode(201);
     }
-
+    
+    [Authorize("AdminOnly")]
     [HttpPost("simulate")]
     public async Task<IActionResult> BulkAdd(SimulateAnswerRequest request)
     {

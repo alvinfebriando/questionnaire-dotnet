@@ -1,5 +1,6 @@
 ﻿using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Questionnaire.Application.SurveyManagement.Commands;
 using Questionnaire.Application.SurveyManagement.Queries;
@@ -38,6 +39,7 @@ public class SurveyController:ControllerBase
         return Ok(response);
     }
 
+    [Authorize("AdminOnly")]
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] AddSurveyRequest request)
     {
@@ -47,6 +49,7 @@ public class SurveyController:ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = result.Id }, response);
     }
 
+    [Authorize("AdminOnly")]
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete(Guid id)
     {
