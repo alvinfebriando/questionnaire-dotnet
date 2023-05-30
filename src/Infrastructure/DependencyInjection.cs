@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Questionnaire.Application.Common.Interfaces;
 using Questionnaire.Application.Data;
+using Questionnaire.Infrastructure.Authentication;
 using Questionnaire.Infrastructure.Persistence.InMemory;
 using Questionnaire.Infrastructure.Persistence.Postgres;
 
@@ -14,6 +15,8 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration config)
     {
+        services.Configure<JwtSettings>(config.GetSection(JwtSettings.SectionName));
+        services.AddScoped<IJwtGenerator, JwtGenerator>();
         services.AddScoped<ILexicalization, Lexicalization>();
         services.AddScoped<IWeightProvider, WeightProvider>();
         services.AddScoped<ITemplateProvider, TemplateProvider>();

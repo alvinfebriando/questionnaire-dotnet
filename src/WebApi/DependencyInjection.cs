@@ -1,11 +1,14 @@
-﻿using Questionnaire.WebApi.Common.JsonConverter;
+﻿using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Questionnaire.WebApi.Common.JsonConverter;
 using Questionnaire.WebApi.Mapping;
 
 namespace Questionnaire.WebApi;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddPresentation(this IServiceCollection services)
+    public static IServiceCollection AddPresentation(this IServiceCollection services, IConfiguration config)
     {
         services.AddMappings();
         services.AddCors(
@@ -13,6 +16,22 @@ public static class DependencyInjection
             {
                 options.AddDefaultPolicy(policy => { policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod(); });
             });
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(
+                options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = config["JwtSettings:Issuer"],
+                        ValidAudience = config["JwtSettings:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.UTF8.GetBytes(config["JwtSettings:Key"]))
+                    };
+                });
+        services.AddAuthorization();
         services.AddControllers()
             .AddJsonOptions(
                 options =>
@@ -21,7 +40,6 @@ public static class DependencyInjection
                     options.JsonSerializerOptions.Converters.Add(new QuestionJsonConverter());
                     options.JsonSerializerOptions.Converters.Add(new LecturerJsonConverter());
                 });
-
         return services;
     }
 }
