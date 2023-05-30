@@ -8,13 +8,16 @@ namespace Questionnaire.WebApi;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddPresentation(this IServiceCollection services, IConfiguration config)
+    public static IServiceCollection AddPresentation(
+        this IServiceCollection services,
+        IConfiguration config)
     {
         services.AddMappings();
         services.AddCors(
             options =>
             {
-                options.AddDefaultPolicy(policy => { policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod(); });
+                options.AddDefaultPolicy(
+                    policy => { policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod(); });
             });
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(
@@ -31,7 +34,13 @@ public static class DependencyInjection
                             Encoding.UTF8.GetBytes(config["JwtSettings:Key"]))
                     };
                 });
-        services.AddAuthorization();
+        services.AddAuthorization(
+            options =>
+            {
+                options.AddPolicy(
+                    "AdminOnly",
+                    policy => { policy.RequireRole("Admin"); });
+            });
         services.AddControllers()
             .AddJsonOptions(
                 options =>

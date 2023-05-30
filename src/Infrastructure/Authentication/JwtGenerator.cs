@@ -23,11 +23,13 @@ public class JwtGenerator : IJwtGenerator
         var signingCredentials = new SigningCredentials(
             new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key)),
             SecurityAlgorithms.HmacSha256);
+        var role = user.Name == "Admin" ? "Admin" : "Student";
         var claims = new List<Claim>
         {
             new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new(JwtRegisteredClaimNames.Email, user.Email),
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new(ClaimTypes.Role, role)
         };
         var securityToken =
             new JwtSecurityToken(

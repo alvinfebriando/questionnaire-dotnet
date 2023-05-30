@@ -1,11 +1,13 @@
 using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Questionnaire.Application.ReportManagement.Queries;
 using Questionnaire.WebApi.Dto;
 
 namespace Questionnaire.WebApi.Controllers;
 
+[Authorize("AdminOnly")]
 [Route("api/[controller]")]
 [ApiController]
 public class ReportController : ControllerBase
@@ -26,7 +28,7 @@ public class ReportController : ControllerBase
         var result = await _mediator.Send(query);
         return Ok(_mapper.Map<ReportResponse>(result));
     }
-    
+
     [HttpGet("{surveyId:guid}/content")]
     public async Task<IActionResult> GetContent(Guid surveyId)
     {
