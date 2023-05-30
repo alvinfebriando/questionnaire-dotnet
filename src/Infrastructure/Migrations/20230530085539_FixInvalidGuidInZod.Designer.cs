@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Questionnaire.Infrastructure.Persistence.Postgres;
@@ -11,9 +12,10 @@ using Questionnaire.Infrastructure.Persistence.Postgres;
 namespace Questionnaire.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230530085539_FixInvalidGuidInZod")]
+    partial class FixInvalidGuidInZod
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,7 +43,7 @@ namespace Questionnaire.Infrastructure.Migrations
 
                     b.HasIndex("SurveyQuestionSurveyId", "SurveyQuestionQuestionId");
 
-                    b.ToTable("Answers", (string)null);
+                    b.ToTable("Answers");
                 });
 
             modelBuilder.Entity("Questionnaire.Domain.Entities.Lecturer", b =>
@@ -60,7 +62,7 @@ namespace Questionnaire.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Lecturers", (string)null);
+                    b.ToTable("Lecturers");
 
                     b.HasData(
                         new
@@ -265,7 +267,7 @@ namespace Questionnaire.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Questions", (string)null);
+                    b.ToTable("Questions");
 
                     b.HasData(
                         new
@@ -391,7 +393,7 @@ namespace Questionnaire.Infrastructure.Migrations
 
                     b.HasIndex("LecturerId");
 
-                    b.ToTable("Surveys", (string)null);
+                    b.ToTable("Surveys");
                 });
 
             modelBuilder.Entity("Questionnaire.Domain.Entities.SurveyQuestion", b =>
@@ -406,7 +408,7 @@ namespace Questionnaire.Infrastructure.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("SurveyQuestions", (string)null);
+                    b.ToTable("SurveyQuestions");
                 });
 
             modelBuilder.Entity("Questionnaire.Domain.Entities.User", b =>
@@ -429,7 +431,7 @@ namespace Questionnaire.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
 
                     b.HasData(
                         new
@@ -1146,7 +1148,7 @@ namespace Questionnaire.Infrastructure.Migrations
 
                     b.HasIndex("SurveysId");
 
-                    b.ToTable("SurveyUser", (string)null);
+                    b.ToTable("SurveyUser");
                 });
 
             modelBuilder.Entity("Questionnaire.Domain.Entities.Answer", b =>
