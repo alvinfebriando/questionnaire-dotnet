@@ -17,7 +17,8 @@ public class QuestionEntityTypeConfiguration : IEntityTypeConfiguration<Question
             .HasConversion(
                 v => v.ToString().Humanize(LetterCasing.LowerCase),
                 v => (QuestionSection)Enum.Parse(typeof(QuestionSection), v.Dehumanize()));
-        builder.HasData(LoadQuestion());
+        var seed = new Seed();
+        builder.HasData(seed.Questions);
     }
 
     private static IEnumerable<Question> LoadQuestion()

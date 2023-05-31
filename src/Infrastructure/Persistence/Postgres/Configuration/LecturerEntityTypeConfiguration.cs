@@ -18,7 +18,8 @@ public class LecturerEntityTypeConfiguration : IEntityTypeConfiguration<Lecturer
             .HasConversion(
                 v => v.ToString().Humanize(LetterCasing.Sentence),
                 v => (LecturerTitle)Enum.Parse(typeof(LecturerTitle), v.Dehumanize()));
-        builder.HasData(LoadLecturer());
+        var seed = new Seed();
+        builder.HasData(seed.Lecturers);
     }
 
     private static IEnumerable<Lecturer> LoadLecturer()
