@@ -19,5 +19,9 @@ public class SurveyQuestionEntityTypeConfiguration : IEntityTypeConfiguration<Su
             .HasOne<Question>(sq => sq.Question)
             .WithMany()
             .HasForeignKey(sq => sq.QuestionId);
+
+        var seed = new Seed();
+        var sq = seed.SurveyQuestions.Select(s => new { s.SurveyId, s.QuestionId });
+        builder.HasData(sq);
     }
 }

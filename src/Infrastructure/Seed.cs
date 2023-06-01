@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using Bogus;
+﻿using Bogus;
 using Bogus.DataSets;
 using Questionnaire.Domain.Entities;
 using Questionnaire.Domain.ValueObjects;
@@ -11,17 +10,21 @@ public class Seed
     public IEnumerable<User> Users { get; set; }
     public IEnumerable<Question> Questions { get; set; }
     public IEnumerable<Lecturer> Lecturers { get; set; }
+    public IEnumerable<Survey> Surveys { get; set; }
+    public IEnumerable<SurveyQuestion> SurveyQuestions { get; set; }
 
     public Seed()
     {
         Users = GenerateUsers(97);
         Questions = GenerateQuestions();
         Lecturers = GenerateLecturers(30);
+        Surveys = GenerateSurveys(Lecturers, 10);
+        (Surveys, SurveyQuestions) = GenerateSurveyQuestions(Surveys, Questions);
     }
 
     private static T SeedRow<T>(Faker<T> faker, int rowId) where T : class
     {
-        var recordRow = faker.UseSeed(rowId*132).Generate();
+        var recordRow = faker.UseSeed(rowId * 132).Generate();
         return recordRow;
     }
 
@@ -209,6 +212,110 @@ public class Seed
                     return l;
                 })
             .ToList();
+        
         return lecturers;
+    }
+
+    public IEnumerable<Survey> GenerateSurveys(
+        IEnumerable<Lecturer> lecturers,
+        int amount)
+    {
+        var subjects = new List<string>
+        {
+            "Pendidikan Pancasila",
+            "Bahasa Indonesia",
+            "Matematika Dasar",
+            "Pengantar Teknologi Informasi",
+            "Organisasi dan Arsitektur Komputer",
+            "Dasar Pemrograman",
+            "Pemrograman Web",
+            "Pendidikan Kewarganegaraan",
+            "Pendidikan Agama Islam",
+            "Pendidikan Agama Kristen Protestan",
+            "Pendidikan Agama Katolik",
+            "Pendidikan Agama Hindu",
+            "Pendidikan Agama Budha",
+            "Pendidikan Agama Konghucu",
+            "Pendidikan Kepercayaan Terhadap Tuhan Yang Maha Esa",
+            "Pemrograman Berorientasi Objek",
+            "Pemrograman Web Lanjutan",
+            "Sistem Basis Data",
+            "Struktur Data dan Algoritma",
+            "Internasionalisasi 1",
+            "Matematika Diskrit",
+            "Komunikasi Data dan Jaringan Komputer",
+            "Manajemen Sistem Basis Data",
+            "Pemrograman Berorientasi Objek Lanjutan",
+            "Web Semantik",
+            "Internasionalisasi 2",
+            "Analisis dan Design Sistem",
+            "Jaminan dan Keamanan Informasi",
+            "Sistem Operasi",
+            "Interaksi Manusia dan Komputer",
+            "Kecerdasan Buatan",
+            "Keamanan Server dan Jaringan",
+            "Seni dan Kebugaran",
+            "Kearifan Lokal",
+            "Administrasi dan Desain Jaringan",
+            "Desain Interaksi",
+            "Fundamental Big Data",
+            "Pemrograman Mobile",
+            "Metodologi Penelitian",
+            "Teknik Penulisan Karya Ilmiah",
+            "Probabilistik dan Statistik",
+            "Data Warehouse dan Bisnis Intelligence",
+            "Pemrograman Integrative",
+            "Routing Jaringan",
+            "Audit Teknologi Informasi",
+            "Enterprise Development Software",
+            "Etika Profesi",
+            "IT-Preneurship",
+            "Keahlian Presentasi dan Komunikasi",
+            "Manajemen Proyek Teknologi Informasi",
+            "Perilaku Organisasi"
+        };
+        var testSurvey = new Faker<Survey>("id_ID")
+            .RuleFor(s => s.Id, f => f.Random.Guid())
+            .RuleFor(
+                s => s.Date,
+                f => f.Date.BetweenDateOnly(new DateOnly(2023, 3, 1), new DateOnly(2023, 6, 1)))
+            .RuleFor(s => s.Place, f => f.PickRandomParam("A", "B", "C"))
+            .RuleFor(s => s.Subject, f => f.PickRandom(subjects))
+            .RuleFor(s => s.Lecturer, f => f.PickRandom(lecturers));
+        var surveys = Enumerable
+            .Range(1, amount)
+            .Select(i => SeedRow(testSurvey, i))
+            .ToList();
+
+        return surveys;
+    }
+
+    public (IEnumerable<Survey> s, IEnumerable<SurveyQuestion> sq) GenerateSurveyQuestions(
+        IEnumerable<Survey> surveys,
+        IEnumerable<Question> questions)
+    {
+        var surveyQuestions = new List<SurveyQuestion>();
+        surveys = surveys.ToList();
+        questions = questions.ToList();
+        foreach (var survey in surveys)
+        {
+            var sq = questions.Select(
+                    q => new SurveyQuestion
+                    {
+                        QuestionId = q.Id,
+                        Question = q,
+                        SurveyId = survey.Id,
+                        Survey = survey
+                    })
+                .ToList();
+            survey.AspectCount = sq.Where(s => s.SurveyId == survey.Id)
+                .GroupBy(s => s.Question.Section)
+                .Count();
+            survey.QuestionCount = sq.Count(s => s.SurveyId == survey.Id);
+            survey.SurveyQuestions = sq;
+            surveyQuestions.AddRange(sq);
+        }
+
+        return (surveys, surveyQuestions);
     }
 }
