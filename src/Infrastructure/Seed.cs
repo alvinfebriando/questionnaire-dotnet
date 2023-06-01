@@ -12,6 +12,7 @@ public class Seed
     public IEnumerable<Lecturer> Lecturers { get; set; }
     public IEnumerable<Survey> Surveys { get; set; }
     public IEnumerable<SurveyQuestion> SurveyQuestions { get; set; }
+    public IEnumerable<Answer> Answers { get; set; }
 
     public Seed()
     {
@@ -20,6 +21,7 @@ public class Seed
         Lecturers = GenerateLecturers(30);
         Surveys = GenerateSurveys(Lecturers, 10);
         (Surveys, SurveyQuestions) = GenerateSurveyQuestions(Surveys, Questions);
+        Answers = GenerateAnswer(Surveys, SurveyQuestions);
     }
 
     private static T SeedRow<T>(Faker<T> faker, int rowId) where T : class
@@ -194,6 +196,75 @@ public class Seed
         }
 
         return (surveys, surveyQuestions);
+    }
+
+    private static (int, IEnumerable<Answer>) GenerateAnswer(
+        int index,
+        IEnumerable<SurveyQuestion> surveyQuestions)
+    {
+        var scores = new[] { 1, 2, 3, 4, 5 };
+        var weightSelections = new[]
+        {
+            5, 4, 3, 4, 3,
+            5, 2, 1, 4, 5,
+            2, 3, 4
+        };
+        const int respondent = 45;
+        var answers = surveyQuestions.Select(
+                (s, i) =>
+                {
+                    var weight = LoadWeight(weightSelections[i]);
+                    var testAnswer = new Faker<Answer>()
+                        .RuleFor(a => a.Id, f => f.Random.Guid())
+                        .RuleFor(a => a.Score, f => f.Random.WeightedRandom(scores, weight));
+                    var answersOfEachSq = Enumerable.Range(1, respondent)
+                        .Select(j => SeedRow(testAnswer, index++))
+                        .ToList();
+                    answersOfEachSq = answersOfEachSq.Select(
+                            a =>
+                            {
+                                a.SurveyQuestion = s;
+                                return a;
+                            })
+                        .ToList();
+                    return answersOfEachSq;
+                })
+            .ToList();
+        return (index, answers.SelectMany(a => a));
+    }
+
+
+    private static IEnumerable<Answer> GenerateAnswer(
+        IEnumerable<Survey> surveys,
+        IEnumerable<SurveyQuestion> surveyQuestions)
+    {
+        var answers = new List<Answer>();
+        surveys = surveys.ToList();
+        var index = 0;
+        foreach (var survey in surveys)
+        {
+            index++;
+            surveyQuestions = surveyQuestions.ToList();
+            var sq = surveyQuestions.Where(s => s.SurveyId == survey.Id).ToList();
+            var a = GenerateAnswer(index, sq);
+            index = a.Item1;
+            answers.AddRange(a.Item2);
+        }
+
+        return answers;
+    }
+
+    private static float[] LoadWeight(int index)
+    {
+        var weights = new List<float[]>
+        {
+            new[] { 0.750f, 0.100f, 0.075f, 0.05f, 0.025f },
+            new[] { 0.100f, 0.750f, 0.075f, 0.05f, 0.025f },
+            new[] { 0.025f, 0.05f, 0.750f, 0.100f, 0.075f },
+            new[] { 0.025f, 0.05f, 0.075f, 0.750f, 0.100f },
+            new[] { 0.025f, 0.05f, 0.075f, 0.100f, 0.750f },
+        };
+        return weights[index - 1];
     }
 
     private static IEnumerable<User> LoadCustomUser()
