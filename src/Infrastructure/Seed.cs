@@ -38,52 +38,13 @@ public class Seed
         var user = Enumerable.Range(1, amount)
             .Select(i => SeedRow(testUser, i))
             .ToList();
-        user.AddRange(
-            new List<User>
-            {
-                new()
-                {
-                    Id = new Guid("41CDC211-9AD2-44DF-9AD0-122014CD918B"),
-                    Name = "Admin",
-                    Email = "admin@usu.ac.id",
-                    Password = "admin123"
-                },
-                new()
-                {
-                    Id = new Guid("107E9536-5FD4-4B44-891E-9E77EB5CA9AB"),
-                    Name = "Alvin",
-                    Email = "alvin@usu.ac.id",
-                    Password = "alvin123"
-                },
-                new()
-                {
-                    Id = new Guid("6E8173DB-65AA-4B55-B030-EEE00927CD39"),
-                    Name = "Febriando",
-                    Email = "febriando@usu.ac.id",
-                    Password = "febriando123"
-                }
-            });
+        user.AddRange(LoadCustomUser());
         return user;
     }
 
     public IEnumerable<Question> GenerateQuestions()
     {
-        var ids = new List<Guid>
-        {
-            new("218408d9-5277-4a87-85b0-49e4d58f562e"),
-            new("2345f1b9-68ea-47c0-a07c-308c96bb57f9"),
-            new("26a20919-c2a6-4d55-ba27-d1c9e7494803"),
-            new("5eaade91-6711-40f4-bc93-865c1f236e9f"),
-            new("92629cf6-7fe4-44fc-886e-96dc9fe7e46d"),
-            new("b242aabb-2a9b-4f6e-b5b2-c3f599ca307e"),
-            new("b69bc16e-ae97-471c-80db-6ef12b26638c"),
-            new("c8d17dd4-ee70-4ab8-87d4-b5fff5b21e72"),
-            new("d7434e14-1b4e-4d05-bc24-17c1fe75f4b9"),
-            new("dade9ae9-02b1-410c-9048-da7ed520c459"),
-            new("dfddc352-89d5-40dc-a428-1cccd3bb1925"),
-            new("f0b09e3c-87d1-4c8a-9408-cb9ee5881552"),
-            new("fa5a6ef2-b376-4122-9f1e-591a29e1a2de")
-        };
+        var ids = LoadQuestionIds().ToList();
         return new List<Question>
         {
             new(
@@ -159,7 +120,133 @@ public class Seed
 
     public IEnumerable<Lecturer> GenerateLecturers(int amount)
     {
-        var ids = new List<Guid>
+        var ids = LoadLecturerIds().ToList();
+
+        var testLecturer = new Faker<Lecturer>("id_ID")
+            .RuleFor(l => l.Title, f => f.PickRandom<LecturerTitle>())
+            .RuleFor(
+                l => l.Name,
+                (f, l) => f.Name.FirstName(
+                    l.Title == LecturerTitle.Pak
+                        ? Name.Gender.Male
+                        : Name.Gender.Female));
+        var lecturers = Enumerable.Range(1, amount)
+            .Select(i => SeedRow(testLecturer, i))
+            .ToList();
+        lecturers = lecturers.Take(ids.Count)
+            .Select(
+                (l, i) =>
+                {
+                    l.Id = ids[i];
+                    return l;
+                })
+            .ToList();
+
+        return lecturers;
+    }
+
+
+    public IEnumerable<Survey> GenerateSurveys(
+        IEnumerable<Lecturer> lecturers,
+        int amount)
+    {
+        var subjects = LoadSubjects();
+        var testSurvey = new Faker<Survey>("id_ID")
+            .RuleFor(s => s.Id, f => f.Random.Guid())
+            .RuleFor(
+                s => s.Date,
+                f => f.Date.BetweenDateOnly(new DateOnly(2023, 3, 1), new DateOnly(2023, 6, 1)))
+            .RuleFor(s => s.Place, f => f.PickRandomParam("A", "B", "C"))
+            .RuleFor(s => s.Subject, f => f.PickRandom(subjects))
+            .RuleFor(s => s.Lecturer, f => f.PickRandom(lecturers));
+        var surveys = Enumerable
+            .Range(1, amount)
+            .Select(i => SeedRow(testSurvey, i))
+            .ToList();
+
+        return surveys;
+    }
+
+    public (IEnumerable<Survey> s, IEnumerable<SurveyQuestion> sq) GenerateSurveyQuestions(
+        IEnumerable<Survey> surveys,
+        IEnumerable<Question> questions)
+    {
+        var surveyQuestions = new List<SurveyQuestion>();
+        surveys = surveys.ToList();
+        questions = questions.ToList();
+        foreach (var survey in surveys)
+        {
+            var sq = questions.Select(
+                    q => new SurveyQuestion
+                    {
+                        QuestionId = q.Id,
+                        Question = q,
+                        SurveyId = survey.Id,
+                        Survey = survey
+                    })
+                .ToList();
+            survey.AspectCount = sq.Where(s => s.SurveyId == survey.Id)
+                .GroupBy(s => s.Question.Section)
+                .Count();
+            survey.QuestionCount = sq.Count(s => s.SurveyId == survey.Id);
+            survey.SurveyQuestions = sq;
+            surveyQuestions.AddRange(sq);
+        }
+
+        return (surveys, surveyQuestions);
+    }
+
+    private static IEnumerable<User> LoadCustomUser()
+    {
+        return new List<User>
+        {
+            new()
+            {
+                Id = new Guid("41CDC211-9AD2-44DF-9AD0-122014CD918B"),
+                Name = "Admin",
+                Email = "admin@usu.ac.id",
+                Password = "admin123"
+            },
+            new()
+            {
+                Id = new Guid("107E9536-5FD4-4B44-891E-9E77EB5CA9AB"),
+                Name = "Alvin",
+                Email = "alvin@usu.ac.id",
+                Password = "alvin123"
+            },
+            new()
+            {
+                Id = new Guid("6E8173DB-65AA-4B55-B030-EEE00927CD39"),
+                Name = "Febriando",
+                Email = "febriando@usu.ac.id",
+                Password = "febriando123"
+            }
+        };
+    }
+
+    private static IEnumerable<Guid> LoadQuestionIds()
+    {
+        return new List<Guid>
+        {
+            new("218408d9-5277-4a87-85b0-49e4d58f562e"),
+            new("2345f1b9-68ea-47c0-a07c-308c96bb57f9"),
+            new("26a20919-c2a6-4d55-ba27-d1c9e7494803"),
+            new("5eaade91-6711-40f4-bc93-865c1f236e9f"),
+            new("92629cf6-7fe4-44fc-886e-96dc9fe7e46d"),
+            new("b242aabb-2a9b-4f6e-b5b2-c3f599ca307e"),
+            new("b69bc16e-ae97-471c-80db-6ef12b26638c"),
+            new("c8d17dd4-ee70-4ab8-87d4-b5fff5b21e72"),
+            new("d7434e14-1b4e-4d05-bc24-17c1fe75f4b9"),
+            new("dade9ae9-02b1-410c-9048-da7ed520c459"),
+            new("dfddc352-89d5-40dc-a428-1cccd3bb1925"),
+            new("f0b09e3c-87d1-4c8a-9408-cb9ee5881552"),
+            new("fa5a6ef2-b376-4122-9f1e-591a29e1a2de")
+        };
+    }
+
+    private static IEnumerable<Guid> LoadLecturerIds()
+    {
+        return new List<Guid>
         {
             new("e97e4f1e-d72e-43ad-92a0-2cbd28296bcf"),
             new("64805099-6e8a-4269-82a4-59642ec8a610"),
@@ -192,35 +279,11 @@ public class Seed
             new("2415fe09-a849-4cf7-b5dd-63e0d2613307"),
             new("a18dcd39-1de8-4b93-a237-8936c3f1f0a0")
         };
-
-        var testLecturer = new Faker<Lecturer>("id_ID")
-            .RuleFor(l => l.Title, f => f.PickRandom<LecturerTitle>())
-            .RuleFor(
-                l => l.Name,
-                (f, l) => f.Name.FirstName(
-                    l.Title == LecturerTitle.Pak
-                        ? Name.Gender.Male
-                        : Name.Gender.Female));
-        var lecturers = Enumerable.Range(1, amount)
-            .Select(i => SeedRow(testLecturer, i))
-            .ToList();
-        lecturers = lecturers.Take(ids.Count)
-            .Select(
-                (l, i) =>
-                {
-                    l.Id = ids[i];
-                    return l;
-                })
-            .ToList();
-        
-        return lecturers;
     }
 
-    public IEnumerable<Survey> GenerateSurveys(
-        IEnumerable<Lecturer> lecturers,
-        int amount)
+    private static IEnumerable<string> LoadSubjects()
     {
-        var subjects = new List<string>
+        return new List<string>
         {
             "Pendidikan Pancasila",
             "Bahasa Indonesia",
@@ -274,48 +337,5 @@ public class Seed
             "Manajemen Proyek Teknologi Informasi",
             "Perilaku Organisasi"
         };
-        var testSurvey = new Faker<Survey>("id_ID")
-            .RuleFor(s => s.Id, f => f.Random.Guid())
-            .RuleFor(
-                s => s.Date,
-                f => f.Date.BetweenDateOnly(new DateOnly(2023, 3, 1), new DateOnly(2023, 6, 1)))
-            .RuleFor(s => s.Place, f => f.PickRandomParam("A", "B", "C"))
-            .RuleFor(s => s.Subject, f => f.PickRandom(subjects))
-            .RuleFor(s => s.Lecturer, f => f.PickRandom(lecturers));
-        var surveys = Enumerable
-            .Range(1, amount)
-            .Select(i => SeedRow(testSurvey, i))
-            .ToList();
-
-        return surveys;
-    }
-
-    public (IEnumerable<Survey> s, IEnumerable<SurveyQuestion> sq) GenerateSurveyQuestions(
-        IEnumerable<Survey> surveys,
-        IEnumerable<Question> questions)
-    {
-        var surveyQuestions = new List<SurveyQuestion>();
-        surveys = surveys.ToList();
-        questions = questions.ToList();
-        foreach (var survey in surveys)
-        {
-            var sq = questions.Select(
-                    q => new SurveyQuestion
-                    {
-                        QuestionId = q.Id,
-                        Question = q,
-                        SurveyId = survey.Id,
-                        Survey = survey
-                    })
-                .ToList();
-            survey.AspectCount = sq.Where(s => s.SurveyId == survey.Id)
-                .GroupBy(s => s.Question.Section)
-                .Count();
-            survey.QuestionCount = sq.Count(s => s.SurveyId == survey.Id);
-            survey.SurveyQuestions = sq;
-            surveyQuestions.AddRange(sq);
-        }
-
-        return (surveys, surveyQuestions);
     }
 }
