@@ -28,7 +28,7 @@ public class Seed
         return recordRow;
     }
 
-    public IEnumerable<User> GenerateUsers(int amount)
+    private static IEnumerable<User> GenerateUsers(int amount)
     {
         var testUser = new Faker<User>("id_ID")
             .RuleFor(u => u.Id, f => f.Random.Guid())
@@ -42,7 +42,7 @@ public class Seed
         return user;
     }
 
-    public IEnumerable<Question> GenerateQuestions()
+    private static IEnumerable<Question> GenerateQuestions()
     {
         var ids = LoadQuestionIds().ToList();
         return new List<Question>
@@ -118,7 +118,7 @@ public class Seed
         };
     }
 
-    public IEnumerable<Lecturer> GenerateLecturers(int amount)
+    private static IEnumerable<Lecturer> GenerateLecturers(int amount)
     {
         var ids = LoadLecturerIds().ToList();
 
@@ -146,7 +146,7 @@ public class Seed
     }
 
 
-    public IEnumerable<Survey> GenerateSurveys(
+    private static IEnumerable<Survey> GenerateSurveys(
         IEnumerable<Lecturer> lecturers,
         int amount)
     {
@@ -167,7 +167,7 @@ public class Seed
         return surveys;
     }
 
-    public (IEnumerable<Survey> s, IEnumerable<SurveyQuestion> sq) GenerateSurveyQuestions(
+    private static (IEnumerable<Survey> s, IEnumerable<SurveyQuestion> sq) GenerateSurveyQuestions(
         IEnumerable<Survey> surveys,
         IEnumerable<Question> questions)
     {
