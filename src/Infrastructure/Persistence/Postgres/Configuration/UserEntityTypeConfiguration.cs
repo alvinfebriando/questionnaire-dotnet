@@ -10,10 +10,7 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
     public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.HasKey(u => u.Id);
-        builder
-            .HasMany(u => u.Surveys)
-            .WithMany(s => s.AnsweredBy);
-
+       
         var seed = new Seed();
         builder.HasData(seed.Users);
     }

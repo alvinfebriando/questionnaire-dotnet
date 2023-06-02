@@ -16,4 +16,5 @@ public class Answer : BaseEntity
 
     public SurveyQuestion SurveyQuestion { get; set; }
     public double Score { get; set; }
+    public IEnumerable<AnswerUser> AnswerUsers { get; set; }
 }

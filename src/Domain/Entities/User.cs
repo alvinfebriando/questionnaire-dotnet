@@ -5,5 +5,5 @@ public class User : BaseEntity
     public string Name { get; set; }
     public string Email { get; set; }
     public string Password { get; set; }
-    public ICollection<Survey> Surveys { get; set; }
+    public IEnumerable<AnswerUser> AnswerUsers { get; set; }
 }
