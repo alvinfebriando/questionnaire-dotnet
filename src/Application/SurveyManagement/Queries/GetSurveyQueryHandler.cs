@@ -17,10 +17,12 @@ public class GetSurveyQueryHandler : IRequestHandler<GetSurveyQuery, AllSurveyRe
         GetSurveyQuery request,
         CancellationToken cancellationToken)
     {
-        var result = await _context.Surveys.Include(s => s.SurveyQuestions)
+        var result = await _context.Surveys
+            .Include(s => s.SurveyQuestions)
             .ThenInclude(sq => sq.Question)
             .Include(s=>s.Lecturer)
             .ToListAsync(cancellationToken);
+        result = result.OrderByDescending(s => s.Date).ToList();
         return new AllSurveyResult(
             result.Select(
                 r => new SurveyResult(
