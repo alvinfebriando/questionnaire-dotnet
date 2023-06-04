@@ -40996,21 +40996,6 @@ namespace Questionnaire.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Questionnaire.Domain.Entities.AnswerUser", b =>
-                {
-                    b.Property<Guid>("AnswerId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("AnswerId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AnswerUser");
-                });
-
             modelBuilder.Entity("Questionnaire.Domain.Entities.Lecturer", b =>
                 {
                     b.Property<Guid>("Id")
@@ -42855,6 +42840,21 @@ namespace Questionnaire.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("SurveyUser", b =>
+                {
+                    b.Property<Guid>("AnsweredById")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("SurveysId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("AnsweredById", "SurveysId");
+
+                    b.HasIndex("SurveysId");
+
+                    b.ToTable("SurveyUser");
+                });
+
             modelBuilder.Entity("Questionnaire.Domain.Entities.Answer", b =>
                 {
                     b.HasOne("Questionnaire.Domain.Entities.SurveyQuestion", "SurveyQuestion")
@@ -42864,25 +42864,6 @@ namespace Questionnaire.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("SurveyQuestion");
-                });
-
-            modelBuilder.Entity("Questionnaire.Domain.Entities.AnswerUser", b =>
-                {
-                    b.HasOne("Questionnaire.Domain.Entities.Answer", "Answer")
-                        .WithMany("AnswerUsers")
-                        .HasForeignKey("AnswerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Questionnaire.Domain.Entities.User", "User")
-                        .WithMany("AnswerUsers")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Answer");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Questionnaire.Domain.Entities.Survey", b =>
@@ -42915,19 +42896,24 @@ namespace Questionnaire.Infrastructure.Migrations
                     b.Navigation("Survey");
                 });
 
-            modelBuilder.Entity("Questionnaire.Domain.Entities.Answer", b =>
+            modelBuilder.Entity("SurveyUser", b =>
                 {
-                    b.Navigation("AnswerUsers");
+                    b.HasOne("Questionnaire.Domain.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("AnsweredById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Questionnaire.Domain.Entities.Survey", null)
+                        .WithMany()
+                        .HasForeignKey("SurveysId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Questionnaire.Domain.Entities.Survey", b =>
                 {
                     b.Navigation("SurveyQuestions");
-                });
-
-            modelBuilder.Entity("Questionnaire.Domain.Entities.User", b =>
-                {
-                    b.Navigation("AnswerUsers");
                 });
 #pragma warning restore 612, 618
         }

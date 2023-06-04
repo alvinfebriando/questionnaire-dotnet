@@ -9,4 +9,5 @@ public class Survey : BaseEntity
     public int QuestionCount { get; set; }
     public int AspectCount { get; set; }
     public ICollection<SurveyQuestion> SurveyQuestions { get; set; }
+    public ICollection<User> AnsweredBy { get; set; }
 }
