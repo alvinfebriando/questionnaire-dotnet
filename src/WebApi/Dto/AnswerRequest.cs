@@ -1,6 +1,6 @@
 ﻿namespace Questionnaire.WebApi.Dto;
 
-public record AddAnswerRequest(IList<AnswerOfSurveyQuestion> Answers);
+public record AddAnswerRequest(IList<AnswerOfSurveyQuestion> Answers, Guid AnsweredByUserId);
 
 public record AnswerOfSurveyQuestion(Guid SurveyId, Guid QuestionId, double Score);
 

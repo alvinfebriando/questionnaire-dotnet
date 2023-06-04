@@ -15,6 +15,7 @@ public class AddAnswerCommandHandler : IRequestHandler<AddAnswerCommand, Unit>
 
     public async Task<Unit> Handle(AddAnswerCommand request, CancellationToken cancellationToken)
     {
+        var user = await _context.Users.FindAsync(new object?[] { request.AnsweredByUserId }, cancellationToken: cancellationToken);
         foreach (var answer in request.Answers)
         {
             var surveyQuestion = new SurveyQuestion
@@ -22,7 +23,12 @@ public class AddAnswerCommandHandler : IRequestHandler<AddAnswerCommand, Unit>
                 SurveyId = answer.SurveyId, QuestionId = answer.QuestionId
             };
             _context.SurveyQuestions.Attach(surveyQuestion);
-            var a = new Answer{Score = answer.Score,SurveyQuestion = surveyQuestion};
+            var a = new Answer
+            {
+                Score = answer.Score,
+                SurveyQuestion = surveyQuestion,
+                AnsweredByUser = user
+            };
             _context.Answers.Add(a);
         }
 
