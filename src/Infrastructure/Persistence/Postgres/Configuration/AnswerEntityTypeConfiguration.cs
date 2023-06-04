@@ -13,6 +13,8 @@ public class AnswerEntityTypeConfiguration : IEntityTypeConfiguration<Answer>
         builder
             .HasOne<SurveyQuestion>(a => a.SurveyQuestion)
             .WithMany();
+        builder.HasOne<User>(a => a.AnsweredByUser)
+            .WithMany(u => u.Answers);
 
         var seed = new Seed();
         var answers = seed.Answers.Select(
