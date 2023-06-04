@@ -29,6 +29,7 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthResult>
         }
 
         var token = _jwtGenerator.GenerateToken(user);
-        return new AuthResult(user, token);
+        var role = user.Name == "Admin" ? "Admin" : "Student";
+        return new AuthResult(user, token, role);
     }
 }

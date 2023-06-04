@@ -1,3 +1,3 @@
 ﻿namespace Questionnaire.WebApi.Dto;
 
-public record AuthResponse(Guid Id, string Name, string Email, string Token);
+public record AuthResponse(Guid Id, string Name, string Email, string Token, string Role);
