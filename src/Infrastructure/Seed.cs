@@ -163,7 +163,7 @@ public class Seed
             .RuleFor(s => s.Lecturer, f => f.PickRandom(lecturers));
         var surveys = Enumerable
             .Range(1, amount)
-            .Select(i => SeedRow(testSurvey, i))
+            .Select(i => SeedRow(testSurvey, i+121212))
             .ToList();
 
         return surveys;
